@@ -12,6 +12,13 @@
     ],
     "fields": [
         {
+            "fieldName": "userId",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "userName",
             "fieldType": "String",
             "fieldValidateRules": [

@@ -44,4 +44,11 @@ public interface UserDataService {
      * @param userId the userId of the entity
      */
     List<UserDataDTO> getUserDataByUserId(String userId);
+
+    /**
+     * Get the created "userId" userData.
+     *
+     * @param userId the userId of the entity
+     */
+    List<UserDataDTO> getCreatedUsers(String userId);
 }

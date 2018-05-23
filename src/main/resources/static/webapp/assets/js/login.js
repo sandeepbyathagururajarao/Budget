@@ -11,7 +11,7 @@ function login() {
             if(data != null && data.length > 0) {
                 var id = data[0].id;
                 var dataType = data[0].userType;
-                var respUserName = data[0].userName;
+                var respUserName = data[0].userId;
                 var respPassword = data[0].password;
                 if(userId === respUserName && password === respPassword) {
                     sessionStorage.setItem("UID",id);

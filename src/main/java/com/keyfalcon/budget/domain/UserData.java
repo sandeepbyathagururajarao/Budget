@@ -22,6 +22,10 @@ public class UserData implements Serializable {
     private Long id;
 
     @NotNull
+    @Column(name = "user_id", nullable = false)
+    private String userId;
+
+    @NotNull
     @Column(name = "user_name", nullable = false)
     private String userName;
 
@@ -55,6 +59,19 @@ public class UserData implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public UserData userId(String userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -173,6 +190,7 @@ public class UserData implements Serializable {
     public String toString() {
         return "UserData{" +
             "id=" + getId() +
+            ", userId='" + getUserId() + "'" +
             ", userName='" + getUserName() + "'" +
             ", password='" + getPassword() + "'" +
             ", userType='" + getUserType() + "'" +

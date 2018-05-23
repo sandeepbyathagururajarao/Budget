@@ -1,5 +1,6 @@
 package com.keyfalcon.budget.service.impl;
 
+import com.keyfalcon.budget.domain.UserData;
 import com.keyfalcon.budget.service.StateService;
 import com.keyfalcon.budget.domain.State;
 import com.keyfalcon.budget.repository.StateRepository;
@@ -83,5 +84,14 @@ public class StateServiceImpl implements StateService {
     public void delete(Long id) {
         log.debug("Request to delete State : {}", id);
         stateRepository.delete(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<StateDTO> findAllFilteredStates(Long id) {
+        log.debug("Request to get all filtered States");
+        return stateRepository.findAllByUserId(id).stream()
+            .map(stateMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 }

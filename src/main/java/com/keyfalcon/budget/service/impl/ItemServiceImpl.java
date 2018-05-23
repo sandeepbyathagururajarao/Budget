@@ -84,4 +84,14 @@ public class ItemServiceImpl implements ItemService {
         log.debug("Request to delete Item : {}", id);
         itemRepository.delete(id);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ItemDTO> findAllFilteredItems(Long id) {
+        log.debug("Request to get all filtered States");
+        return itemRepository.findAllByUserId(id).stream()
+            .map(itemMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
 }

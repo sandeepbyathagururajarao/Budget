@@ -97,7 +97,9 @@ function submitData(path) {
         data : formJSON,
         url: path,
         success: function(data){
-            alert(data);
+            if(data != null) {
+                alert("Data updated succesfully");
+            }
         },
         error:function(xhr,status,err){
             alert("Error:"+err);

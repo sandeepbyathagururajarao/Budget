@@ -37,4 +37,10 @@ public interface StateService {
      * @param id the id of the entity
      */
     void delete(Long id);
+    /**
+     * Get all filtered states.
+     *
+     * @return the list of entities
+     */
+    List<StateDTO> findAllFilteredStates(Long id);
 }

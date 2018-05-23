@@ -32,6 +32,9 @@ public class State implements Serializable {
     @Column(name = "modified_date")
     private ZonedDateTime modifiedDate;
 
+    @ManyToOne
+    private UserData user;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -78,6 +81,19 @@ public class State implements Serializable {
 
     public void setModifiedDate(ZonedDateTime modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public UserData getUser() {
+        return user;
+    }
+
+    public State user(UserData userData) {
+        this.user = userData;
+        return this;
+    }
+
+    public void setUser(UserData userData) {
+        this.user = userData;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

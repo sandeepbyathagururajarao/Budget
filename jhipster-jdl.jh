@@ -1,4 +1,5 @@
 entity UserData {	
+    userId String required,
     userName String required,
     password String required,
     userType String required,
@@ -94,6 +95,10 @@ relationship ManyToOne {
 
 relationship ManyToOne {
 	Area{user} to UserData
+}
+
+relationship ManyToOne {
+	State{user} to UserData
 }
 
 relationship OneToMany {

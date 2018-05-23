@@ -46,6 +46,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = BudgetApp.class)
 public class UserDataResourceIntTest {
 
+    private static final String DEFAULT_USER_ID = "AAAAAAAAAA";
+    private static final String UPDATED_USER_ID = "BBBBBBBBBB";
+
     private static final String DEFAULT_USER_NAME = "AAAAAAAAAA";
     private static final String UPDATED_USER_NAME = "BBBBBBBBBB";
 
@@ -108,6 +111,7 @@ public class UserDataResourceIntTest {
      */
     public static UserData createEntity(EntityManager em) {
         UserData userData = new UserData()
+            .userId(DEFAULT_USER_ID)
             .userName(DEFAULT_USER_NAME)
             .password(DEFAULT_PASSWORD)
             .userType(DEFAULT_USER_TYPE)
@@ -138,6 +142,7 @@ public class UserDataResourceIntTest {
         List<UserData> userDataList = userDataRepository.findAll();
         assertThat(userDataList).hasSize(databaseSizeBeforeCreate + 1);
         UserData testUserData = userDataList.get(userDataList.size() - 1);
+        assertThat(testUserData.getUserId()).isEqualTo(DEFAULT_USER_ID);
         assertThat(testUserData.getUserName()).isEqualTo(DEFAULT_USER_NAME);
         assertThat(testUserData.getPassword()).isEqualTo(DEFAULT_PASSWORD);
         assertThat(testUserData.getUserType()).isEqualTo(DEFAULT_USER_TYPE);
@@ -164,6 +169,25 @@ public class UserDataResourceIntTest {
         // Validate the UserData in the database
         List<UserData> userDataList = userDataRepository.findAll();
         assertThat(userDataList).hasSize(databaseSizeBeforeCreate);
+    }
+
+    @Test
+    @Transactional
+    public void checkUserIdIsRequired() throws Exception {
+        int databaseSizeBeforeTest = userDataRepository.findAll().size();
+        // set the field null
+        userData.setUserId(null);
+
+        // Create the UserData, which fails.
+        UserDataDTO userDataDTO = userDataMapper.toDto(userData);
+
+        restUserDataMockMvc.perform(post("/api/user-data")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(userDataDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<UserData> userDataList = userDataRepository.findAll();
+        assertThat(userDataList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -272,6 +296,7 @@ public class UserDataResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(userData.getId().intValue())))
+            .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID.toString())))
             .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
             .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD.toString())))
             .andExpect(jsonPath("$.[*].userType").value(hasItem(DEFAULT_USER_TYPE.toString())))
@@ -291,6 +316,7 @@ public class UserDataResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(userData.getId().intValue()))
+            .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID.toString()))
             .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME.toString()))
             .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD.toString()))
             .andExpect(jsonPath("$.userType").value(DEFAULT_USER_TYPE.toString()))
@@ -319,6 +345,7 @@ public class UserDataResourceIntTest {
         // Disconnect from session so that the updates on updatedUserData are not directly saved in db
         em.detach(updatedUserData);
         updatedUserData
+            .userId(UPDATED_USER_ID)
             .userName(UPDATED_USER_NAME)
             .password(UPDATED_PASSWORD)
             .userType(UPDATED_USER_TYPE)
@@ -336,6 +363,7 @@ public class UserDataResourceIntTest {
         List<UserData> userDataList = userDataRepository.findAll();
         assertThat(userDataList).hasSize(databaseSizeBeforeUpdate);
         UserData testUserData = userDataList.get(userDataList.size() - 1);
+        assertThat(testUserData.getUserId()).isEqualTo(UPDATED_USER_ID);
         assertThat(testUserData.getUserName()).isEqualTo(UPDATED_USER_NAME);
         assertThat(testUserData.getPassword()).isEqualTo(UPDATED_PASSWORD);
         assertThat(testUserData.getUserType()).isEqualTo(UPDATED_USER_TYPE);

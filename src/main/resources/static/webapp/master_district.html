@@ -198,26 +198,10 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover">
+                <table id="display_grid" class="table table-hover">
                   <tr>
                     <th>District</th>
                     <th class="text-right">Action</th>
-                  </tr>
-                  <tr>
-                    <td>Coimbatore</td>
-                    <td class="text-right"><a href="master_district_view.html"><i class="fas fa-eye icon-table"></i></a><a href="master_district_edit.html"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i class="remove fas fa-trash-alt icon-table" style="background: red"></i></td>
-                  </tr>
-                  <tr>
-                    <td>Salem</td>
-                    <td class="text-right"><a href="master_district_view.html"><i class="fas fa-eye icon-table"></i></a><a href="master_district_edit.html"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i class="remove fas fa-trash-alt icon-table" style="background: red"></i></td>
-                  </tr>
-                  <tr>
-                    <td>Chennai</td>
-                    <td class="text-right"><a href="master_district_view.html"><i class="fas fa-eye icon-table"></i></a><a href="master_district_edit.html"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i class="remove fas fa-trash-alt icon-table" style="background: red"></i></td>
-                  </tr>
-                  <tr>
-                    <td>Erode</td>
-                    <td class="text-right"><a href="master_district_view.html"><i class="fas fa-eye icon-table"></i></a><a href="master_district_edit.html"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i class="remove fas fa-trash-alt icon-table" style="background: red"></i></td>
                   </tr>
                 </table>
               </div>
@@ -258,18 +242,30 @@
 <!-- AdminLTE App -->
 <script src="assets/js/adminlte.min.js"></script>
 <!-- page script -->
+<script src="assets/js/variables.js"></script>
+<script src="assets/js/include.js"></script>
 <script type="text/javascript">
-      $( document ).ready(function() {
-      // var counter = 1;
-      $('.remove').on('click', function(){
-        // $(this).closest('tr').remove();
-        var r = confirm("Press ok button to delete!");
-        if (r == true) {
-          $(this).closest('tr').remove();
-        } else {
+    function getRecords(path) {
+        $.ajax({
+            method: "GET",
+            url: path+"filter/"+sessionStorage.getItem("UID"),
+            success: function(data){
+                if(data != null && data.length > 0) {
+                    for(ctr = 0; ctr < data.length; ctr++) {
+                        var stateId = data[ctr].id;
+                        var name = data[ctr].name;
+                        $('#display_grid tr:last').after('<tr><td>'+name+'</td><td class="text-right"><a href="master_district_view.html?id='+stateId+'"><i class="fas fa-eye icon-table"></i></a><a href="master_district_edit.html?id='+stateId+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i onclick=removeRecord('+stateId+',\''+states+'\') class="remove fas fa-trash-alt icon-table" style="background: red"></i></td></tr>');
+                    }
+                }
+            },
+            error:function(xhr,status,err){
+                alert("Error:"+err);
+            }
+        });
+    }
 
-        }
-      })
+    $( document ).ready(function() {
+        getRecords(states);
     });
 </script>
 

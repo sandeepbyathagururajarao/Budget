@@ -88,7 +88,14 @@ public class UserDataServiceImpl implements UserDataService {
     @Override
     @Transactional(readOnly = true)
     public List<UserDataDTO> getUserDataByUserId(String userId) {
-        return userDataRepository.findAllByUserName(userId).stream()
+        return userDataRepository.findAllByUserId(userId).stream()
+            .map(userDataMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    public List<UserDataDTO> getCreatedUsers(String userId) {
+        return userDataRepository.findAllByCreatedBy(userId).stream()
             .map(userDataMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }

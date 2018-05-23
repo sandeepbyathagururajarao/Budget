@@ -116,4 +116,16 @@ public class StateResource {
         stateService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    /**
+     * GET  /states/filter : get all filtered the states.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of states in body
+     */
+    @GetMapping("/states/filter/{id}")
+    @Timed
+    public List<StateDTO> getFilteredStates(@PathVariable Long id) {
+        log.debug("REST request to get all filtered States");
+        return stateService.findAllFilteredStates(id);
+    }
 }

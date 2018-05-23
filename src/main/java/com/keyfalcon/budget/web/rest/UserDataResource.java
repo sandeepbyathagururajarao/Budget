@@ -118,15 +118,28 @@ public class UserDataResource {
     }
 
     /**
-     * DELETE  /user-data/:id : delete the "id" userData.
+     * GET  /user-data/validate/:userName : validate "userName" userData.
      *
-     * @param userName the id of the userDataDTO to delete
+     * @param userName the id of the userDataDTO to validate
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/user-data/validate/{userName}")
+    @GetMapping("/user-data/validate/{userName}")
     @Timed
     public List<UserDataDTO> getUserData(@PathVariable String userName) {
         log.debug("REST request to validate against UserData : {}", userName);
         return userDataService.getUserDataByUserId(userName);
+    }
+
+    /**
+     * GET  /user-data/filter/:userName : filter "userName" userData.
+     *
+     * @param userName the id of the userDataDTO to filter
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @GetMapping("/user-data/filter/{userName}")
+    @Timed
+    public List<UserDataDTO> getCreatedUsers(@PathVariable String userName) {
+        log.debug("REST request to filter against UserData : {}", userName);
+        return userDataService.getCreatedUsers(userName);
     }
 }

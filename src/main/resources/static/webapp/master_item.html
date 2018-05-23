@@ -248,7 +248,7 @@
     function getRecords(path) {
         $.ajax({
             method: "GET",
-            url: path,
+            url: path+"filter/"+sessionStorage.getItem("UID"),
             success: function(data){
                 if(data != null && data.length > 0) {
                     for(ctr = 0; ctr < data.length; ctr++) {

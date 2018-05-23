@@ -14,5 +14,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface UserDataRepository extends JpaRepository<UserData, Long> {
-    List<UserData> findAllByUserName(String userId);
+    List<UserData> findAllByUserId(String userId);
+    List<UserData> findAllByCreatedBy(String userId);
 }

@@ -16,6 +16,9 @@ public class UserDataDTO implements Serializable {
     private Long id;
 
     @NotNull
+    private String userId;
+
+    @NotNull
     private String userName;
 
     @NotNull
@@ -40,6 +43,14 @@ public class UserDataDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -123,6 +134,7 @@ public class UserDataDTO implements Serializable {
     public String toString() {
         return "UserDataDTO{" +
             "id=" + getId() +
+            ", userId='" + getUserId() + "'" +
             ", userName='" + getUserName() + "'" +
             ", password='" + getPassword() + "'" +
             ", userType='" + getUserType() + "'" +

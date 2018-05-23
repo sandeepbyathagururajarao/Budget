@@ -105,7 +105,7 @@
               <li class="nav-item">
                 <a href="master_district.html" class="nav-link">
                   <i class="fas fa-caret-right nav-icon"></i>
-                  <p>District master</p>
+                  <p>State master</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -123,7 +123,7 @@
               <p>Approval<span class="right badge badge-danger">3</span></p>
             </a>
           </li>
-          
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
@@ -165,13 +165,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Create District</h1>
+            <h1>Create State</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
               <li class="breadcrumb-item active">Master</li>
-              <li class="breadcrumb-item active">District</li>
+              <li class="breadcrumb-item active">State</li>
             </ol>
           </div>
         </div>
@@ -192,14 +192,14 @@
                 <form role="form">
                   <div class="card-body">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Name of District</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Name">
+                      <label for="name">Name of State</label>
+                      <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
                     </div>
                   </div>
                 </form>
               </div>
               <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" onclick="submitData(states)" class="btn btn-primary">Submit</button>
               </div>
             </div>
             <!-- /.card -->
@@ -237,6 +237,15 @@
 <!-- AdminLTE App -->
 <script src="assets/js/adminlte.min.js"></script>
 <!-- page script -->
+
+<script src="assets/js/variables.js"></script>
+<script src="assets/js/include.js"></script>
+
+<script>
+    $( document ).ready(function() {
+
+    });
+</script>
 
 </body>
 </html>

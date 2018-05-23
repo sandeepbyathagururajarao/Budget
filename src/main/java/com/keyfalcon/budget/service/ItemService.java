@@ -37,4 +37,6 @@ public interface ItemService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    List<ItemDTO> findAllFilteredItems(Long id);
 }
