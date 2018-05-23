@@ -1,0 +1,107 @@
+entity UserData {	
+    userName String required,
+    password String required,
+    userType String required,
+    createdBy String required,
+    createdDate ZonedDateTime required,
+    modifiedDate ZonedDateTime
+}
+
+entity Area {
+	name String required,
+    createdDate ZonedDateTime required,
+    modifiedDate ZonedDateTime
+}
+
+entity Item {
+	itemName String required,
+    createdDate ZonedDateTime required,
+    modifiedDate ZonedDateTime
+}
+
+entity Guideline {
+	paraName String required,
+    createdDate ZonedDateTime required,
+    modifiedDate ZonedDateTime
+}
+
+entity SubType {
+	subTypeNumber String required,
+    createdDate ZonedDateTime required,
+    modifiedDate ZonedDateTime
+}
+
+entity TCP {
+	paraNoTCP String required,
+    createdDate ZonedDateTime required,
+    modifiedDate ZonedDateTime
+}
+
+entity State {
+	name String required,
+    createdDate ZonedDateTime required,
+    modifiedDate ZonedDateTime
+}
+
+entity PurchaseItem {
+	type String required,
+	gpsCoordinate String,
+	justification String,
+	image String,
+    approvalStatus String required,    
+    createdDate ZonedDateTime required,
+    modifiedDate ZonedDateTime
+}
+
+entity PurchaseSubItem {
+	name String,
+	noOfItem String,
+	unit String,
+	price String,
+	total String required,	
+    createdDate ZonedDateTime required,
+    modifiedDate ZonedDateTime
+}
+
+enum Role {
+    SUPERADMIN, ADMIN, USER
+}
+
+relationship OneToOne {
+	PurchaseItem{item} to Item,
+    PurchaseItem{guideline} to Guideline,
+    PurchaseItem{subType} to SubType,
+    PurchaseItem{tcp} to TCP,
+    PurchaseItem{area} to Area
+    PurchaseItem{user} to UserData
+}
+
+relationship OneToOne {
+	UserData{state} to State
+}
+
+relationship ManyToOne {
+	Item{user} to UserData
+}
+
+relationship ManyToOne {
+	Guideline{user} to UserData
+}
+
+relationship ManyToOne {
+	TCP{user} to UserData
+}
+
+relationship ManyToOne {
+	Area{user} to UserData
+}
+
+relationship OneToMany {
+	PurchaseItem{subItems} to PurchaseSubItem
+}
+
+
+dto * with mapstruct
+
+service all with serviceImpl
+

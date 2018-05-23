@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity PurchaseItem.
+    -->
+    <changeSet id="20180521142952-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="item_id"
+                                 baseTableName="purchase_item"
+                                 constraintName="fk_purchase_item_item_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="item"/>
+
+        <addForeignKeyConstraint baseColumnNames="guideline_id"
+                                 baseTableName="purchase_item"
+                                 constraintName="fk_purchase_item_guideline_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="guideline"/>
+
+        <addForeignKeyConstraint baseColumnNames="sub_type_id"
+                                 baseTableName="purchase_item"
+                                 constraintName="fk_purchase_item_sub_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sub_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="tcp_id"
+                                 baseTableName="purchase_item"
+                                 constraintName="fk_purchase_item_tcp_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tcp"/>
+
+        <addForeignKeyConstraint baseColumnNames="area_id"
+                                 baseTableName="purchase_item"
+                                 constraintName="fk_purchase_item_area_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="area"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="purchase_item"
+                                 constraintName="fk_purchase_item_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_data"/>
+
+    </changeSet>
+</databaseChangeLog>

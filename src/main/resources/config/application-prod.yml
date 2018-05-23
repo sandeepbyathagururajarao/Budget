@@ -27,9 +27,9 @@ spring:
             enabled: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/Budget?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://localhost:3306/budget?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
-        password:
+        password: root
         hikari:
             data-source-properties:
                 cachePrepStmts: true
