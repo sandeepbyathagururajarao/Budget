@@ -78,6 +78,10 @@ relationship ManyToOne {
 }
 
 relationship ManyToOne {
+	UserData{state} to State 
+}
+
+relationship ManyToOne {
 	Item{user} to UserData
 }
 

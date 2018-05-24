@@ -48,8 +48,7 @@ public class UserData implements Serializable {
     @Column(name = "modified_date")
     private ZonedDateTime modifiedDate;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
     private State state;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

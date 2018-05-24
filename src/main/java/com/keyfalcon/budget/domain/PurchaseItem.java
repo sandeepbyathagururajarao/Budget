@@ -48,33 +48,27 @@ public class PurchaseItem implements Serializable {
     @Column(name = "modified_date")
     private ZonedDateTime modifiedDate;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Item item;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Guideline guideline;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private SubType subType;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private TCP tcp;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Area area;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private UserData user;
-
     @OneToMany(mappedBy = "purchaseItem")
     @JsonIgnore
     private Set<PurchaseSubItem> subItems = new HashSet<>();
+
+    @ManyToOne
+    private Item item;
+
+    @ManyToOne
+    private Guideline guideline;
+
+    @ManyToOne
+    private SubType subType;
+
+    @ManyToOne
+    private TCP tcp;
+
+    @ManyToOne
+    private Area area;
+
+    @ManyToOne
+    private UserData user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -176,6 +170,31 @@ public class PurchaseItem implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
+    public Set<PurchaseSubItem> getSubItems() {
+        return subItems;
+    }
+
+    public PurchaseItem subItems(Set<PurchaseSubItem> purchaseSubItems) {
+        this.subItems = purchaseSubItems;
+        return this;
+    }
+
+    public PurchaseItem addSubItems(PurchaseSubItem purchaseSubItem) {
+        this.subItems.add(purchaseSubItem);
+        purchaseSubItem.setPurchaseItem(this);
+        return this;
+    }
+
+    public PurchaseItem removeSubItems(PurchaseSubItem purchaseSubItem) {
+        this.subItems.remove(purchaseSubItem);
+        purchaseSubItem.setPurchaseItem(null);
+        return this;
+    }
+
+    public void setSubItems(Set<PurchaseSubItem> purchaseSubItems) {
+        this.subItems = purchaseSubItems;
+    }
+
     public Item getItem() {
         return item;
     }
@@ -252,31 +271,6 @@ public class PurchaseItem implements Serializable {
 
     public void setUser(UserData userData) {
         this.user = userData;
-    }
-
-    public Set<PurchaseSubItem> getSubItems() {
-        return subItems;
-    }
-
-    public PurchaseItem subItems(Set<PurchaseSubItem> purchaseSubItems) {
-        this.subItems = purchaseSubItems;
-        return this;
-    }
-
-    public PurchaseItem addSubItems(PurchaseSubItem purchaseSubItem) {
-        this.subItems.add(purchaseSubItem);
-        purchaseSubItem.setPurchaseItem(this);
-        return this;
-    }
-
-    public PurchaseItem removeSubItems(PurchaseSubItem purchaseSubItem) {
-        this.subItems.remove(purchaseSubItem);
-        purchaseSubItem.setPurchaseItem(null);
-        return this;
-    }
-
-    public void setSubItems(Set<PurchaseSubItem> purchaseSubItems) {
-        this.subItems = purchaseSubItems;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

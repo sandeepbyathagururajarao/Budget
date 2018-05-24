@@ -19,13 +19,13 @@ public interface PurchaseItemMapper extends EntityMapper<PurchaseItemDTO, Purcha
     @Mapping(source = "user.id", target = "userId")
     PurchaseItemDTO toDto(PurchaseItem purchaseItem);
 
+    @Mapping(target = "subItems", ignore = true)
     @Mapping(source = "itemId", target = "item")
     @Mapping(source = "guidelineId", target = "guideline")
     @Mapping(source = "subTypeId", target = "subType")
     @Mapping(source = "tcpId", target = "tcp")
     @Mapping(source = "areaId", target = "area")
     @Mapping(source = "userId", target = "user")
-    @Mapping(target = "subItems", ignore = true)
     PurchaseItem toEntity(PurchaseItemDTO purchaseItemDTO);
 
     default PurchaseItem fromId(Long id) {

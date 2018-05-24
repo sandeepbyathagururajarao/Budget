@@ -49,9 +49,11 @@
             <column name="modified_date" type="timestamp">
                 <constraints nullable="true" />
             </column>
+
             <column name="state_id" type="bigint">
-                <constraints unique="true" nullable="true" />
+                <constraints nullable="true" />
             </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="user_data" columnName="created_date" columnDataType="datetime"/>

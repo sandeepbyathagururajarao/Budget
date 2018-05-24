@@ -2,58 +2,46 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipType": "one-to-one",
-            "relationshipName": "item",
-            "otherEntityName": "item",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "purchaseItem"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "guideline",
-            "otherEntityName": "guideline",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "purchaseItem"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "subType",
-            "otherEntityName": "subType",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "purchaseItem"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "tcp",
-            "otherEntityName": "tCP",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "purchaseItem"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "area",
-            "otherEntityName": "area",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "purchaseItem"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "user",
-            "otherEntityName": "userData",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "purchaseItem"
-        },
-        {
             "relationshipType": "one-to-many",
             "relationshipName": "subItems",
             "otherEntityName": "purchaseSubItem",
             "otherEntityRelationshipName": "purchaseItem"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "item",
+            "otherEntityName": "item",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "guideline",
+            "otherEntityName": "guideline",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "subType",
+            "otherEntityName": "subType",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "tcp",
+            "otherEntityName": "tCP",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "area",
+            "otherEntityName": "area",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "userData",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

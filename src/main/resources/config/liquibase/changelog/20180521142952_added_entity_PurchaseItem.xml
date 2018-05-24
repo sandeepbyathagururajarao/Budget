@@ -49,19 +49,31 @@
             <column name="modified_date" type="timestamp">
                 <constraints nullable="true" />
             </column>
+
             <column name="item_id" type="bigint">
-                <constraints unique="true" nullable="true" />
-            </column>            <column name="guideline_id" type="bigint">
-                <constraints unique="true" nullable="true" />
-            </column>            <column name="sub_type_id" type="bigint">
-                <constraints unique="true" nullable="true" />
-            </column>            <column name="tcp_id" type="bigint">
-                <constraints unique="true" nullable="true" />
-            </column>            <column name="area_id" type="bigint">
-                <constraints unique="true" nullable="true" />
-            </column>            <column name="user_id" type="bigint">
-                <constraints unique="true" nullable="true" />
+                <constraints nullable="true" />
             </column>
+
+            <column name="guideline_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sub_type_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tcp_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="area_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="user_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="purchase_item" columnName="created_date" columnDataType="datetime"/>
