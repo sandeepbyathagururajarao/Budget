@@ -68,17 +68,13 @@ enum Role {
     SUPERADMIN, ADMIN, USER
 }
 
-relationship OneToOne {
+relationship ManyToOne {
 	PurchaseItem{item} to Item,
     PurchaseItem{guideline} to Guideline,
     PurchaseItem{subType} to SubType,
     PurchaseItem{tcp} to TCP,
     PurchaseItem{area} to Area
     PurchaseItem{user} to UserData
-}
-
-relationship OneToOne {
-	UserData{state} to State
 }
 
 relationship ManyToOne {

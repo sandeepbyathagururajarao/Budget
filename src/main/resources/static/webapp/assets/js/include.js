@@ -99,6 +99,7 @@ function submitData(path) {
         success: function(data){
             if(data != null) {
                 alert("Data updated succesfully");
+                history.back();
             }
         },
         error:function(xhr,status,err){
