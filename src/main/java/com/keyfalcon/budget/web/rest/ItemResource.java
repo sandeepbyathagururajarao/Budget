@@ -1,6 +1,7 @@
 package com.keyfalcon.budget.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.keyfalcon.budget.Role;
 import com.keyfalcon.budget.service.ItemService;
 import com.keyfalcon.budget.web.rest.errors.BadRequestAlertException;
 import com.keyfalcon.budget.web.rest.util.HeaderUtil;
@@ -118,14 +119,20 @@ public class ItemResource {
     }
 
     /**
-     * GET  /states/filter : get all filtered the states.
+     * GET  /states/filter/{userRole}/{id} : get all filtered the states.
      *
      * @return the ResponseEntity with status 200 (OK) and the list of states in body
      */
-    @GetMapping("/items/filter/{id}")
+    @GetMapping("/items/filter/{userRole}/{id}")
     @Timed
-    public List<ItemDTO> getFilteredItems(@PathVariable Long id) {
+    public List<ItemDTO> getFilteredItems(@PathVariable Long userRole, @PathVariable Long id) {
         log.debug("REST request to get all filtered items");
-        return itemService.findAllFilteredItems(id);
+        List<ItemDTO> itemDTOList = null;
+        if(Role.getValue(userRole) == Role.SUPERADMIN) {
+            itemDTOList = itemService.findAll();
+        } else {
+            itemDTOList = itemService.findAllFilteredItems(id);
+        }
+        return itemDTOList;
     }
 }

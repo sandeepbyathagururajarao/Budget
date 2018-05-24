@@ -198,7 +198,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover">
+                <table id="display_grid" class="table table-hover">
                   <tr>
                     <th>User Name</th>
                     <th>State</th>
@@ -249,14 +249,14 @@
     function getRecords(path) {
         $.ajax({
             method: "GET",
-            url: path+"filter/"+sessionStorage.getItem("UID"),
+            url: path+"filter/"+sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
             success: function(data){
                 if(data != null && data.length > 0) {
                     for(ctr = 0; ctr < data.length; ctr++) {
                         var userId = data[ctr].id;
-                        var name = data[ctr].name;
-                        var state = data[ctr].state;
-                        $('#display_grid tr:last').after('<tr><td>'+name+'</td><td>'+state+'</td><td class="text-right"><a href="user_super_admin_view.html?id='+userId+'"><i class="fas fa-eye icon-table"></i></a><a href="user_super_admin_edit.html?id='+userId+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i onclick=removeRecord('+userId+',\''+items+'\') class="remove fas fa-trash-alt icon-table" style="background: red"></i></td></tr>');
+                        var name = data[ctr].userName;
+                        var state = data[ctr].stateName;
+                        $('#display_grid tr:last').after('<tr><td>'+name+'</td><td>'+state+'</td><td class="text-right"><a href="user_super_admin_view.html?id='+userId+'"><i class="fas fa-eye icon-table"></i></a><a href="user_super_admin_edit.html?id='+userId+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i onclick=removeRecord('+userId+',\''+users+'\') class="remove fas fa-trash-alt icon-table" style="background: red"></i></td></tr>');
                     }
                 }
             },
@@ -267,7 +267,7 @@
     }
 
     $( document ).ready(function() {
-        getRecords(items);
+        getRecords(users);
     });
 </script>
 

@@ -84,8 +84,14 @@ function getFormData($form){
     $.map(unindexed_array, function(n, i){
         indexed_array[n['name']] = n['value'];
     });
-    indexed_array["createdDate"]=new Date();
-    indexed_array["userId"]=sessionStorage.getItem("UID");
+    if(indexed_array["id"] != null) {
+        indexed_array["modifiedDate"]=new Date();
+    } else {
+        indexed_array["createdDate"]=new Date();
+    }
+    if(indexed_array["userId"] == null) {
+        indexed_array["userId"] = sessionStorage.getItem("UID");
+    }
     return JSON.stringify(indexed_array);
 }
 

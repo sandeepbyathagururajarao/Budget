@@ -37,4 +37,6 @@ public interface GuidelineService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    List<GuidelineDTO> findAllFilteredGuidelines(Long id);
 }

@@ -105,7 +105,7 @@
               <li class="nav-item">
                 <a href="master_district.html" class="nav-link">
                   <i class="fas fa-caret-right nav-icon"></i>
-                  <p>District master</p>
+                  <p>State master</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -192,14 +192,16 @@
                 <form role="form">
                   <div class="card-body">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Guidelines Para</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Para" value="21.5.15">
+                      <label for="paraName">Guidelines Para</label>
+                      <input type="text" class="form-control" id="paraName" name="paraName" placeholder="Enter Para">
+                        <input type="hidden" class="form-control" id="id" name="id">
+                        <input type="hidden" id="createdDate" name="createdDate">
                     </div>
                   </div>
                 </form>
               </div>
               <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" onclick="submitData(guidelines)" class="btn btn-primary">Submit</button>
               </div>
             </div>
             <!-- /.card -->
@@ -237,6 +239,15 @@
 <!-- AdminLTE App -->
 <script src="assets/js/adminlte.min.js"></script>
 <!-- page script -->
+<script src="assets/js/variables.js"></script>
+<script src="assets/js/include.js"></script>
 
+<script>
+    $( document ).ready(function() {
+        var id = getParameterByName("id");
+        document.getElementById("id").value = id;
+        updateFieldsWithData(id, guidelines);
+    });
+</script>
 </body>
 </html>

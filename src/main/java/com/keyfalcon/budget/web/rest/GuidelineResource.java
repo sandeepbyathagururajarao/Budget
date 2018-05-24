@@ -1,6 +1,7 @@
 package com.keyfalcon.budget.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.keyfalcon.budget.Role;
 import com.keyfalcon.budget.service.GuidelineService;
 import com.keyfalcon.budget.web.rest.errors.BadRequestAlertException;
 import com.keyfalcon.budget.web.rest.util.HeaderUtil;
@@ -115,5 +116,23 @@ public class GuidelineResource {
         log.debug("REST request to delete Guideline : {}", id);
         guidelineService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET  /states/filter/{userRole}/{id} : get all filtered the states.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of states in body
+     */
+    @GetMapping("/guidelines/filter/{userRole}/{id}")
+    @Timed
+    public List<GuidelineDTO> getFilteredGuidelines(@PathVariable Long userRole, @PathVariable Long id) {
+        log.debug("REST request to get all filtered guidelines");
+        List<GuidelineDTO> guidelineDTOList = null;
+        if(Role.getValue(userRole) == Role.SUPERADMIN) {
+            guidelineDTOList = guidelineService.findAll();
+        } else {
+            guidelineDTOList = guidelineService.findAllFilteredGuidelines(id);
+        }
+        return guidelineDTOList;
     }
 }

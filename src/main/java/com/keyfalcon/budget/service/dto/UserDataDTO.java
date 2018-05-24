@@ -37,6 +37,8 @@ public class UserDataDTO implements Serializable {
 
     private Long stateId;
 
+    private String stateName;
+
     public Long getId() {
         return id;
     }
@@ -107,6 +109,14 @@ public class UserDataDTO implements Serializable {
 
     public void setStateId(Long stateId) {
         this.stateId = stateId;
+    }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
     }
 
     @Override

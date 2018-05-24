@@ -189,33 +189,32 @@
                   <h3 class="d-inline card-title">Master</h3>
                 </div>
                 <!-- form start -->
-                <form role="form">
-                  <div class="card-body">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Super Admin Name</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Name" value="Suresh">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Password</label>
-                      <input type="Password" class="form-control" id="exampleInputEmail1" placeholder="Enter Password" value="123124">
-                    </div>
-                    <div class="form-group">
-                      <label>Select State</label>
-                      <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">Tamilnadu</option>
-                        <option>Tamilnadu</option>
-                        <option>Telegana</option>
-                        <option>karnataka</option>
-                        <option>Orisa</option>
-                        <option>Kerala</option>
-                        <option>Rajasthan</option>
-                      </select>
-                    </div>
-                  </div>
-                </form>
+                  <form role="form">
+                      <div class="card-body">
+                          <div class="form-group">
+                              <label for="userName">Super Admin Name</label>
+                              <input type="text" class="form-control" id="userName" name="userName" placeholder="Enter Name">
+                          </div>
+                          <div class="form-group">
+                              <label for="password">Password</label>
+                              <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+                          </div>
+                          <div class="form-group">
+                              <label>Select State</label>
+                              <select id="stateId" name="stateId" class="form-control select2" style="width: 100%;">
+                                  <option>Select State</option>
+                              </select>
+                          </div>
+                      </div>
+                      <input type="hidden" id="id" name="id">
+                      <input type="hidden" id="userType" name="userType" value="1">
+                      <input type="hidden" id="createdBy" name="createdBy">
+                      <input type="hidden" id="createdDate" name="createdDate">
+                      <input type="hidden" id="userId" name="userId">
+                  </form>
               </div>
               <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" onclick="submitData(users)" class="btn btn-primary">Submit</button>
               </div>
             </div>
             <!-- /.card -->
@@ -253,6 +252,31 @@
 <!-- AdminLTE App -->
 <script src="assets/js/adminlte.min.js"></script>
 <!-- page script -->
+<script src="assets/js/variables.js"></script>
+<script src="assets/js/include.js"></script>
 
+<script>
+    $( document ).ready(function() {
+        $.ajax({
+            method: "GET",
+            url: states+"filter/"+sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
+            success: function(data){
+                if(data != null && data.length > 0) {
+                    for(ctr = 0; ctr < data.length; ctr++) {
+                        var stateId = data[ctr].id;
+                        var name = data[ctr].name;
+                        $('#stateId option:last').after('<option value="'+stateId+'">'+name+'</option>');
+                    }
+                }
+                var id = getParameterByName("id");
+                document.getElementById("id").value = id;
+                updateFieldsWithData(id, users);
+            },
+            error:function(xhr,status,err){
+                alert("Error:"+err);
+            }
+        });
+    });
+</script>
 </body>
 </html>

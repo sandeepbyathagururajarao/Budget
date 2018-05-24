@@ -1,6 +1,7 @@
 package com.keyfalcon.budget.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.keyfalcon.budget.Role;
 import com.keyfalcon.budget.service.UserDataService;
 import com.keyfalcon.budget.web.rest.errors.BadRequestAlertException;
 import com.keyfalcon.budget.web.rest.util.HeaderUtil;
@@ -120,26 +121,32 @@ public class UserDataResource {
     /**
      * GET  /user-data/validate/:userName : validate "userName" userData.
      *
-     * @param userName the id of the userDataDTO to validate
+     * @param userId the id of the userDataDTO to validate
      * @return the ResponseEntity with status 200 (OK)
      */
-    @GetMapping("/user-data/validate/{userName}")
+    @GetMapping("/user-data/validate/{userId}")
     @Timed
-    public List<UserDataDTO> getUserData(@PathVariable String userName) {
-        log.debug("REST request to validate against UserData : {}", userName);
-        return userDataService.getUserDataByUserId(userName);
+    public List<UserDataDTO> getUserData(@PathVariable String userId) {
+        log.debug("REST request to validate against UserData : {}", userId);
+        return userDataService.getUserDataByUserId(userId);
     }
 
     /**
-     * GET  /user-data/filter/:userName : filter "userName" userData.
+     * GET  /user-data/filter/{userRole}/{userId} : filter "userId" userData.
      *
-     * @param userName the id of the userDataDTO to filter
+     * @param userId the id of the userDataDTO to filter
      * @return the ResponseEntity with status 200 (OK)
      */
-    @GetMapping("/user-data/filter/{userName}")
+    @GetMapping("/user-data/filter/{userRole}/{userId}")
     @Timed
-    public List<UserDataDTO> getCreatedUsers(@PathVariable String userName) {
-        log.debug("REST request to filter against UserData : {}", userName);
-        return userDataService.getCreatedUsers(userName);
+    public List<UserDataDTO> getCreatedUsers(@PathVariable Long userRole, @PathVariable String userId) {
+        log.debug("REST request to filter against UserData : {}", userId);
+        List<UserDataDTO> userDataDTOList = null;
+        if(Role.getValue(userRole) == Role.SUPERADMIN) {
+            userDataDTOList = userDataService.findAll();
+        } else {
+            userDataDTOList = userDataService.getCreatedUsers(userId);
+        }
+        return userDataDTOList;
     }
 }

@@ -166,7 +166,7 @@
         <div class="row mb-2">
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <h1 class="d-inline">View Super Admin</h1>
-            <a href="user_super_admin_edit.html" data-toggle="tooltip" title="Edit" href=""><i class="fa fa-pencil-alt icon-create"></i></a>
+            <a href="#" onclick="editRecord()" data-toggle="tooltip" title="Edit" href=""><i class="fa fa-pencil-alt icon-create"></i></a>
           </div>
 
           <div class="col-sm-6">
@@ -194,30 +194,20 @@
                 <form role="form">
                   <div class="card-body">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Super Admin Name</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Name" value="Suresh" disabled>
+                      <label for="userName">Super Admin Name</label>
+                      <input type="text" class="form-control" id="userName" name="userName" placeholder="Enter Name" disabled>
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Password</label>
-                      <input type="Password" class="form-control" id="exampleInputEmail1" placeholder="Enter Password" value="123124" disabled>
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" disabled>
                     </div>
                     <div class="form-group">
                       <label>Select State</label>
-                      <select class="form-control select2" style="width: 100%;" disabled>
-                        <option selected="selected">Tamilnadu</option>
-                        <option>Tamilnadu</option>
-                        <option>Telegana</option>
-                        <option>karnataka</option>
-                        <option>Orisa</option>
-                        <option>Kerala</option>
-                        <option>Rajasthan</option>
-                      </select>
+                        <input type="hidden" class="form-control" id="id" name="id">
+                        <input type="text" id="stateName" name="stateName" class="form-control" style="width: 100%;" disabled>
                     </div>
                   </div>
                 </form>
-              </div>
-              <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
               </div>
             </div>
             <!-- /.card -->
@@ -255,6 +245,20 @@
 <!-- AdminLTE App -->
 <script src="assets/js/adminlte.min.js"></script>
 <!-- page script -->
+<script src="assets/js/variables.js"></script>
+<script src="assets/js/include.js"></script>
+
+<script>
+    $( document ).ready(function() {
+        var id = getParameterByName("id");
+        document.getElementById("id").value = id;
+        updateFieldsWithData(id, users);
+    });
+
+    function editRecord() {
+        location.href = "user_super_admin_edit.html?id="+document.getElementById("id").value;
+    }
+</script>
 
 </body>
 </html>

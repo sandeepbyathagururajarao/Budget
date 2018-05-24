@@ -12,6 +12,7 @@ import org.mapstruct.*;
 public interface UserDataMapper extends EntityMapper<UserDataDTO, UserData> {
 
     @Mapping(source = "state.id", target = "stateId")
+    @Mapping(source = "state.name", target = "stateName")
     UserDataDTO toDto(UserData userData);
 
     @Mapping(source = "stateId", target = "state")

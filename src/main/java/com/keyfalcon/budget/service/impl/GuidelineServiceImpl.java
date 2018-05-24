@@ -84,4 +84,13 @@ public class GuidelineServiceImpl implements GuidelineService {
         log.debug("Request to delete Guideline : {}", id);
         guidelineRepository.delete(id);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<GuidelineDTO> findAllFilteredGuidelines(Long id) {
+        log.debug("Request to get all filtered States");
+        return guidelineRepository.findAllByUserId(id).stream()
+            .map(guidelineMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 }
