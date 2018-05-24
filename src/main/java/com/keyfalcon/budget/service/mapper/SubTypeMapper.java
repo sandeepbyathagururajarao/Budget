@@ -8,10 +8,14 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity SubType and its DTO SubTypeDTO.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {UserDataMapper.class})
 public interface SubTypeMapper extends EntityMapper<SubTypeDTO, SubType> {
 
+    @Mapping(source = "user.id", target = "userId")
+    SubTypeDTO toDto(SubType subType);
 
+    @Mapping(source = "userId", target = "user")
+    SubType toEntity(SubTypeDTO subTypeDTO);
 
     default SubType fromId(Long id) {
         if (id == null) {

@@ -84,4 +84,13 @@ public class SubTypeServiceImpl implements SubTypeService {
         log.debug("Request to delete SubType : {}", id);
         subTypeRepository.delete(id);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<SubTypeDTO> findAllFilteredItems(Long id) {
+        log.debug("Request to get all filtered States");
+        return subTypeRepository.findAllByUserId(id).stream()
+            .map(subTypeMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 }

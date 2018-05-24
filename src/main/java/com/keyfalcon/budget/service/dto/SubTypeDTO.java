@@ -4,6 +4,8 @@ package com.keyfalcon.budget.service.dto;
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -20,6 +22,8 @@ public class SubTypeDTO implements Serializable {
     private ZonedDateTime createdDate;
 
     private ZonedDateTime modifiedDate;
+
+    private Long userId;
 
     public Long getId() {
         return id;
@@ -51,6 +55,14 @@ public class SubTypeDTO implements Serializable {
 
     public void setModifiedDate(ZonedDateTime modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userDataId) {
+        this.userId = userDataId;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.keyfalcon.budget.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.keyfalcon.budget.Role;
 import com.keyfalcon.budget.service.SubTypeService;
 import com.keyfalcon.budget.web.rest.errors.BadRequestAlertException;
 import com.keyfalcon.budget.web.rest.util.HeaderUtil;
@@ -115,5 +116,23 @@ public class SubTypeResource {
         log.debug("REST request to delete SubType : {}", id);
         subTypeService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET  /sub-types/filter/{userRole}/{id} : get all filtered the states.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of states in body
+     */
+    @GetMapping("/sub-types/filter/{userRole}/{id}")
+    @Timed
+    public List<SubTypeDTO> getFilteredItems(@PathVariable Long userRole, @PathVariable Long id) {
+        log.debug("REST request to get all filtered items");
+        List<SubTypeDTO> subTypeDTOList = null;
+        if(Role.getValue(userRole) == Role.SUPERADMIN) {
+            subTypeDTOList = subTypeService.findAll();
+        } else {
+            subTypeDTOList = subTypeService.findAllFilteredItems(id);
+        }
+        return subTypeDTOList;
     }
 }

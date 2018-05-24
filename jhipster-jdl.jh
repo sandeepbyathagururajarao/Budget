@@ -90,6 +90,10 @@ relationship ManyToOne {
 }
 
 relationship ManyToOne {
+	SubType{user} to UserData
+}
+
+relationship ManyToOne {
 	TCP{user} to UserData
 }
 
