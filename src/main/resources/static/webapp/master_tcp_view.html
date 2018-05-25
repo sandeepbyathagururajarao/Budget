@@ -105,7 +105,7 @@
               <li class="nav-item">
                 <a href="master_district.html" class="nav-link">
                   <i class="fas fa-caret-right nav-icon"></i>
-                  <p>District master</p>
+                  <p>State master</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -166,7 +166,7 @@
         <div class="row mb-2">
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <h1 class="d-inline">View Para No Tcp</h1>
-            <a href="master_tcp_edit.html" data-toggle="tooltip" title="Edit" href=""><i class="fa fa-pencil-alt icon-create"></i></a>
+            <a href="#" onclick="editRecord()" data-toggle="tooltip" title="Edit" href=""><i class="fa fa-pencil-alt icon-create"></i></a>
           </div>
 
           <div class="col-sm-6">
@@ -194,14 +194,12 @@
                 <form role="form">
                   <div class="card-body">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Tcp</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Tcp" value="11.5.6" disabled>
+                      <label for="paraNoTCP">Tcp</label>
+                        <input type="hidden" class="form-control" id="id" name="id">
+                        <input type="text" class="form-control" id="paraNoTCP" name="paraNoTCP" placeholder="Enter Tcp" disabled>
                     </div>
                   </div>
                 </form>
-              </div>
-              <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
               </div>
             </div>
             <!-- /.card -->
@@ -239,6 +237,19 @@
 <!-- AdminLTE App -->
 <script src="assets/js/adminlte.min.js"></script>
 <!-- page script -->
+<script src="assets/js/variables.js"></script>
+<script src="assets/js/include.js"></script>
 
+<script>
+    $( document ).ready(function() {
+        var id = getParameterByName("id");
+        document.getElementById("id").value = id;
+        updateFieldsWithData(id, tcps);
+    });
+
+    function editRecord() {
+        location.href = "master_tcp_edit.html?id="+document.getElementById("id").value;
+    }
+</script>
 </body>
 </html>

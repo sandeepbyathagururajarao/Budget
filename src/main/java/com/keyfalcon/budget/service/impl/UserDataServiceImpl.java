@@ -94,8 +94,15 @@ public class UserDataServiceImpl implements UserDataService {
     }
 
     @Override
-    public List<UserDataDTO> getCreatedUsers(String userId) {
-        return userDataRepository.findAllByCreatedBy(userId).stream()
+    public List<UserDataDTO> findAllByCriteria(String criteria) {
+        return userDataRepository.findAllByUserType(criteria).stream()
+            .map(userDataMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    public List<UserDataDTO> findAllByCreatedByAndCriteria(String userId, String criteria) {
+        return userDataRepository.findAllByCreatedByAndUserType(userId,criteria).stream()
             .map(userDataMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }

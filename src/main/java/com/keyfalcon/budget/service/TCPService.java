@@ -37,4 +37,6 @@ public interface TCPService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    List<TCPDTO> findAllFilteredItems(Long id);
 }

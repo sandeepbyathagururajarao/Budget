@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.util.List;
+
 
 /**
  * Spring Data JPA repository for the TCP entity.
@@ -12,5 +14,5 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface TCPRepository extends JpaRepository<TCP, Long> {
-
+    public List<TCP> findAllByUserId(Long id);
 }

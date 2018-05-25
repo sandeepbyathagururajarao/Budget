@@ -15,5 +15,6 @@ import java.util.List;
 @Repository
 public interface UserDataRepository extends JpaRepository<UserData, Long> {
     List<UserData> findAllByUserId(String userId);
-    List<UserData> findAllByCreatedBy(String userId);
+    List<UserData> findAllByCreatedByAndUserType(String userId, String criteria);
+    List<UserData> findAllByUserType(String criteria);
 }

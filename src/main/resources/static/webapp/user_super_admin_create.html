@@ -254,17 +254,8 @@
 <script src="assets/js/include.js"></script>
 
 <script>
-    var randomString = function(length) {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        for(var i = 0; i < length; i++) {
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
-        return text;
-    };
-
     $( document ).ready(function() {
-        document.getElementById("userId").value = randomString(10);
+        document.getElementById("userId").value = randomString();
         document.getElementById("createdBy").value = sessionStorage.getItem("UID");
         $.ajax({
             method: "GET",

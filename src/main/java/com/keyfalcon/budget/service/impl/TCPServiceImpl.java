@@ -84,4 +84,13 @@ public class TCPServiceImpl implements TCPService {
         log.debug("Request to delete TCP : {}", id);
         tCPRepository.delete(id);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<TCPDTO> findAllFilteredItems(Long id) {
+        log.debug("Request to get all filtered States");
+        return tCPRepository.findAllByUserId(id).stream()
+            .map(tCPMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 }

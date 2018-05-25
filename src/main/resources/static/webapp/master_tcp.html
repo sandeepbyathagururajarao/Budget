@@ -105,7 +105,7 @@
               <li class="nav-item">
                 <a href="master_district.html" class="nav-link">
                   <i class="fas fa-caret-right nav-icon"></i>
-                  <p>District master</p>
+                  <p>State master</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -198,26 +198,10 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover">
+                <table id="display_grid" class="table table-hover">
                   <tr>
                     <th>Para No Tcp</th>
                     <th class="text-right">Action</th>
-                  </tr>
-                  <tr>
-                    <td>11.5.6</td>
-                    <td class="text-right"><a href="master_tcp_view.html"><i class="fas fa-eye icon-table"></i></a><a href="master_tcp_edit.html"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i class="remove fas fa-trash-alt icon-table" style="background: red"></i></td>
-                  </tr>
-                  <tr>
-                    <td>18.5.6</td>
-                    <td class="text-right"><a href="master_tcp_view.html"><i class="fas fa-eye icon-table"></i></a><a href="master_tcp_edit.html"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i class="remove fas fa-trash-alt icon-table" style="background: red"></i></td>
-                  </tr>
-                  <tr>
-                    <td>25.5.6</td>
-                    <td class="text-right"><a href="master_tcp_view.html"><i class="fas fa-eye icon-table"></i></a><a href="master_tcp_edit.html"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i class="remove fas fa-trash-alt icon-table" style="background: red"></i></td>
-                  </tr>
-                  <tr>
-                    <td>28.5.6</td>
-                    <td class="text-right"><a href="master_tcp_view.html"><i class="fas fa-eye icon-table"></i></a><a href="master_tcp_edit.html"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i class="remove fas fa-trash-alt icon-table" style="background: red"></i></td>
                   </tr>
                 </table>
               </div>
@@ -258,18 +242,30 @@
 <!-- AdminLTE App -->
 <script src="assets/js/adminlte.min.js"></script>
 <!-- page script -->
+<script src="assets/js/variables.js"></script>
+<script src="assets/js/include.js"></script>
 <script type="text/javascript">
-      $( document ).ready(function() {
-      // var counter = 1;
-      $('.remove').on('click', function(){
-        // $(this).closest('tr').remove();
-        var r = confirm("Press ok button to delete!");
-        if (r == true) {
-          $(this).closest('tr').remove();
-        } else {
+    function getRecords(path) {
+        $.ajax({
+            method: "GET",
+            url: path+"filter/"+sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
+            success: function(data){
+                if(data != null && data.length > 0) {
+                    for(ctr = 0; ctr < data.length; ctr++) {
+                        var tcpId = data[ctr].id;
+                        var paraNoTCP = data[ctr].paraNoTCP;
+                        $('#display_grid tr:last').after('<tr><td>'+paraNoTCP+'</td><td class="text-right"><a href="master_tcp_view.html?id='+tcpId+'"><i class="fas fa-eye icon-table"></i></a><a href="master_tcp_edit.html?id='+tcpId+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i onclick=removeRecord('+tcpId+',\''+tcps+'\') class="remove fas fa-trash-alt icon-table" style="background: red"></i></td></tr>');
+                    }
+                }
+            },
+            error:function(xhr,status,err){
+                alert("Error:"+err);
+            }
+        });
+    }
 
-        }
-      })
+    $( document ).ready(function() {
+        getRecords(tcps);
     });
 </script>
 

@@ -1,6 +1,8 @@
 package com.keyfalcon.budget.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.keyfalcon.budget.Role;
+import com.keyfalcon.budget.domain.TCP;
 import com.keyfalcon.budget.service.TCPService;
 import com.keyfalcon.budget.web.rest.errors.BadRequestAlertException;
 import com.keyfalcon.budget.web.rest.util.HeaderUtil;
@@ -115,5 +117,23 @@ public class TCPResource {
         log.debug("REST request to delete TCP : {}", id);
         tCPService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET  /states/filter/{userRole}/{id} : get all filtered the states.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of states in body
+     */
+    @GetMapping("/tcps/filter/{userRole}/{id}")
+    @Timed
+    public List<TCPDTO> getFilteredItems(@PathVariable Long userRole, @PathVariable Long id) {
+        log.debug("REST request to get all filtered items");
+        List<TCPDTO> tcpList = null;
+        if(Role.getValue(userRole) == Role.SUPERADMIN) {
+            tcpList = tCPService.findAll();
+        } else {
+            tcpList = tCPService.findAllFilteredItems(id);
+        }
+        return tcpList;
     }
 }

@@ -139,13 +139,16 @@ public class UserDataResource {
      */
     @GetMapping("/user-data/filter/{userRole}/{userId}")
     @Timed
-    public List<UserDataDTO> getCreatedUsers(@PathVariable Long userRole, @PathVariable String userId) {
+    public List<UserDataDTO> getCreatedByUsersOnCriteria(@PathVariable Long userRole, @PathVariable String userId) {
         log.debug("REST request to filter against UserData : {}", userId);
+        String userRoleStr = String.valueOf(userRole);
+        char criteria = userRoleStr.charAt(0);
+        char loggedInUserRole = userRoleStr.charAt(1);
         List<UserDataDTO> userDataDTOList = null;
-        if(Role.getValue(userRole) == Role.SUPERADMIN) {
-            userDataDTOList = userDataService.findAll();
+        if(Role.getValue(Long.valueOf(String.valueOf(loggedInUserRole))) == Role.SUPERADMIN) {
+            userDataDTOList = userDataService.findAllByCriteria(String.valueOf(criteria));
         } else {
-            userDataDTOList = userDataService.getCreatedUsers(userId);
+            userDataDTOList = userDataService.findAllByCreatedByAndCriteria(userId,String.valueOf(criteria));
         }
         return userDataDTOList;
     }

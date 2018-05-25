@@ -45,10 +45,19 @@ public interface UserDataService {
      */
     List<UserDataDTO> getUserDataByUserId(String userId);
 
+
+    /**
+     * Get the created "userId" userData.
+     *
+     * @param criteria the userId of the entity
+     */
+    List<UserDataDTO> findAllByCriteria(String criteria);
+
+
     /**
      * Get the created "userId" userData.
      *
      * @param userId the userId of the entity
      */
-    List<UserDataDTO> getCreatedUsers(String userId);
+    List<UserDataDTO> findAllByCreatedByAndCriteria(String userId, String criteria);
 }

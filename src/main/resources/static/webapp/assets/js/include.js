@@ -114,3 +114,15 @@ function submitData(path) {
     });
 }
 
+var randomString = function(length) {
+    if(length == null) {
+        length = 5;
+    }
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    for(var i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+};
+
