@@ -25,8 +25,8 @@ public class PurchaseItem implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "jhi_type", nullable = false)
-    private String type;
+    @Column(name = "purchase_type", nullable = false)
+    private String purchaseType;
 
     @Column(name = "gps_coordinate")
     private String gpsCoordinate;
@@ -49,7 +49,6 @@ public class PurchaseItem implements Serializable {
     private ZonedDateTime modifiedDate;
 
     @OneToMany(mappedBy = "purchaseItem")
-    @JsonIgnore
     private Set<PurchaseSubItem> subItems = new HashSet<>();
 
     @ManyToOne
@@ -65,7 +64,7 @@ public class PurchaseItem implements Serializable {
     private TCP tcp;
 
     @ManyToOne
-    private Area area;
+    private State state;
 
     @ManyToOne
     private UserData user;
@@ -79,17 +78,17 @@ public class PurchaseItem implements Serializable {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getPurchaseType() {
+        return purchaseType;
     }
 
-    public PurchaseItem type(String type) {
-        this.type = type;
+    public PurchaseItem purchaseType(String purchaseType) {
+        this.purchaseType = purchaseType;
         return this;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setPurchaseType(String purchaseType) {
+        this.purchaseType = purchaseType;
     }
 
     public String getGpsCoordinate() {
@@ -247,17 +246,17 @@ public class PurchaseItem implements Serializable {
         this.tcp = tCP;
     }
 
-    public Area getArea() {
-        return area;
+    public State getState() {
+        return state;
     }
 
-    public PurchaseItem area(Area area) {
-        this.area = area;
+    public PurchaseItem state(State state) {
+        this.state = state;
         return this;
     }
 
-    public void setArea(Area area) {
-        this.area = area;
+    public void setState(State state) {
+        this.state = state;
     }
 
     public UserData getUser() {
@@ -298,7 +297,7 @@ public class PurchaseItem implements Serializable {
     public String toString() {
         return "PurchaseItem{" +
             "id=" + getId() +
-            ", type='" + getType() + "'" +
+            ", purchaseType='" + getPurchaseType() + "'" +
             ", gpsCoordinate='" + getGpsCoordinate() + "'" +
             ", justification='" + getJustification() + "'" +
             ", image='" + getImage() + "'" +

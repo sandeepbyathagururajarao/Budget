@@ -32,11 +32,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="tcp"/>
 
-        <addForeignKeyConstraint baseColumnNames="area_id"
+        <addForeignKeyConstraint baseColumnNames="state_id"
                                  baseTableName="purchase_item"
-                                 constraintName="fk_purchase_item_area_id"
+                                 constraintName="fk_purchase_item_state_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="area"/>
+                                 referencedTableName="state"/>
 
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="purchase_item"

@@ -16,7 +16,7 @@ public class PurchaseItemDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String type;
+    private String purchaseType;
 
     private String gpsCoordinate;
 
@@ -40,9 +40,11 @@ public class PurchaseItemDTO implements Serializable {
 
     private Long tcpId;
 
-    private Long areaId;
+    private Long stateId;
 
     private Long userId;
+
+    private Set<PurchaseSubItemDTO> subItems = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -52,12 +54,12 @@ public class PurchaseItemDTO implements Serializable {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getPurchaseType() {
+        return purchaseType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setPurchaseType(String purchaseType) {
+        this.purchaseType = purchaseType;
     }
 
     public String getGpsCoordinate() {
@@ -140,12 +142,12 @@ public class PurchaseItemDTO implements Serializable {
         this.tcpId = tCPId;
     }
 
-    public Long getAreaId() {
-        return areaId;
+    public Long getStateId() {
+        return stateId;
     }
 
-    public void setAreaId(Long areaId) {
-        this.areaId = areaId;
+    public void setStateId(Long stateId) {
+        this.stateId = stateId;
     }
 
     public Long getUserId() {
@@ -154,6 +156,14 @@ public class PurchaseItemDTO implements Serializable {
 
     public void setUserId(Long userDataId) {
         this.userId = userDataId;
+    }
+
+    public void setSubItems(Set<PurchaseSubItemDTO> purchaseSubItems) {
+        this.subItems = purchaseSubItems;
+    }
+
+    public Set<PurchaseSubItemDTO> getSubItems() {
+        return subItems;
     }
 
     @Override
@@ -181,7 +191,7 @@ public class PurchaseItemDTO implements Serializable {
     public String toString() {
         return "PurchaseItemDTO{" +
             "id=" + getId() +
-            ", type='" + getType() + "'" +
+            ", purchaseType='" + getPurchaseType() + "'" +
             ", gpsCoordinate='" + getGpsCoordinate() + "'" +
             ", justification='" + getJustification() + "'" +
             ", image='" + getImage() + "'" +

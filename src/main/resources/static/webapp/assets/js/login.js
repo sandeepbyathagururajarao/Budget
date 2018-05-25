@@ -6,6 +6,7 @@ function login() {
     var password = document.getElementById("password").value;
     $.ajax({
         method: "GET",
+        cache: false,
         url: authenticate+userId,
         success: function(data){
             if(data != null && data.length > 0) {

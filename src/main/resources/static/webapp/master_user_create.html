@@ -259,6 +259,7 @@
         document.getElementById("createdBy").value = sessionStorage.getItem("UID");
         $.ajax({
             method: "GET",
+            cache: false,
             url: states+"filter/"+sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
             success: function(data){
                 if(data != null && data.length > 0) {

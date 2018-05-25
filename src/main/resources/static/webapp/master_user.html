@@ -249,6 +249,7 @@
     function getRecords(path) {
         $.ajax({
             method: "GET",
+            cache: false,
             url: path+"filter/3"+sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
             success: function(data){
                 if(data != null && data.length > 0) {

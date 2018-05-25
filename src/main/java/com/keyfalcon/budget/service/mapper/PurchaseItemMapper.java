@@ -8,23 +8,22 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity PurchaseItem and its DTO PurchaseItemDTO.
  */
-@Mapper(componentModel = "spring", uses = {ItemMapper.class, GuidelineMapper.class, SubTypeMapper.class, TCPMapper.class, AreaMapper.class, UserDataMapper.class})
+@Mapper(componentModel = "spring", uses = {ItemMapper.class, GuidelineMapper.class, SubTypeMapper.class, TCPMapper.class, StateMapper.class, UserDataMapper.class})
 public interface PurchaseItemMapper extends EntityMapper<PurchaseItemDTO, PurchaseItem> {
 
     @Mapping(source = "item.id", target = "itemId")
     @Mapping(source = "guideline.id", target = "guidelineId")
     @Mapping(source = "subType.id", target = "subTypeId")
     @Mapping(source = "tcp.id", target = "tcpId")
-    @Mapping(source = "area.id", target = "areaId")
+    @Mapping(source = "state.id", target = "stateId")
     @Mapping(source = "user.id", target = "userId")
     PurchaseItemDTO toDto(PurchaseItem purchaseItem);
 
-    @Mapping(target = "subItems", ignore = true)
     @Mapping(source = "itemId", target = "item")
     @Mapping(source = "guidelineId", target = "guideline")
     @Mapping(source = "subTypeId", target = "subType")
     @Mapping(source = "tcpId", target = "tcp")
-    @Mapping(source = "areaId", target = "area")
+    @Mapping(source = "stateId", target = "state")
     @Mapping(source = "userId", target = "user")
     PurchaseItem toEntity(PurchaseItemDTO purchaseItemDTO);
 

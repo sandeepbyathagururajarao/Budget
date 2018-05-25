@@ -46,8 +46,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = BudgetApp.class)
 public class PurchaseItemResourceIntTest {
 
-    private static final String DEFAULT_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_TYPE = "BBBBBBBBBB";
+    private static final String DEFAULT_PURCHASE_TYPE = "AAAAAAAAAA";
+    private static final String UPDATED_PURCHASE_TYPE = "BBBBBBBBBB";
 
     private static final String DEFAULT_GPS_COORDINATE = "AAAAAAAAAA";
     private static final String UPDATED_GPS_COORDINATE = "BBBBBBBBBB";
@@ -111,7 +111,7 @@ public class PurchaseItemResourceIntTest {
      */
     public static PurchaseItem createEntity(EntityManager em) {
         PurchaseItem purchaseItem = new PurchaseItem()
-            .type(DEFAULT_TYPE)
+            .purchaseType(DEFAULT_PURCHASE_TYPE)
             .gpsCoordinate(DEFAULT_GPS_COORDINATE)
             .justification(DEFAULT_JUSTIFICATION)
             .image(DEFAULT_IMAGE)
@@ -142,7 +142,7 @@ public class PurchaseItemResourceIntTest {
         List<PurchaseItem> purchaseItemList = purchaseItemRepository.findAll();
         assertThat(purchaseItemList).hasSize(databaseSizeBeforeCreate + 1);
         PurchaseItem testPurchaseItem = purchaseItemList.get(purchaseItemList.size() - 1);
-        assertThat(testPurchaseItem.getType()).isEqualTo(DEFAULT_TYPE);
+        assertThat(testPurchaseItem.getPurchaseType()).isEqualTo(DEFAULT_PURCHASE_TYPE);
         assertThat(testPurchaseItem.getGpsCoordinate()).isEqualTo(DEFAULT_GPS_COORDINATE);
         assertThat(testPurchaseItem.getJustification()).isEqualTo(DEFAULT_JUSTIFICATION);
         assertThat(testPurchaseItem.getImage()).isEqualTo(DEFAULT_IMAGE);
@@ -173,10 +173,10 @@ public class PurchaseItemResourceIntTest {
 
     @Test
     @Transactional
-    public void checkTypeIsRequired() throws Exception {
+    public void checkPurchaseTypeIsRequired() throws Exception {
         int databaseSizeBeforeTest = purchaseItemRepository.findAll().size();
         // set the field null
-        purchaseItem.setType(null);
+        purchaseItem.setPurchaseType(null);
 
         // Create the PurchaseItem, which fails.
         PurchaseItemDTO purchaseItemDTO = purchaseItemMapper.toDto(purchaseItem);
@@ -239,7 +239,7 @@ public class PurchaseItemResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(purchaseItem.getId().intValue())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].purchaseType").value(hasItem(DEFAULT_PURCHASE_TYPE.toString())))
             .andExpect(jsonPath("$.[*].gpsCoordinate").value(hasItem(DEFAULT_GPS_COORDINATE.toString())))
             .andExpect(jsonPath("$.[*].justification").value(hasItem(DEFAULT_JUSTIFICATION.toString())))
             .andExpect(jsonPath("$.[*].image").value(hasItem(DEFAULT_IMAGE.toString())))
@@ -259,7 +259,7 @@ public class PurchaseItemResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(purchaseItem.getId().intValue()))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
+            .andExpect(jsonPath("$.purchaseType").value(DEFAULT_PURCHASE_TYPE.toString()))
             .andExpect(jsonPath("$.gpsCoordinate").value(DEFAULT_GPS_COORDINATE.toString()))
             .andExpect(jsonPath("$.justification").value(DEFAULT_JUSTIFICATION.toString()))
             .andExpect(jsonPath("$.image").value(DEFAULT_IMAGE.toString()))
@@ -288,7 +288,7 @@ public class PurchaseItemResourceIntTest {
         // Disconnect from session so that the updates on updatedPurchaseItem are not directly saved in db
         em.detach(updatedPurchaseItem);
         updatedPurchaseItem
-            .type(UPDATED_TYPE)
+            .purchaseType(UPDATED_PURCHASE_TYPE)
             .gpsCoordinate(UPDATED_GPS_COORDINATE)
             .justification(UPDATED_JUSTIFICATION)
             .image(UPDATED_IMAGE)
@@ -306,7 +306,7 @@ public class PurchaseItemResourceIntTest {
         List<PurchaseItem> purchaseItemList = purchaseItemRepository.findAll();
         assertThat(purchaseItemList).hasSize(databaseSizeBeforeUpdate);
         PurchaseItem testPurchaseItem = purchaseItemList.get(purchaseItemList.size() - 1);
-        assertThat(testPurchaseItem.getType()).isEqualTo(UPDATED_TYPE);
+        assertThat(testPurchaseItem.getPurchaseType()).isEqualTo(UPDATED_PURCHASE_TYPE);
         assertThat(testPurchaseItem.getGpsCoordinate()).isEqualTo(UPDATED_GPS_COORDINATE);
         assertThat(testPurchaseItem.getJustification()).isEqualTo(UPDATED_JUSTIFICATION);
         assertThat(testPurchaseItem.getImage()).isEqualTo(UPDATED_IMAGE);

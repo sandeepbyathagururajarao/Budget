@@ -24,6 +24,7 @@ function removeRecord(id, path) {
 	if (r == true) {
 		$.ajax({
 		  method: "DELETE",
+          cache: false,
 		  url: path+id,
 		  success: function(data){
 			location.reload();
@@ -38,6 +39,7 @@ function removeRecord(id, path) {
 function updateFieldsWithData(id, path) {
     $.ajax({
         method: "GET",
+        cache: false,
         url: path+id,
         success: function(data){
             if(data != null) {
@@ -69,6 +71,7 @@ function populateRecordCount() {
     $.ajax({
         method: "GET",
         url: path,
+        cache: false,
         success: function(data){
 
         },
@@ -101,6 +104,7 @@ function submitData(path) {
         method: "PUT",
         contentType:"application/json; charset=utf-8",
         data : formJSON,
+        cache: false,
         url: path,
         success: function(data){
             if(data != null) {
