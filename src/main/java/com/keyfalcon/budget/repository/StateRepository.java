@@ -15,4 +15,6 @@ import java.util.List;
 @Repository
 public interface StateRepository extends JpaRepository<State, Long> {
     public List<State> findAllByUserId(Long id);
+    public List<State> findAllByNameContainsAndUserId(String name,Long id);
+    public List<State> findAllByNameContains(String name);
 }

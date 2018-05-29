@@ -43,4 +43,8 @@ public interface StateService {
      * @return the list of entities
      */
     List<StateDTO> findAllFilteredStates(Long id);
+
+    List<StateDTO> searchAllItems(String name);
+
+    List<StateDTO> searchItems(String name, Long id);
 }
