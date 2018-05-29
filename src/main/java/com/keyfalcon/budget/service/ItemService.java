@@ -39,4 +39,8 @@ public interface ItemService {
     void delete(Long id);
 
     List<ItemDTO> findAllFilteredItems(Long id);
+
+    List<ItemDTO> searchItems(String itemName, Long id);
+
+    List<ItemDTO> searchAllItems(String itemName);
 }

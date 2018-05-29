@@ -94,4 +94,22 @@ public class ItemServiceImpl implements ItemService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<ItemDTO> searchItems(String itemName, Long id) {
+        log.debug("Request to get all filtered Items based on User");
+        return itemRepository.findAllByItemNameContainsAndUserId(itemName, id).stream()
+            .map(itemMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ItemDTO> searchAllItems(String itemName) {
+        log.debug("Request to get all filtered Items");
+        return itemRepository.findAllByItemNameContains(itemName).stream()
+            .map(itemMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
 }
