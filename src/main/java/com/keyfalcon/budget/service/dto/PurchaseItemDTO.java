@@ -166,8 +166,8 @@ public class PurchaseItemDTO implements Serializable {
         this.userId = userDataId;
     }
 
-    public String setItemName(String approvalString) {
-        return this.itemName;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
     public String getItemName() {

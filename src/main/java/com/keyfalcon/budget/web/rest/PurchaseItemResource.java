@@ -85,6 +85,16 @@ public class PurchaseItemResource {
             return createPurchaseItem(purchaseItemDTO);
         }
         PurchaseItemDTO result = purchaseItemService.save(purchaseItemDTO);
+        int childDelete = purchaseSubItemService.deleteAllByPurchaseId(purchaseItemDTO.getId());
+        if(purchaseItemDTO.getSubItems() != null) {
+            for (PurchaseSubItemDTO purchaseSubItemDTO : purchaseItemDTO.getSubItems()) {
+                purchaseSubItemDTO.setPurchaseItemId(purchaseItemDTO.getId());
+                purchaseSubItemDTO.setId(null);
+            }
+        }
+        if(result != null) {
+            purchaseSubItemService.saveAll(purchaseItemDTO.getSubItems());
+        }
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, purchaseItemDTO.getId().toString()))
             .body(result);
@@ -113,6 +123,11 @@ public class PurchaseItemResource {
     public ResponseEntity<PurchaseItemDTO> getPurchaseItem(@PathVariable Long id) {
         log.debug("REST request to get PurchaseItem : {}", id);
         PurchaseItemDTO purchaseItemDTO = purchaseItemService.findOne(id);
+        if(purchaseItemDTO != null) {
+            for (PurchaseSubItemDTO purchaseSubItemDTO : purchaseItemDTO.getSubItems()) {
+                purchaseSubItemDTO.setPurchaseItemId(purchaseItemDTO.getId());
+            }
+        }
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(purchaseItemDTO));
     }
 

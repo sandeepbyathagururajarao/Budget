@@ -12,5 +12,5 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface PurchaseSubItemRepository extends JpaRepository<PurchaseSubItem, Long> {
-
+    public int deleteAllByPurchaseItemId(Long id);
 }

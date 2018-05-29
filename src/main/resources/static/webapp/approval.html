@@ -55,7 +55,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="Purchase_item.html" class="nav-link">
+            <a href="purchase_item.html" class="nav-link">
               <i class="nav-icon fa fa-th"></i>
               <p>Purchase Items<span class="right badge badge-danger">23</span></p>
             </a>
@@ -353,51 +353,51 @@
       $('.remove').on('click', function(){
         // $(this).closest('tr').remove();
         var r = confirm("You want to decline this approval");
-        
+
       })
 
       $('.approve').on('click', function(){
         // $(this).closest('tr').remove();
         var r = confirm("You want to accept this approval");
-        
+
       })
     });
 
 //select all checkboxes
-$("#select_all").change(function(){  //"select all" change 
+$("#select_all").change(function(){  //"select all" change
     var status = this.checked; // "select all" checked status
     $('.checkbox').each(function(){ //iterate all listed checkbox items
         this.checked = status; //change ".checkbox" checked status
     });
 });
 
-$('.checkbox').change(function(){ //".checkbox" change 
+$('.checkbox').change(function(){ //".checkbox" change
     //uncheck "select all", if one of the listed checkbox item is unchecked
     if(this.checked == false){ //if this item is unchecked
         $("#select_all")[0].checked = false; //change "select all" checked status to false
     }
-    
+
     //check "select all" if all checkbox items are checked
-    if ($('.checkbox:checked').length == $('.checkbox').length ){ 
+    if ($('.checkbox:checked').length == $('.checkbox').length ){
         $("#select_all")[0].checked = true; //change "select all" checked status to true
     }
 });
 
-$("#select").change(function(){  //"select all" change 
+$("#select").change(function(){  //"select all" change
     var status = this.checked; // "select all" checked status
     $('.checkbox').each(function(){ //iterate all listed checkbox items
         this.checked = status; //change ".checkbox" checked status
     });
 });
 
-$('.checkbox').change(function(){ //".checkbox" change 
+$('.checkbox').change(function(){ //".checkbox" change
     //uncheck "select all", if one of the listed checkbox item is unchecked
     if(this.checked == false){ //if this item is unchecked
         $("#select")[0].checked = false; //change "select all" checked status to false
     }
-    
+
     //check "select all" if all checkbox items are checked
-    if ($('.checkbox:checked').length == $('.checkbox').length ){ 
+    if ($('.checkbox:checked').length == $('.checkbox').length ){
         $("#select")[0].checked = true; //change "select all" checked status to true
     }
 });
@@ -415,7 +415,7 @@ $('.checkbox').change(function(){ //".checkbox" change
         }*/
       });
       $('.remove').on('click', function(){
-      
+
       });
     });
 </script>

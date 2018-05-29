@@ -93,4 +93,7 @@ public class PurchaseSubItemServiceImpl implements PurchaseSubItemService {
         return true;
     }
 
+    public int deleteAllByPurchaseId(Long id) {
+        return purchaseSubItemRepository.deleteAllByPurchaseItemId(id);
+    }
 }

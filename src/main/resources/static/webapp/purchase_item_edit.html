@@ -64,7 +64,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="Purchase_item.html" class="nav-link">
+            <a href="purchase_item.html" class="nav-link">
               <i class="nav-icon fa fa-th"></i>
               <p>Purchase Items<span class="right badge badge-danger">23</span></p>
             </a>
@@ -164,13 +164,13 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-            <h1>Edit Recurring Items</h1>
+          <div class="col-sm-6">
+            <h1 id="createItemsTitle"></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active">Recurring Items</li>
+              <li class="breadcrumb-item active" id="headerTitle"></li>
             </ol>
           </div>
         </div>
@@ -180,8 +180,8 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
+        <div class="col-md-3 col-lg-3 col-xl-3"></div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
@@ -193,108 +193,42 @@
                 <div class="card-body">
                   <div class="form-group">
                   <label>Item</label>
-                  <select class="form-control select2" style="width: 100%;">
-                    <option selected="selected">Mousse</option>
-                    <option>Printer</option>
-                    <option>Keyboard</option>
-                    <option>Internet Modem</option>
-                    <option>Speaker</option>
-                    <option>Moniter</option>
-                    <option>Headphone</option>
+                  <select id="itemId" name="itemId" class="form-control select2" style="width: 100%;">
+                      <option>Select</option>
                   </select>
                 </div>
                 <div class="row text-flow">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group text-flow">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg--4 col-xl-4 form-group text-flow">
                       <label>Guidelines as per the para rule book</label>
-                      <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">12.1.15</option>
-                        <option>09.5.16</option>
-                        <option>07.8.12</option>
-                        <option>28.3.17</option>
-                        <option>35.8.54</option>
-                        <option>86.3.54</option>
-                        <option>84.6.12</option>
+                      <select id="guidelineId" name="guidelineId" class="form-control select2" style="width: 100%;">
+                          <option>Select</option>
                       </select>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg--4 col-xl-4 form-group">
                       <label>Sub Type number</label>
-                      <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">System</option>
-                        <option>Table</option>
-                        <option>Machine</option>
-                        <option>Watch</option>
-                        <option>battery</option>
-                        <option>Key box</option>
-                        <option>Mobile</option>
+                      <select id="subTypeId" name="subTypeId" class="form-control select2" style="width: 100%;">
+                          <option>Select</option>
                       </select>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg--4 col-xl-4 form-group">
                       <label>Para No Tcp</label>
-                      <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">Alabama</option>
-                        <option>Alaska</option>
-                        <option>California</option>
-                        <option>Delaware</option>
-                        <option>Tennessee</option>
-                        <option>Texas</option>
-                        <option>Washington</option>
+                      <select id="tcpId" name="tcpId" class="form-control select2" style="width: 100%;">
+                          <option>Select</option>
                       </select>
                     </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
+                  <input type="hidden" class="form-control" id="id" name="id">
+                  <input type="hidden" id="createdDate" name="createdDate">
               </form>
             </div>
             <!-- /.card -->
 
              <!-- general form elements -->
-             <div class="add_item">
-              <div class=" card card-primary">
-                <div class="card-header">
-                 <span> <h3 class="d-inline card-title">Sub Items</h3>
-                  <i style="cursor: pointer;" class="hide_on_click float-right fa fa-plus icon-create"></i></span>
-                </div>
-                <!-- form start -->
-                <form role="form">
-                  <div class="card-body">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Name of Sub Item</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter sub Item" value="Computer Moniter">
-                    </div>
+             <div id="subItemString">
 
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">No of items (Physical taget)</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter no of item" value="3">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Units</label>
-                        <select class="form-control select2" style="width: 100%;">
-                          <option selected="selected">Kms</option>
-                          <option>No's</option>
-                          <option>Litre</option>
-                          <option>Killogram</option>
-                          <option>Piece</option>
-                          <option>sets</option>
-                          <option>litre</option>
-                        </select>
-                      </div>
-
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Unit Price</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter unit" value="1000">
-                    </div>
-
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Total( Financial Target)</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter total" value="3000">
-                    </div>
-                  </div>
-                  <!-- /.card-body -->
-                </form>
-
-              </div>
-            </div>
+             </div>
             <!-- /.card -->
 
             <!-- general form elements -->
@@ -306,40 +240,34 @@
               <form role="form">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">GPS Coordinates</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter GPS Coordinates" value="11.0168° N, 76.9558° E">
+                    <label for="gpsCoordinate">GPS Coordinates</label>
+                    <input type="text" class="form-control" id="gpsCoordinate" name="gpsCoordinate" placeholder="Enter GPS Coordinates">
                   </div>
 
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Justification</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Justification" value="2">
+                    <label for="justification">Justification</label>
+                    <input type="text" class="form-control" id="justification" name="justification" placeholder="Enter Justification">
                   </div>
 
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Area</label>
-                    <select class="form-control select2" style="width: 100%;">
-                      <option selected="selected">C1</option>
-                      <option>B1</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
+                    <label for="image">File input</label>
                     <div class="input-group">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        <input type="file" class="custom-file-input" id="image" name="image">
+                        <label class="custom-file-label" for="image">Choose file</label>
                       </div>
                       <div class="input-group-append">
-                        <span class="input-group-text" id="">Upload</span>
+                        <span class="input-group-text" id="upload">Upload</span>
                       </div>
                     </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
+                  <input type="hidden" class="form-control" id="approvalStatus" name="approvalStatus" value="1">
+                  <input type="hidden" class="form-control" id="purchaseType" name="purchaseType">
               </form>
               <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" onclick="submitPurchaseData(purchases)" class="btn btn-primary">Submit</button>
               </div>
             </div>
             <!-- /.card -->
@@ -379,20 +307,199 @@
 <!-- AdminLTE App -->
 <script src="assets/js/adminlte.min.js"></script>
 <!-- page script -->
+
+<script src="assets/js/variables.js"></script>
+<script src="assets/js/include.js"></script>
+
 <script>
-  $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2();
-  })
+    var subItemString = '<div class="add_item">\n' +
+        '              <div class=" card card-primary">\n' +
+        '               <div class="card-header">\n' +
+        '                 <span> <h3 class="d-inline card-title">Sub Items</h3>\n' +
+        '                  <i style="cursor: pointer;" class="hide_on_click float-right fa fa-plus icon-create"></i></span>\n' +
+        '                </div>\n'+
+        '                <form role="form">\n' +
+        '                  <div class="card-body">\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="name">Name of Sub Item</label>\n' +
+        '                      <input type="text" class="form-control" id="name" name="name" placeholder="Enter Sub Item">\n' +
+        '                    </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="noOfItem">No of items (Physical taget)</label>\n' +
+        '                      <input type="text" class="form-control" id="noOfItem" name="noOfItem" placeholder="Enter no of item">\n' +
+        '                    </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                        <label>Units</label>\n' +
+        '                        <select id="unit" name="unit" class="form-control select2" style="width: 100%;">\n'+
+        '                        <option>Select</option>\n'+
+        '                          <option>No\'s</option>\n' +
+        '                          <option>Litre</option>\n' +
+        '                          <option>Kilogram</option>\n' +
+        '                          <option>Piece</option>\n' +
+        '                          <option>Sets</option>\n' +
+        '                        </select>\n' +
+        '                      </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="price">Unit Price</label>\n' +
+        '                      <input type="text" class="form-control" id="price" name="price" placeholder="Enter unit">\n' +
+        '                    </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="total">Total(Financial Target)</label>\n' +
+        '                      <input type="text" class="form-control" id="total" name="total" placeholder="Enter total">\n' +
+        '                    </div>\n' +
+        '                  </div>\n' +
+        '                 <input type="hidden" class="form-control" id="purchaseItemId" name="purchaseItemId">\n' +
+        '                 <input type="hidden" id="createdDate" name="createdDate">\n' +
+        '                </form>\n' +
+        '              </div>\n' +
+        '            </div>';
 
-  $('.hide_on_click').on('click', function(){
-        var add = $(this).closest('.add_item');
-         add.after('<div class="add_item"><div class="card-close card card-primary"><div class="card-header"><span> <h3 class="d-inline card-title">New Sub Items</h3><i style="cursor: pointer;" class="delete float-right fa  fa-times icon-create"></i></span></div><form role="form"><div class="card-body"><div class="form-group"><label for="exampleInputEmail1">Name of Sub Item</label><input type="email" class="form-control" id="exampleInputEmail1" placeholder="Computer Moniter"></div><div class="form-group"><label for="exampleInputEmail1">No of items (Physical taget)</label><input type="email" class="form-control" id="exampleInputEmail1" placeholder="3"></div><div class="form-group"><label>Units</label><select class="form-control select2" style="width: 100%;"><option selected="selected">Kms</option><option>No</option><option>Litre</option><option>Killogram</option><option>Piece</option><option>sets</option><option>litre</option></select></div><div class="form-group"><label for="exampleInputEmail1">Unit Price</label><input type="email" class="form-control" id="exampleInputEmail1" placeholder="1000"></div><div class="form-group"><label for="exampleInputEmail1">Total( Financial Target)</label><input type="email" class="form-control" id="exampleInputEmail1" placeholder="3000"></div></div></form></div></div>');
-  });
+    var newSubItemString = '<div class="add_item">\n' +
+        '              <div class=" card card-primary">\n' +
+        '               <div class="card-header">\n' +
+        '                 <span> <h3 class="d-inline card-title">New Sub Items</h3>\n' +
+        '                  <i style="cursor: pointer;" class="delete float-right fa  fa-times icon-create"></i></span>\n' +
+        '                </div>\n'+
+        '                <form role="form">\n' +
+        '                  <div class="card-body">\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="name">Name of Sub Item</label>\n' +
+        '                      <input type="text" class="form-control" id="name" name="name" placeholder="Enter Sub Item">\n' +
+        '                    </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="noOfItem">No of items (Physical taget)</label>\n' +
+        '                      <input type="text" class="form-control" id="noOfItem" name="noOfItem" placeholder="Enter no of item">\n' +
+        '                    </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                        <label>Units</label>\n' +
+        '                        <select id="unit" name="unit" class="form-control select2" style="width: 100%;">\n' +
+        '                        <option>Select</option>\n'+
+        '                          <option>No\'s</option>\n' +
+        '                          <option>Litre</option>\n' +
+        '                          <option>Kilogram</option>\n' +
+        '                          <option>Piece</option>\n' +
+        '                          <option>Sets</option>\n' +
+        '                        </select>\n' +
+        '                      </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="price">Unit Price</label>\n' +
+        '                      <input type="text" class="form-control" id="price" name="price" placeholder="Enter unit">\n' +
+        '                    </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="total">Total(Financial Target)</label>\n' +
+        '                      <input type="text" class="form-control" id="total" name="total" placeholder="Enter total">\n' +
+        '                    </div>\n' +
+        '                  </div>\n' +
+        '                 <input type="hidden" class="form-control" id="id" name="id">\n' +
+        '                 <input type="hidden" class="form-control" id="purchaseItemId" name="purchaseItemId">\n' +
+        '                 <input type="hidden" id="createdDate" name="createdDate">\n' +
+        '                </form>\n' +
+        '              </div>\n' +
+        '            </div>';
 
-  $(document).on('click', '.delete', function(){
-    // alert("ok");
-          $(this).closest('.add_item').remove();
+    $(document).ready(function () {
+        var purchaseType = getParameterByName("type");
+        if(purchaseType == null || purchaseType == "1") {
+            $("#createItemsTitle").text("Edit Recurring Items");
+            $("#headerTitle").text("Recurring Items");
+        } else if(purchaseType == "2") {
+            $("#createItemsTitle").text("Edit Non Recurring Items");
+            $("#headerTitle").text("Non Recurring Items");
+        } else {
+            $("#createItemsTitle").text("Edit Abstract Items");
+            $("#headerTitle").text("Abstract Items");
+        }
+        document.getElementById("purchaseType").value = purchaseType;
+        $('#subItemString').html(subItemString);
+        $('.hide_on_click').on('click', function () {
+            var add = $("#subItemString").last('.add_item');
+            add.after(newSubItemString);
+            $('.select2').select2();
+        });
+
+        fillDropDownDetails();
+        var id = getParameterByName("id");
+        $('form')[0].id.value = id;
+        getAndUpdatePurchaseItemData(id, purchases);
+        $('.select2').select2();
+        $(document).ajaxStop(function() {
+            updatePurchaseItemFieldsWithData();
+        });
+    });
+
+    function fillDropDownDetails() {
+        $.ajax({
+            method: "GET",
+            cache: false,
+            url: items+"filter/"+sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
+            success: function(data){
+                if(data != null && data.length > 0) {
+                    for(ctr = 0; ctr < data.length; ctr++) {
+                        var id = data[ctr].id;
+                        var itemName = data[ctr].itemName;
+                        $('#itemId option:last').after('<option value="'+id+'">'+itemName+'</option>');
+                    }
+                }
+            },
+            error:function(xhr,status,err){
+                alert("Error:"+err);
+            }
+        });
+        $.ajax({
+            method: "GET",
+            cache: false,
+            url: guidelines+"filter/"+sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
+            success: function(data){
+                if(data != null && data.length > 0) {
+                    for(ctr = 0; ctr < data.length; ctr++) {
+                        var id = data[ctr].id;
+                        var paraName = data[ctr].paraName;
+                        $('#guidelineId option:last').after('<option value="'+id+'">'+paraName+'</option>');
+                    }
+                }
+            },
+            error:function(xhr,status,err){
+                alert("Error:"+err);
+            }
+        });
+        $.ajax({
+            method: "GET",
+            cache: false,
+            url: subtypes+"filter/"+sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
+            success: function(data){
+                if(data != null && data.length > 0) {
+                    for(ctr = 0; ctr < data.length; ctr++) {
+                        var id = data[ctr].id;
+                        var subTypeNumber = data[ctr].subTypeNumber;
+                        $('#subTypeId option:last').after('<option value="'+id+'">'+subTypeNumber+'</option>');
+                    }
+                }
+            },
+            error:function(xhr,status,err){
+                alert("Error:"+err);
+            }
+        });
+        $.ajax({
+            method: "GET",
+            cache: false,
+            url: tcps+"filter/"+sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
+            success: function(data){
+                if(data != null && data.length > 0) {
+                    for(ctr = 0; ctr < data.length; ctr++) {
+                        var id = data[ctr].id;
+                        var paraNoTCP = data[ctr].paraNoTCP;
+                        $('#tcpId option:last').after('<option value="'+id+'">'+paraNoTCP+'</option>');
+                    }
+                }
+            },
+            error:function(xhr,status,err){
+                alert("Error:"+err);
+            }
+        });
+    }
+
+    $(document).on('click', '.delete', function () {
+        $(this).closest('.add_item').remove();
     });
 </script>
 </body>

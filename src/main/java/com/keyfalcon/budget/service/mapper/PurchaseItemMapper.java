@@ -15,6 +15,10 @@ public interface PurchaseItemMapper extends EntityMapper<PurchaseItemDTO, Purcha
     @Mapping(source = "guideline.id", target = "guidelineId")
     @Mapping(source = "subType.id", target = "subTypeId")
     @Mapping(source = "tcp.id", target = "tcpId")
+    @Mapping(source = "item.itemName", target = "itemName")
+    @Mapping(source = "guideline.paraName", target = "guidelineName")
+    @Mapping(source = "subType.subTypeNumber", target = "subTypeName")
+    @Mapping(source = "tcp.paraNoTCP", target = "tcpName")
     @Mapping(source = "state.id", target = "stateId")
     @Mapping(source = "user.id", target = "userId")
     PurchaseItemDTO toDto(PurchaseItem purchaseItem);

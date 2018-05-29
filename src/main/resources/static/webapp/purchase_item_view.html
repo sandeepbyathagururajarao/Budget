@@ -64,7 +64,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="Purchase_item.html" class="nav-link">
+            <a href="purchase_item.html" class="nav-link">
               <i class="nav-icon fa fa-th"></i>
               <p>Purchase Items<span class="right badge badge-danger">23</span></p>
             </a>
@@ -164,14 +164,14 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-            <h1 class="d-inline">View Recurring Items</h1>
-            <a href="recurring_edit.html" data-toggle="tooltip" title="Edit" href=""><i class="fa fa-pencil-alt icon-create"></i></a>
+          <div class="col-sm-6">
+            <h1 class="d-inline" id="createItemsTitle"></h1>
+            <a href="#" onclick="editRecord()" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-alt icon-create"></i></a>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active">Recurring Items</li>
+              <li class="breadcrumb-item active" id="headerTitle"></li>
             </ol>
           </div>
         </div>
@@ -181,8 +181,8 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
+        <div class="col-md-3 col-lg-3 col-xl-3"></div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
@@ -194,108 +194,34 @@
                 <div class="card-body">
                   <div class="form-group">
                   <label>Item</label>
-                  <select class="form-control select2" style="width: 100%;" disabled>
-                    <option selected="selected">Mousse</option>
-                    <option>Printer</option>
-                    <option>Keyboard</option>
-                    <option>Internet Modem</option>
-                    <option>Speaker</option>
-                    <option>Moniter</option>
-                    <option>Headphone</option>
-                  </select>
+                  <input type="text" id="itemName" name="itemName" class="form-control" disabled>
                 </div>
                 <div class="row text-flow">
-                    <div class="col-4 form-group text-flow">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg--4 col-xl-4 form-group text-flow">
                       <label>Guidelines as per the para rule book</label>
-                      <select class="form-control select2" style="width: 100%;" disabled>
-                        <option selected="selected">12.1.15</option>
-                        <option>09.5.16</option>
-                        <option>07.8.12</option>
-                        <option>28.3.17</option>
-                        <option>35.8.54</option>
-                        <option>86.3.54</option>
-                        <option>84.6.12</option>
-                      </select>
+                      <input type="text" id="guidelineName" name="guidelineName" class="form-control" disabled>
                     </div>
-                    <div class="col-4 form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg--4 col-xl-4 form-group">
                       <label>Sub Type number</label>
-                      <select class="form-control select2" style="width: 100%;" disabled>
-                        <option selected="selected">System</option>
-                        <option>Table</option>
-                        <option>Machine</option>
-                        <option>Watch</option>
-                        <option>battery</option>
-                        <option>Key box</option>
-                        <option>Mobile</option>
-                      </select>
+                      <input type="text" id="subTypeName" name="subTypeName" class="form-control" disabled>
                     </div>
-                    <div class="col-4 form-group">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg--4 col-xl-4 form-group">
                       <label>Para No Tcp</label>
-                      <select class="form-control select2" style="width: 100%;" disabled>
-                        <option selected="selected">Alabama</option>
-                        <option>Alaska</option>
-                        <option>California</option>
-                        <option>Delaware</option>
-                        <option>Tennessee</option>
-                        <option>Texas</option>
-                        <option>Washington</option>
-                      </select>
+                      <input type="text" id="tcpName" name="tcpName" class="form-control" disabled>
                     </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
+                  <input type="hidden" class="form-control" id="id" name="id">
+                  <input type="hidden" id="createdDate" name="createdDate">
               </form>
             </div>
             <!-- /.card -->
 
              <!-- general form elements -->
-             <div class="add_item">
-              <div class=" card card-primary">
-                <div class="card-header">
-                 <span> <h3 class="d-inline card-title">Sub Items</h3>
-                 </span>
-                </div>
-                <!-- form start -->
-                <form role="form">
-                  <div class="card-body">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Name of Sub Item</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter sub Item" value="Computer Moniter" disabled>
-                    </div>
+             <div id="subItemString">
 
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">No of items (Physical taget)</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter no of item" value="3" disabled>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Units</label>
-                        <select class="form-control select2" style="width: 100%;" disabled>
-                          <option selected="selected">Kms</option>
-                          <option>No's</option>
-                          <option>Litre</option>
-                          <option>Killogram</option>
-                          <option>Piece</option>
-                          <option>sets</option>
-                          <option>litre</option>
-                        </select>
-                      </div>
-
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Unit Price</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter unit" value="1000" disabled>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Total( Financial Target)</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter total" value="3000" disabled>
-                    </div>
-                  </div>
-                  <!-- /.card-body -->
-                </form>
-
-              </div>
-            </div>
+             </div>
             <!-- /.card -->
 
             <!-- general form elements -->
@@ -307,38 +233,35 @@
               <form role="form">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">GPS Coordinates</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter GPS Coordinates" value="11.0168° N, 76.9558° E" disabled>
+                    <label for="gpsCoordinate">GPS Coordinates</label>
+                    <input type="text" class="form-control" id="gpsCoordinate" name="gpsCoordinate" placeholder="Enter GPS Coordinates" disabled>
                   </div>
 
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Justification</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Justification" value="2" disabled>
+                    <label for="justification">Justification</label>
+                    <input type="text" class="form-control" id="justification" name="justification" placeholder="Enter Justification" disabled>
                   </div>
 
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Area</label>
-                    <select class="form-control select2" style="width: 100%;" disabled>
-                      <option selected="selected">C1</option>
-                      <option>B1</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
+                    <label for="image">File input</label>
                     <div class="input-group">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        <input type="file" class="custom-file-input" id="image" name="image" disabled>
+                        <label class="custom-file-label" for="image">Choose file</label>
                       </div>
                       <div class="input-group-append">
-                        <span class="input-group-text" id="">Upload</span>
+                        <span class="input-group-text" id="upload">Upload</span>
                       </div>
                     </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
+                  <input type="hidden" class="form-control" id="approvalStatus" name="approvalStatus" value="1">
+                  <input type="hidden" class="form-control" id="purchaseType" name="purchaseType">
               </form>
+              <div class="card-footer">
+                  <button type="button" onclick="submitPurchaseData(purchases)" class="btn btn-primary">Submit</button>
+              </div>
             </div>
             <!-- /.card -->
 
@@ -378,5 +301,117 @@
 <script src="assets/js/adminlte.min.js"></script>
 <!-- page script -->
 
+<script src="assets/js/variables.js"></script>
+<script src="assets/js/include.js"></script>
+
+<script>
+    var subItemString = '<div class="add_item">\n' +
+        '              <div class=" card card-primary">\n' +
+        '               <div class="card-header">\n' +
+        '                 <span> <h3 class="d-inline card-title">Sub Items</h3>\n' +
+        '                  <i style="cursor: pointer;" class="hide_on_click float-right fa fa-plus icon-create"></i></span>\n' +
+        '                </div>\n'+
+        '                <form role="form">\n' +
+        '                  <div class="card-body">\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="name">Name of Sub Item</label>\n' +
+        '                      <input type="text" class="form-control" id="name" name="name" placeholder="Enter Sub Item" disabled>\n' +
+        '                    </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="noOfItem">No of items (Physical taget)</label>\n' +
+        '                      <input type="text" class="form-control" id="noOfItem" name="noOfItem" placeholder="Enter no of item" disabled>\n' +
+        '                    </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                        <label>Units</label>\n' +
+        '                        <input type="text" id="unit" name="unit" class="form-control" disabled>\n'+
+        '                      </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="price">Unit Price</label>\n' +
+        '                      <input type="text" class="form-control" id="price" name="price" placeholder="Enter unit" disabled>\n' +
+        '                    </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="total">Total(Financial Target)</label>\n' +
+        '                      <input type="text" class="form-control" id="total" name="total" placeholder="Enter total" disabled>\n' +
+        '                    </div>\n' +
+        '                  </div>\n' +
+        '                 <input type="hidden" class="form-control" id="purchaseItemId" name="purchaseItemId">\n' +
+        '                 <input type="hidden" id="createdDate" name="createdDate">\n' +
+        '                </form>\n' +
+        '              </div>\n' +
+        '            </div>';
+
+    var newSubItemString = '<div class="add_item">\n' +
+        '              <div class=" card card-primary">\n' +
+        '               <div class="card-header">\n' +
+        '                 <span> <h3 class="d-inline card-title">New Sub Items</h3>\n' +
+        '                  <i style="cursor: pointer;" class="delete float-right fa  fa-times icon-create"></i></span>\n' +
+        '                </div>\n'+
+        '                <form role="form">\n' +
+        '                  <div class="card-body">\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="name">Name of Sub Item</label>\n' +
+        '                      <input type="text" class="form-control" id="name" name="name" placeholder="Enter Sub Item" disabled>\n' +
+        '                    </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="noOfItem">No of items (Physical taget)</label>\n' +
+        '                      <input type="text" class="form-control" id="noOfItem" name="noOfItem" placeholder="Enter no of item" disabled>\n' +
+        '                    </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                        <label>Units</label>\n' +
+        '                        <input type="text" id="unit" name="unit" class="form-control" disabled>\n'+
+        '                      </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="price">Unit Price</label>\n' +
+        '                      <input type="text" class="form-control" id="price" name="price" placeholder="Enter unit" disabled>\n' +
+        '                    </div>\n' +
+        '                    <div class="form-group">\n' +
+        '                      <label for="total">Total(Financial Target)</label>\n' +
+        '                      <input type="text" class="form-control" id="total" name="total" placeholder="Enter total" disabled>\n' +
+        '                    </div>\n' +
+        '                  </div>\n' +
+        '                 <input type="hidden" class="form-control" id="id" name="id">\n' +
+        '                 <input type="hidden" class="form-control" id="purchaseItemId" name="purchaseItemId">\n' +
+        '                 <input type="hidden" id="createdDate" name="createdDate">\n' +
+        '                </form>\n' +
+        '              </div>\n' +
+        '            </div>';
+
+    $(document).ready(function () {
+        var purchaseType = getParameterByName("type");
+        if(purchaseType == null || purchaseType == "1") {
+            $("#createItemsTitle").text("View Recurring Items");
+            $("#headerTitle").text("Recurring Items");
+        } else if(purchaseType == "2") {
+            $("#createItemsTitle").text("View Non Recurring Items");
+            $("#headerTitle").text("Non Recurring Items");
+        } else {
+            $("#createItemsTitle").text("View Abstract Items");
+            $("#headerTitle").text("Abstract Items");
+        }
+        document.getElementById("purchaseType").value = purchaseType;
+        $('#subItemString').html(subItemString);
+        $('.hide_on_click').on('click', function () {
+            var add = $("#subItemString").last('.add_item');
+            add.after(newSubItemString);
+            $('.select2').select2();
+        });
+
+        var id = getParameterByName("id");
+        $('form')[0].id.value = id;
+        getAndUpdatePurchaseItemData(id, purchases);
+        $('.select2').select2();
+        $(document).ajaxStop(function() {
+            updatePurchaseItemFieldsWithData();
+        });
+    });
+
+    $(document).on('click', '.delete', function () {
+        $(this).closest('.add_item').remove();
+    });
+
+    function editRecord() {
+        location.href = "purchase_item_edit.html?type="+getParameterByName("type")+"&id="+document.getElementById("id").value;
+    }
+</script>
 </body>
 </html>

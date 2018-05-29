@@ -55,7 +55,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="Purchase_item.html" class="nav-link">
+            <a href="purchase_item.html" class="nav-link">
               <i class="nav-icon fa fa-th"></i>
               <p>Purchase Items<span class="right badge badge-danger">23</span></p>
             </a>
@@ -329,18 +329,19 @@
                         if(subItems != null && subItems.length > 0) {
                             var counter = 1;
                             for (subctr = 0; subctr < subItems.length; subctr++) {
-                                subItemName = subItemName +(counter++) + ". "+subItems[subctr].name+"\n";
-                                unit = unit +(counter) + ". "+subItems[subctr].unit+"\n";
-                                unitPrice = unitPrice +(counter) + ". "+subItems[subctr].price+"\n";
-                                total = total +(counter) + ". "+subItems[subctr].total+"\n";
+                                subItemName = subItemName +(counter) + ". "+subItems[subctr].name+"<br>";
+                                unit = unit +(counter) + ". "+subItems[subctr].unit+"<br>";
+                                unitPrice = unitPrice +(counter) + ". "+subItems[subctr].price+"<br>";
+                                total = total +(counter) + ". "+subItems[subctr].total+"<br>";
+                                counter++;
                             }
                         }
                         if(approvalStatus == 2) {
-                            approvalStatus = '<span style="color: green; font-weight: bold;"></span>';
+                            approvalStatus = '<span style="color: green; font-weight: bold;">Approved</span>';
                         } else if(approvalStatus == 3) {
-                            approvalStatus = '<span style="color: blue; font-weight: bold;"></span>';
+                            approvalStatus = '<span style="color: blue; font-weight: bold;">Rejected</span>';
                         } else {
-                            approvalStatus = '<span style="color: red; font-weight: bold;"></span>';
+                            approvalStatus = '<span style="color: red; font-weight: bold;">Pending</span>';
                         }
                         var displayData = '<tr>\n' +
                             '              <td><a href="purchase_item_view.html?type=1&id='+id+'"><i class="fas fa-eye icon-table"></i></a>' +
@@ -371,23 +372,68 @@
     }
 
     function getNonRecurringRecords(path) {
-        /*$.ajax({
+        $.ajax({
             method: "GET",
             cache: false,
-            url: path+"filter/"+sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
+            url: path+"filter/nonrecurring/"+sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
             success: function(data){
                 if(data != null && data.length > 0) {
                     for(ctr = 0; ctr < data.length; ctr++) {
-                        var itemId = data[ctr].id;
+                        var id = data[ctr].id;
+                        var approvalStatus = data[ctr].approvalStatus;
                         var itemName = data[ctr].itemName;
-                        $('#non_recurring_display_grid tr:last').after('<tr><td>'+itemName+'</td><td class="text-right"><a href="master_item_view.html?id='+itemId+'"><i class="fas fa-eye icon-table"></i></a><a href="master_item_edit.html?id='+itemId+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i onclick=removeRecord('+itemId+',\''+purchases+'\') class="remove fas fa-trash-alt icon-table" style="background: red"></i></td></tr>');
+                        var guidelineName = data[ctr].guidelineName;
+                        var subTypeName = data[ctr].subTypeName;
+                        var tcpName = data[ctr].tcpName;
+                        var gpsCoordinate = data[ctr].gpsCoordinate;
+                        var subItems = data[ctr].subItems;
+                        var subItemName = "";
+                        var unit = "";
+                        var unitPrice = 0;
+                        var total = 0;
+                        if(subItems != null && subItems.length > 0) {
+                            var counter = 1;
+                            for (subctr = 0; subctr < subItems.length; subctr++) {
+                                subItemName = subItemName +(counter) + ". "+subItems[subctr].name+"<br>";
+                                unit = unit +(counter) + ". "+subItems[subctr].unit+"<br>";
+                                unitPrice = unitPrice +(counter) + ". "+subItems[subctr].price+"<br>";
+                                total = total +(counter) + ". "+subItems[subctr].total+"<br>";
+                                counter++;
+                            }
+                        }
+                        if(approvalStatus == 2) {
+                            approvalStatus = '<span style="color: green; font-weight: bold;">Approved</span>';
+                        } else if(approvalStatus == 3) {
+                            approvalStatus = '<span style="color: blue; font-weight: bold;">Rejected</span>';
+                        } else {
+                            approvalStatus = '<span style="color: red; font-weight: bold;">Pending</span>';
+                        }
+                        var displayData = '<tr>\n' +
+                            '              <td><a href="purchase_item_view.html?type=2&id='+id+'"><i class="fas fa-eye icon-table"></i></a>' +
+                            '               <a href="purchase_item_edit.html?type=2&id='+id+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a>' +
+                            '               <i class="remove fas fa-trash-alt icon-table" onclick=removeRecord('+id+',"'+purchases+'") style="background: red"></i>' +
+                            '               '+approvalStatus+
+                            '              \n</td><td>'+(ctr+1)+'</td>\n' +
+                            '              <td>'+itemName+'</td>\n' +
+                            '              <td>'+guidelineName+'</td>\n' +
+                            '              <td>'+subTypeName+'</td>\n' +
+                            '              <td>'+tcpName+'</td>\n' +
+                            '              <td>'+subItemName+'</td>\n' +
+                            '              <td>'+unit+'</td>\n' +
+                            '              <td>'+unitPrice+'</td>\n' +
+                            '              <td>'+total+'</td>\n' +
+                            '              <td>'+gpsCoordinate+'</td>\n' +
+                            '              </tr>';
+
+                        $('#non_recurring_grid tr:last').after(displayData);
                     }
+                    $("#non_recurring_display_grid").DataTable();
                 }
             },
             error:function(xhr,status,err){
                 alert("Error:"+err);
             }
-        }); */
+        });
     }
 
     $( document ).ready(function() {

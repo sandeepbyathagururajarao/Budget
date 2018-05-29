@@ -39,4 +39,6 @@ public interface PurchaseSubItemService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    int deleteAllByPurchaseId(Long id);
 }

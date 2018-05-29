@@ -64,7 +64,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="Purchase_item.html" class="nav-link">
+            <a href="purchase_item.html" class="nav-link">
               <i class="nav-icon fa fa-th"></i>
               <p>Purchase Items<span class="right badge badge-danger">23</span></p>
             </a>
@@ -165,12 +165,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Create Recurring Items</h1>
+            <h1 id="createItemsTitle"></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active">Recurring Items</li>
+              <li class="breadcrumb-item active" id="headerTitle"></li>
             </ol>
           </div>
         </div>
@@ -392,6 +392,16 @@
 
     $(document).ready(function () {
         var purchaseType = getParameterByName("type");
+        if(purchaseType == null || purchaseType == "1") {
+            $("#createItemsTitle").text("Create Recurring Items");
+            $("#headerTitle").text("Recurring Items");
+        } else if(purchaseType == "2") {
+            $("#createItemsTitle").text("Create Non Recurring Items");
+            $("#headerTitle").text("Non Recurring Items");
+        } else {
+            $("#createItemsTitle").text("Create Abstract Items");
+            $("#headerTitle").text("Abstract Items");
+        }
         document.getElementById("purchaseType").value = purchaseType;
         $('#subItemString').html(subItemString);
         $('.hide_on_click').on('click', function () {

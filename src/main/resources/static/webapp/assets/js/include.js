@@ -61,6 +61,77 @@ function updateFieldsWithData(id, path) {
     });
 }
 
+var purchaseEditData = null;
+
+function updatePurchaseItemFieldsWithData() {
+    if(purchaseEditData != null) {
+        var forms = $('form');
+        updatePurchaseParentFormFields(forms[0]);
+        updatePurchaseParentFormFields(forms[forms.length - 1]);
+        updateChildFormFields(forms);
+    }
+}
+
+function updatePurchaseParentFormFields($form) {
+    var formElements = $form.elements;
+    for(var elem in formElements) {
+        loopParentItemForm(formElements[elem]);
+    }
+}
+
+function loopParentItemForm(elem) {
+    var val = purchaseEditData[elem.id];
+    if(val != null) {
+        $("#"+elem.id).val(val).trigger("change");
+    }
+}
+
+function updateChildPurchaseFormFields($form, subItem) {
+    var formElements = $form.elements;
+    for(var elem in formElements) {
+        loopChildItemForm(formElements[elem], subItem);
+    }
+}
+
+function loopChildItemForm(elem, subItem) {
+    var val = subItem[elem.id];
+    if(val != null) {
+        $(elem).val(val).trigger("change");
+    }
+}
+
+function updateChildFormFields($forms) {
+    var subItems = purchaseEditData["subItems"];
+    if(subItems != null && subItems.length > 0) {
+        for(var formCnt = 1; formCnt<$forms.length-1; formCnt++) {
+            updateChildPurchaseFormFields($forms[formCnt], subItems[formCnt - 1]);
+        }
+    }
+}
+
+function getAndUpdatePurchaseItemData(id, path) {
+    $.ajax({
+        method: "GET",
+        cache: false,
+        url: path+id,
+        success: function(data){
+            if(data != null) {
+                purchaseEditData = data;
+                var subItems = purchaseEditData["subItems"];
+                if(subItems != null) {
+                    for(ctr=1;ctr<subItems.length;ctr++) {
+                        $('.hide_on_click').click();
+                    }
+                }
+            }
+        },
+        error:function(xhr,status,err){
+            purchaseEditData = null;
+            alert("Error:"+err);
+        }
+    });
+}
+
 function populateRecordCount() {
     var dashPI =document.getElementById("dash_pi");
     var dashMaster = document.getElementById("dash_master");
@@ -87,6 +158,9 @@ function getFormData($form, toStringify){
     $.map(unindexed_array, function(n, i){
         indexed_array[n['name']] = n['value'];
     });
+    if(indexed_array["id"] == "") {
+        indexed_array["id"] = null;
+    }
     if(indexed_array["id"] != null) {
         indexed_array["modifiedDate"]=new Date();
     } else {
