@@ -135,4 +135,22 @@ public class StateResource {
         }
         return stateDTOList;
     }
+
+    @GetMapping("/states/search/{name}/{userRole}/{id}")
+    @Timed
+    public List<StateDTO> getSearchStates(@PathVariable String name, @PathVariable Long userRole, @PathVariable Long id) {
+        log.debug("REST request to get all searched guidelines");
+        if(name != null) {
+            if("@~all~@".equals(name.trim())) {
+                return getFilteredStates(userRole, id);
+            }
+        }
+        List<StateDTO> stateDTOList = null;
+        if(Role.getValue(userRole) == Role.SUPERADMIN) {
+            stateDTOList = stateService.searchAllItems(name);
+        } else {
+            stateDTOList = stateService.searchItems(name, id);
+        }
+        return stateDTOList;
+    }
 }

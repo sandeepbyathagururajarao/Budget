@@ -135,4 +135,22 @@ public class SubTypeResource {
         }
         return subTypeDTOList;
     }
+
+    @GetMapping("/sub-types/search/{subTypeNumber}/{userRole}/{id}")
+    @Timed
+    public List<SubTypeDTO> getSearchSubTypeNumber(@PathVariable String subTypeNumber, @PathVariable Long userRole, @PathVariable Long id) {
+        log.debug("REST request to get all searched SubTypeNumbers");
+        if(subTypeNumber != null) {
+            if("@~all~@".equals(subTypeNumber.trim())) {
+                return getFilteredItems(userRole, id);
+            }
+        }
+        List<SubTypeDTO> subTypeDTOList = null;
+        if(Role.getValue(userRole) == Role.SUPERADMIN) {
+            subTypeDTOList = subTypeService.searchAllItems(subTypeNumber);
+        } else {
+            subTypeDTOList = subTypeService.searchItems(subTypeNumber, id);
+        }
+        return subTypeDTOList;
+    }
 }

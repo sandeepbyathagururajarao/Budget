@@ -39,4 +39,8 @@ public interface TCPService {
     void delete(Long id);
 
     List<TCPDTO> findAllFilteredItems(Long id);
+
+    List<TCPDTO> searchAllItems(String paraNoTCP);
+
+    List<TCPDTO> searchItems(String paraNoTCP, Long id);
 }

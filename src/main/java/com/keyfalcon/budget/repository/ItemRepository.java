@@ -15,4 +15,6 @@ import java.util.List;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
     public List<Item> findAllByUserId(Long id);
+    public List<Item> findAllByItemNameContainsAndUserId(String itemName,Long id);
+    public List<Item> findAllByItemNameContains(String itemName);
 }

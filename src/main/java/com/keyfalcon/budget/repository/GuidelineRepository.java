@@ -15,4 +15,6 @@ import java.util.List;
 @Repository
 public interface GuidelineRepository extends JpaRepository<Guideline, Long> {
     public List<Guideline> findAllByUserId(Long id);
+    public List<Guideline> findAllByParaNameContainsAndUserId(String guideLineName,Long id);
+    public List<Guideline> findAllByParaNameContains(String guideLineName);
 }

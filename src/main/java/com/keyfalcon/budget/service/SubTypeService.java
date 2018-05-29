@@ -39,4 +39,8 @@ public interface SubTypeService {
     void delete(Long id);
 
     List<SubTypeDTO> findAllFilteredItems(Long id);
+
+    List<SubTypeDTO> searchAllItems(String subTypeNumber);
+
+    List<SubTypeDTO> searchItems(String subTypeNumber, Long id);
 }

@@ -93,4 +93,22 @@ public class GuidelineServiceImpl implements GuidelineService {
             .map(guidelineMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<GuidelineDTO> searchItems(String paraName, Long id) {
+        log.debug("Request to get all filtered Paras based on User");
+        return guidelineRepository.findAllByParaNameContainsAndUserId(paraName, id).stream()
+            .map(guidelineMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<GuidelineDTO> searchAllItems(String paraName) {
+        log.debug("Request to get all filtered Paras");
+        return guidelineRepository.findAllByParaNameContains(paraName).stream()
+            .map(guidelineMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 }

@@ -135,4 +135,22 @@ public class ItemResource {
         }
         return itemDTOList;
     }
+
+    @GetMapping("/items/search/{itemName}/{userRole}/{id}")
+    @Timed
+    public List<ItemDTO> getSearchItems(@PathVariable String itemName, @PathVariable Long userRole, @PathVariable Long id) {
+        log.debug("REST request to get all filtered items");
+        if(itemName != null) {
+            if("@~all~@".equals(itemName.trim())) {
+                return getFilteredItems(userRole, id);
+            }
+        }
+        List<ItemDTO> itemDTOList = null;
+        if(Role.getValue(userRole) == Role.SUPERADMIN) {
+            itemDTOList = itemService.searchAllItems(itemName);
+        } else {
+            itemDTOList = itemService.searchItems(itemName, id);
+        }
+        return itemDTOList;
+    }
 }

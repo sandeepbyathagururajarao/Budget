@@ -93,4 +93,22 @@ public class SubTypeServiceImpl implements SubTypeService {
             .map(subTypeMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<SubTypeDTO> searchItems(String subTypeNumber, Long id) {
+        log.debug("Request to get all filtered SubTypeNumbers based on User");
+        return subTypeRepository.findAllBySubTypeNumberContainsAndUserId(subTypeNumber, id).stream()
+            .map(subTypeMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<SubTypeDTO> searchAllItems(String subTypeNumber) {
+        log.debug("Request to get all filtered SubTypeNumbers");
+        return subTypeRepository.findAllBySubTypeNumberContains(subTypeNumber).stream()
+            .map(subTypeMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 }

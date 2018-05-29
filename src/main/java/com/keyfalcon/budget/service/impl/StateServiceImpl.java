@@ -94,4 +94,22 @@ public class StateServiceImpl implements StateService {
             .map(stateMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<StateDTO> searchItems(String name, Long id) {
+        log.debug("Request to get all searched States based on User");
+        return stateRepository.findAllByNameContainsAndUserId(name, id).stream()
+            .map(stateMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<StateDTO> searchAllItems(String name) {
+        log.debug("Request to get all searched States");
+        return stateRepository.findAllByNameContains(name).stream()
+            .map(stateMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 }
