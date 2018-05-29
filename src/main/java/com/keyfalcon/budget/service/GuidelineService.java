@@ -39,4 +39,8 @@ public interface GuidelineService {
     void delete(Long id);
 
     List<GuidelineDTO> findAllFilteredGuidelines(Long id);
+
+    List<GuidelineDTO> searchAllItems(String paraName);
+
+    List<GuidelineDTO> searchItems(String paraName, Long id);
 }

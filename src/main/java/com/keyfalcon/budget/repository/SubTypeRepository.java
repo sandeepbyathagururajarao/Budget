@@ -15,4 +15,6 @@ import java.util.List;
 @Repository
 public interface SubTypeRepository extends JpaRepository<SubType, Long> {
     public List<SubType> findAllByUserId(Long id);
+    public List<SubType> findAllBySubTypeNumberContainsAndUserId(String subTypeNumber,Long id);
+    public List<SubType> findAllBySubTypeNumberContains(String subTypeNumber);
 }

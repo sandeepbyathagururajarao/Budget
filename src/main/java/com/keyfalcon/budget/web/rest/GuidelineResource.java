@@ -135,4 +135,22 @@ public class GuidelineResource {
         }
         return guidelineDTOList;
     }
+
+    @GetMapping("/guidelines/search/{paraName}/{userRole}/{id}")
+    @Timed
+    public List<GuidelineDTO> getSearchGuidelines(@PathVariable String paraName, @PathVariable Long userRole, @PathVariable Long id) {
+        log.debug("REST request to get all searched guidelines");
+        if(paraName != null) {
+            if("@~all~@".equals(paraName.trim())) {
+                return getFilteredGuidelines(userRole, id);
+            }
+        }
+        List<GuidelineDTO> guidelineDTOList = null;
+        if(Role.getValue(userRole) == Role.SUPERADMIN) {
+            guidelineDTOList = guidelineService.searchAllItems(paraName);
+        } else {
+            guidelineDTOList = guidelineService.searchItems(paraName, id);
+        }
+        return guidelineDTOList;
+    }
 }

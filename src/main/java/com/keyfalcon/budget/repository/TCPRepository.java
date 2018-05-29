@@ -15,4 +15,6 @@ import java.util.List;
 @Repository
 public interface TCPRepository extends JpaRepository<TCP, Long> {
     public List<TCP> findAllByUserId(Long id);
+    public List<TCP> findAllByParaNoTCPContainsAndUserId(String paraNoTCP,Long id);
+    public List<TCP> findAllByParaNoTCPContains(String paraNoTCP);
 }

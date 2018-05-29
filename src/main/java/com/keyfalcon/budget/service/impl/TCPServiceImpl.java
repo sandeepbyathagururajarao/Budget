@@ -93,4 +93,22 @@ public class TCPServiceImpl implements TCPService {
             .map(tCPMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<TCPDTO> searchItems(String paraNoTCP, Long id) {
+        log.debug("Request to get all filtered ParaNoTCP based on User");
+        return tCPRepository.findAllByParaNoTCPContainsAndUserId(paraNoTCP, id).stream()
+            .map(tCPMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<TCPDTO> searchAllItems(String paraNoTCP) {
+        log.debug("Request to get all filtered ParaNoTCP");
+        return tCPRepository.findAllByParaNoTCPContains(paraNoTCP).stream()
+            .map(tCPMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 }

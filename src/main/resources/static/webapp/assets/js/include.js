@@ -168,21 +168,21 @@ function submitPurchaseData(path) {
     });
 }
 
-function getSearchRecords(path, itemName) {
-    if(itemName == null || itemName == "") {
-        itemName = "@~all~@";
+function getSearchRecords(path, criteriaName, criteriaValue) {
+    if(criteriaValue == null || criteriaValue == "") {
+        criteriaValue = "@~all~@";
     }
     $.ajax({
         method: "GET",
         cache: false,
-        url: path+"search/"+ itemName + "/" + +sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
+        url: path+"search/"+ criteriaValue + "/" + +sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
         success: function(data){
+            $('#display_grid tbody').empty();
             if(data != null && data.length > 0) {
-				$('#display_grid tbody').empty();
                 for(ctr = 0; ctr < data.length; ctr++) {
-                    var itemId = data[ctr].id;
-                    var itemName = data[ctr].itemName;
-                    $('#display_grid tbody').append('<tr><td>'+itemName+'</td><td class="text-right"><a href="master_item_view.html?id='+itemId+'"><i class="fas fa-eye icon-table"></i></a><a href="master_item_edit.html?id='+itemId+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i onclick=removeRecord('+itemId+',\''+items+'\') class="remove fas fa-trash-alt icon-table" style="background: red"></i></td></tr>');
+                    var id = data[ctr].id;
+                    var name = data[ctr][criteriaName];
+                    $('#display_grid tbody').append('<tr><td>'+name+'</td><td class="text-right"><a href="master_item_view.html?id='+id+'"><i class="fas fa-eye icon-table"></i></a><a href="master_item_edit.html?id='+id+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i onclick=removeRecord('+id+',\''+items+'\') class="remove fas fa-trash-alt icon-table" style="background: red"></i></td></tr>');
                 }
             }
         },

@@ -136,4 +136,22 @@ public class TCPResource {
         }
         return tcpList;
     }
+
+    @GetMapping("/tcps/search/{paraNoTCP}/{userRole}/{id}")
+    @Timed
+    public List<TCPDTO> getSearchParaNoTCP(@PathVariable String paraNoTCP, @PathVariable Long userRole, @PathVariable Long id) {
+        log.debug("REST request to get all ParaNoTCP");
+        if(paraNoTCP != null) {
+            if("@~all~@".equals(paraNoTCP.trim())) {
+                return getFilteredItems(userRole, id);
+            }
+        }
+        List<TCPDTO> tcpList = null;
+        if(Role.getValue(userRole) == Role.SUPERADMIN) {
+            tcpList = tCPService.searchAllItems(paraNoTCP);
+        } else {
+            tcpList = tCPService.searchItems(paraNoTCP, id);
+        }
+        return tcpList;
+    }
 }
