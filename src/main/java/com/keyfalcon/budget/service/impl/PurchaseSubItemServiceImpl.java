@@ -10,8 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -84,4 +83,14 @@ public class PurchaseSubItemServiceImpl implements PurchaseSubItemService {
         log.debug("Request to delete PurchaseSubItem : {}", id);
         purchaseSubItemRepository.delete(id);
     }
+
+    public boolean saveAll(Set<PurchaseSubItemDTO> purchaseSubItemDTOList) {
+        List<PurchaseSubItem> purchaseSubItemList = new ArrayList<>();
+        for(PurchaseSubItemDTO purchaseSubItemDTO:purchaseSubItemDTOList) {
+            purchaseSubItemList.add(purchaseSubItemMapper.toEntity(purchaseSubItemDTO));
+        }
+        purchaseSubItemRepository.save(purchaseSubItemList);
+        return true;
+    }
+
 }

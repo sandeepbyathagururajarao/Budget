@@ -84,4 +84,32 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
         log.debug("Request to delete PurchaseItem : {}", id);
         purchaseItemRepository.delete(id);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<PurchaseItemDTO> findAllFilteredRecurringItems(Long id) {
+        log.debug("Request to get all filtered States");
+        return purchaseItemRepository.findAllByUserIdAndPurchaseType(id,"1").stream()
+            .map(purchaseItemMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<PurchaseItemDTO> findAllFilteredNonRecurringItems(Long id) {
+        log.debug("Request to get all filtered States");
+        return purchaseItemRepository.findAllByUserIdAndPurchaseType(id,"2").stream()
+            .map(purchaseItemMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<PurchaseItemDTO> findAllFilteredByPurchaseType(String purchaseType) {
+        log.debug("Request to get all filtered States");
+        return purchaseItemRepository.findAllByPurchaseType(purchaseType).stream()
+            .map(purchaseItemMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
 }

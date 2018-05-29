@@ -46,6 +46,14 @@ public class PurchaseItemDTO implements Serializable {
 
     private Set<PurchaseSubItemDTO> subItems = new HashSet<>();
 
+    private String itemName;
+
+    private String guidelineName;
+
+    private String subTypeName;
+
+    private String tcpName;
+
     public Long getId() {
         return id;
     }
@@ -156,6 +164,38 @@ public class PurchaseItemDTO implements Serializable {
 
     public void setUserId(Long userDataId) {
         this.userId = userDataId;
+    }
+
+    public String setItemName(String approvalString) {
+        return this.itemName;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public String getGuidelineName() {
+        return guidelineName;
+    }
+
+    public void setGuidelineName(String guidelineName) {
+        this.guidelineName = guidelineName;
+    }
+
+    public String getSubTypeName() {
+        return subTypeName;
+    }
+
+    public void setSubTypeName(String subTypeName) {
+        this.subTypeName = subTypeName;
+    }
+
+    public String getTcpName() {
+        return tcpName;
+    }
+
+    public void setTcpName(String tcpName) {
+        this.tcpName = tcpName;
     }
 
     public void setSubItems(Set<PurchaseSubItemDTO> purchaseSubItems) {

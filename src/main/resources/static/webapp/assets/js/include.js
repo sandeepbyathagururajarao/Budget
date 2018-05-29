@@ -81,7 +81,7 @@ function populateRecordCount() {
     });
 }
 
-function getFormData($form){
+function getFormData($form, toStringify){
     var unindexed_array = $form.serializeArray();
     var indexed_array = {};
     $.map(unindexed_array, function(n, i){
@@ -95,8 +95,24 @@ function getFormData($form){
     if(indexed_array["userId"] == null) {
         indexed_array["userId"] = sessionStorage.getItem("UID");
     }
-    return JSON.stringify(indexed_array);
+    var output = indexed_array;
+    if(toStringify == null) {
+        output = JSON.stringify(indexed_array);
+    }
+    return output;
 }
+
+function extend(src, dest) {
+    Object.keys(src).forEach(function(key) {
+        dest[key] = src[key];
+    });
+    return dest;
+}
+
+function mergeJSON(fromJSON, toJSON){
+    return extend(fromJSON, toJSON);
+}
+
 
 function submitData(path) {
     var formJSON = getFormData($('form'));
@@ -104,6 +120,40 @@ function submitData(path) {
         method: "PUT",
         contentType:"application/json; charset=utf-8",
         data : formJSON,
+        cache: false,
+        url: path,
+        success: function(data){
+            if(data != null) {
+                alert("Data updated succesfully");
+                history.back();
+            }
+        },
+        error:function(xhr,status,err){
+            alert("Error:"+err);
+        }
+    });
+}
+
+function submitPurchaseData(path) {
+    var forms = $('form');
+    var firstForm = getFormData($(forms[0]), false);
+    var lastForm = getFormData($(forms[forms.length-1]), false);
+    var mergedJSON = mergeJSON(firstForm, lastForm);
+
+    var subItems = new Array();
+    var indexed_array = mergedJSON;
+    for(var formCnt = 1; formCnt<forms.length-1; formCnt++) {
+        var subItemForm = getFormData($(forms[formCnt]), false);
+        subItems.push(subItemForm);
+    }
+
+    indexed_array["subItems"] = subItems;
+    var formData = JSON.stringify(indexed_array);
+
+    $.ajax({
+        method: "PUT",
+        contentType:"application/json; charset=utf-8",
+        data : formData,
         cache: false,
         url: path,
         success: function(data){

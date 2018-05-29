@@ -37,4 +37,10 @@ public interface PurchaseItemService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    List<PurchaseItemDTO> findAllFilteredRecurringItems(Long id);
+
+    List<PurchaseItemDTO> findAllFilteredNonRecurringItems(Long id);
+
+    List<PurchaseItemDTO> findAllFilteredByPurchaseType(String purchaseType);
 }

@@ -2,6 +2,7 @@ package com.keyfalcon.budget.service;
 
 import com.keyfalcon.budget.service.dto.PurchaseSubItemDTO;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Service Interface for managing PurchaseSubItem.
@@ -15,6 +16,7 @@ public interface PurchaseSubItemService {
      * @return the persisted entity
      */
     PurchaseSubItemDTO save(PurchaseSubItemDTO purchaseSubItemDTO);
+    boolean saveAll(Set<PurchaseSubItemDTO> purchaseSubItemDTOList);
 
     /**
      * Get all the purchaseSubItems.

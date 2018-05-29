@@ -1,13 +1,17 @@
 package com.keyfalcon.budget.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.keyfalcon.budget.Role;
 import com.keyfalcon.budget.service.PurchaseItemService;
+import com.keyfalcon.budget.service.PurchaseSubItemService;
+import com.keyfalcon.budget.service.dto.PurchaseSubItemDTO;
 import com.keyfalcon.budget.web.rest.errors.BadRequestAlertException;
 import com.keyfalcon.budget.web.rest.util.HeaderUtil;
 import com.keyfalcon.budget.service.dto.PurchaseItemDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +35,9 @@ public class PurchaseItemResource {
 
     private final PurchaseItemService purchaseItemService;
 
+    @Autowired
+    private final PurchaseSubItemService purchaseSubItemService = null;
+
     public PurchaseItemResource(PurchaseItemService purchaseItemService) {
         this.purchaseItemService = purchaseItemService;
     }
@@ -50,6 +57,12 @@ public class PurchaseItemResource {
             throw new BadRequestAlertException("A new purchaseItem cannot already have an ID", ENTITY_NAME, "idexists");
         }
         PurchaseItemDTO result = purchaseItemService.save(purchaseItemDTO);
+        if(result != null) {
+            for(PurchaseSubItemDTO purchaseSubItemDTO:purchaseItemDTO.getSubItems()) {
+                purchaseSubItemDTO.setPurchaseItemId(result.getId());
+            }
+            purchaseSubItemService.saveAll(purchaseItemDTO.getSubItems());
+        }
         return ResponseEntity.created(new URI("/api/purchase-items/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -115,5 +128,41 @@ public class PurchaseItemResource {
         log.debug("REST request to delete PurchaseItem : {}", id);
         purchaseItemService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET  /states/filter/recurring/{userRole}/{id} : get all filtered the states.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of states in body
+     */
+    @GetMapping("/purchase-items/filter/recurring/{userRole}/{id}")
+    @Timed
+    public List<PurchaseItemDTO> getFilteredRecurringItems(@PathVariable Long userRole, @PathVariable Long id) {
+        log.debug("REST request to get all filtered items");
+        List<PurchaseItemDTO> purchaseItemDTOList = null;
+        if(Role.getValue(userRole) == Role.SUPERADMIN) {
+            purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseType("1");
+        } else {
+            purchaseItemDTOList = purchaseItemService.findAllFilteredRecurringItems(id);
+        }
+        return purchaseItemDTOList;
+    }
+
+    /**
+     * GET  /states/filter/nonrecurring/{userRole}/{id} : get all filtered the states.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of states in body
+     */
+    @GetMapping("/purchase-items/filter/nonrecurring/{userRole}/{id}")
+    @Timed
+    public List<PurchaseItemDTO> getFilteredNonRecurringItems(@PathVariable Long userRole, @PathVariable Long id) {
+        log.debug("REST request to get all filtered items");
+        List<PurchaseItemDTO> purchaseItemDTOList = null;
+        if(Role.getValue(userRole) == Role.SUPERADMIN) {
+            purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseType("2");
+        } else {
+            purchaseItemDTOList = purchaseItemService.findAllFilteredNonRecurringItems(id);
+        }
+        return purchaseItemDTOList;
     }
 }
