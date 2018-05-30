@@ -225,11 +225,11 @@
               <div class="tab-pane fade" id="non-recurring" role="tabpanel" aria-labelledby="pills-profile-tab">    <div class="card">
                     <!-- /.card-header -->
                     <div class="card-body">
-                      <div class="">
-                        <a href="purchase_item_create.html?type=2" class="text-left" href=""><i class="fa fa-plus icon-create"></i></a> <span class="label-create">Create</span>
-                        <a class="float-right"  href=""><i style="margin-left: 10px;" class="fa fa-file-pdf icon-create"></i></a>
-                        <a class="float-right" href=""><i class="fa fa-file-excel icon-create"></i></a><span style="color: green; font-weight: bold;"></span>
-                      </div>
+                        <div class="d-block card-body" style="padding-bottom: 0px;">
+                            <input type="checkbox" class="" id="select_all_nr"/> <span style="margin-left: 5px; font-weight: bold; font-size: 18px;">Select All</span>
+                            <button type="button" style="margin: 0px 5px 5px;" class="removenr float-sm-right btn btn-danger">Decline</button>
+                            <button type="button" style="margin: 0px 5px 5px;" class="approvenr float-sm-right btn btn-primary">Approve</button>
+                        </div>
 
                       <table id="non_recurring_display_grid" class="table-responsive table table-bordered table-striped">
                         <thead>
@@ -332,7 +332,7 @@
                                 counter++;
                             }
                         }
-                        var displayData = '<tr><td><input class="checkbox" type="checkbox" name="check[]"></td>\n' +
+                        var displayData = '<tr><td><input class="checkbox" type="checkbox" name="check[]" value="chk_'+id+'"></td>\n' +
                             '              <td><a href="purchase_item_view.html?type=1&id='+id+'"><i class="fas fa-eye icon-table"></i></a>' +
                             '              <a href="purchase_item_edit.html?type=1&id='+id+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a>' +
                             '              </td><td>'+(ctr+1)+'</td>\n' +
@@ -394,7 +394,7 @@
                             }
                         }
 
-                        var displayData = '<tr><td><input class="checkbox" type="checkbox" name="check[]"></td>\n' +
+                        var displayData = '<tr><td><input class="checkboxnr" type="checkbox" name="check[]" value="chk_'+id+'"></td>\n' +
                             '              <td><a href="purchase_item_view.html?type=2&id='+id+'"><i class="fas fa-eye icon-table"></i></a>' +
                             '               <a href="purchase_item_edit.html?type=2&id='+id+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a>' +
                             '              </td><td>'+(ctr+1)+'</td>\n' +
@@ -407,8 +407,8 @@
                             '              <td>'+unitPrice+'</td>\n' +
                             '              <td>'+total+'</td>\n' +
                             '              <td>'+gpsCoordinate+'</td>\n' +
-                            '              <td><button type="submit" style="margin:0px 0px 5px 0px;" class="approve btn btn-primary">Accept</button>\n' +
-                            '              <button type="submit" class="remove btn btn-danger">Decline</button></td>\n'+
+                            '              <td><button type="button" style="margin:0px 0px 5px 0px;" class="approvenr btn btn-primary">Accept</button>\n' +
+                            '              <button type="button" class="removenr btn btn-danger">Decline</button></td>\n'+
                             '              </tr>';
 
                         $('#non_recurring_display_grid tbody').append(displayData);
@@ -430,18 +430,77 @@
         getRecurringRecords(purchases);
         getNonRecurringRecords(purchases);
 
-        // var counter = 1;
-        $('.remove').on('click', function(){
-            var response = confirm("You want to decline this approval");
-            $('.checkbox').each(function(){
-
+        $( document ).ajaxStop(function() {
+            $('.remove').on('click', function(){
+                var response = confirm("You want to decline selected record/s");
+                if(response) {
+                    var indexedApprovedData = [];
+                    if(!$("#select_all")[0].checked) {
+                        $(this).parent().parent().find(".checkbox")[0].checked = true;
+                        indexedApprovedData.push(updateApproveJSON($(this).parent().parent().find(".checkbox")[0].value, 3));
+                    } else {
+                        $('.checkbox').each(function () {
+                            if (this.checked) {
+                                indexedApprovedData.push(updateApproveJSON(this.value, 3));
+                            }
+                        });
+                    }
+                    approveData(purchases, indexedApprovedData);
+                }
             });
-        });
 
-        $('.approve').on('click', function(){
-            var response = confirm("You want to accept this approval");
-            $('.checkbox').each(function(){
-                //this.checked = status;
+            $('.approve').on('click', function(){
+                var response = confirm("You want to accept selected record/s");
+                if(response) {
+                    var indexedApprovedData = [];
+                    if(!$("#select_all")[0].checked) {
+                        $(this).parent().parent().find(".checkbox")[0].checked = true;
+                        indexedApprovedData.push(updateApproveJSON($(this).parent().parent().find(".checkbox")[0].value, 2));
+                    } else {
+                        $('.checkbox').each(function () {
+                            if (this.checked) {
+                                indexedApprovedData.push(updateApproveJSON(this.value, 2));
+                            }
+                        });
+                    }
+                    approveData(purchases, indexedApprovedData);
+                }
+            });
+
+            $('.removenr').on('click', function(){
+                var response = confirm("You want to decline selected record/s");
+                if(response) {
+                    var indexedApprovedData = [];
+                    if(!$("#select_all_nr")[0].checked) {
+                        $(this).parent().parent().find(".checkboxnr")[0].checked = true;
+                        indexedApprovedData.push(updateApproveJSON($(this).parent().parent().find(".checkboxnr")[0].value, 3));
+                    } else {
+                        $('.checkboxnr').each(function () {
+                            if (this.checked) {
+                                indexedApprovedData.push(updateApproveJSON(this.value, 3));
+                            }
+                        });
+                    }
+                    approveData(purchases, indexedApprovedData);
+                }
+            });
+
+            $('.approvenr').on('click', function(){
+                var response = confirm("You want to accept selected record/s");
+                if(response) {
+                    var indexedApprovedData = [];
+                    if(!$("#select_all_nr")[0].checked) {
+                        $(this).parent().parent().find(".checkboxnr")[0].checked = true;
+                        indexedApprovedData.push(updateApproveJSON($(this).parent().parent().find(".checkboxnr")[0].value, 2));
+                    } else {
+                        $('.checkboxnr').each(function () {
+                            if (this.checked) {
+                                indexedApprovedData.push(updateApproveJSON(this.value, 2));
+                            }
+                        });
+                    }
+                    approveData(purchases, indexedApprovedData);
+                }
             });
         });
     });
@@ -466,22 +525,23 @@
         }
     });
 
-    $("#select").change(function(){  //"select all" change
+    //select all checkboxes
+    $("#select_all_nr").change(function(){  //"select all" change
         var status = this.checked; // "select all" checked status
-        $('.checkbox').each(function(){ //iterate all listed checkbox items
+        $('.checkboxnr').each(function(){ //iterate all listed checkbox items
             this.checked = status; //change ".checkbox" checked status
         });
     });
 
-    $('.checkbox').change(function(){ //".checkbox" change
+    $('.checkboxnr').change(function(){ //".checkbox" change
         //uncheck "select all", if one of the listed checkbox item is unchecked
         if(this.checked == false){ //if this item is unchecked
-            $("#select")[0].checked = false; //change "select all" checked status to false
+            $("#select_all_nr")[0].checked = false; //change "select all" checked status to false
         }
 
         //check "select all" if all checkbox items are checked
-        if ($('.checkbox:checked').length == $('.checkbox').length ){
-            $("#select")[0].checked = true; //change "select all" checked status to true
+        if ($('.checkboxnr:checked').length == $('.checkboxnr').length ){
+            $("#select_all_nr")[0].checked = true; //change "select all" checked status to true
         }
     });
 </script>
