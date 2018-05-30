@@ -208,6 +208,33 @@ function submitData(path) {
     });
 }
 
+function updateApproveJSON(id, approvalStatus) {
+    var approvalData = {};
+    approvalData["id"] = id.substring(id.indexOf("_")+1, id.length);
+    approvalData["approvalStatus"] = approvalStatus;
+    return approvalData;
+}
+
+function approveData(path, indexed_array) {
+    var formJSON = JSON.stringify(indexed_array);
+    $.ajax({
+        method: "POST",
+        contentType:"application/json; charset=utf-8",
+        data : formJSON,
+        cache: false,
+        url: path+"approve",
+        success: function(data){
+            if(data != null) {
+                alert("Data updated succesfully");
+                location.reload(true);
+            }
+        },
+        error:function(xhr,status,err){
+            alert("Error:"+err);
+        }
+    });
+}
+
 function submitPurchaseData(path) {
     var forms = $('form');
     var firstForm = getFormData($(forms[0]), false);

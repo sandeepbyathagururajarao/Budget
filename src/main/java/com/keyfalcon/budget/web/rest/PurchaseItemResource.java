@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.keyfalcon.budget.Role;
 import com.keyfalcon.budget.service.PurchaseItemService;
 import com.keyfalcon.budget.service.PurchaseSubItemService;
+import com.keyfalcon.budget.service.dto.ApprovalDTO;
 import com.keyfalcon.budget.service.dto.PurchaseSubItemDTO;
 import com.keyfalcon.budget.web.rest.errors.BadRequestAlertException;
 import com.keyfalcon.budget.web.rest.util.HeaderUtil;
@@ -110,7 +111,7 @@ public class PurchaseItemResource {
     public List<PurchaseItemDTO> getAllPurchaseItems() {
         log.debug("REST request to get all PurchaseItems");
         return purchaseItemService.findAll();
-        }
+    }
 
     /**
      * GET  /purchase-items/:id : get the "id" purchaseItem.
@@ -153,7 +154,7 @@ public class PurchaseItemResource {
     @GetMapping("/purchase-items/filter/recurring/{userRole}/{userId}")
     @Timed
     public List<PurchaseItemDTO> getFilteredRecurringItems(@PathVariable Long userRole, @PathVariable Long userId) {
-        log.debug("REST request to get all filtered items");
+        log.debug("REST request to get all filtered Recurring items");
         List<PurchaseItemDTO> purchaseItemDTOList = null;
         if(Role.getValue(userRole) == Role.SUPERADMIN) {
             purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseType("1");
@@ -171,7 +172,7 @@ public class PurchaseItemResource {
     @GetMapping("/purchase-items/filter/nonrecurring/{userRole}/{userId}")
     @Timed
     public List<PurchaseItemDTO> getFilteredNonRecurringItems(@PathVariable Long userRole, @PathVariable Long userId) {
-        log.debug("REST request to get all filtered items");
+        log.debug("REST request to get all filtered NonRecurring Items");
         List<PurchaseItemDTO> purchaseItemDTOList = null;
         if(Role.getValue(userRole) == Role.SUPERADMIN) {
             purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseType("2");
@@ -189,7 +190,7 @@ public class PurchaseItemResource {
     @GetMapping("/purchase-items/filter/recurring/{approvalStatus}/{userRole}/{userId}")
     @Timed
     public List<PurchaseItemDTO> getFilteredRecurringItemsByApprovalStatus(@PathVariable String approvalStatus, @PathVariable Long userRole, @PathVariable Long userId) {
-        log.debug("REST request to get all filtered items");
+        log.debug("REST request to get all filtered items Recurring Items By ApprovalStatus");
         List<PurchaseItemDTO> purchaseItemDTOList = null;
         if(Role.getValue(userRole) == Role.SUPERADMIN) {
             purchaseItemDTOList = purchaseItemService.findAllFilteredByApprovalAndPurchaseType(approvalStatus, "1");
@@ -207,7 +208,7 @@ public class PurchaseItemResource {
     @GetMapping("/purchase-items/filter/nonrecurring/{approvalStatus}/{userRole}/{userId}")
     @Timed
     public List<PurchaseItemDTO> getFilteredNonRecurringItemsByApprovalStatus(@PathVariable String approvalStatus, @PathVariable Long userRole, @PathVariable Long userId) {
-        log.debug("REST request to get all filtered items");
+        log.debug("REST request to get all filtered NonRecurring Items By ApprovalStatus");
         List<PurchaseItemDTO> purchaseItemDTOList = null;
         if(Role.getValue(userRole) == Role.SUPERADMIN) {
             purchaseItemDTOList = purchaseItemService.findAllFilteredByApprovalAndPurchaseType(approvalStatus, "2");
@@ -215,5 +216,24 @@ public class PurchaseItemResource {
             purchaseItemDTOList = purchaseItemService.findAllFilteredApprovalAndNonRecurringItems(approvalStatus, userId);
         }
         return purchaseItemDTOList;
+    }
+
+    /**
+     * GET  /states/filter/nonrecurring/{userRole}/{id} : get all filtered the states.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of states in body
+     */
+    @PostMapping("/purchase-items/approve")
+    @Timed
+    public int updateApprovalStatus(@Valid @RequestBody ApprovalDTO approvalDTOArr[]) {
+        log.debug("REST request to update approval status");
+        int ctr = 0;
+        for(ApprovalDTO approvalDTO:approvalDTOArr) {
+            PurchaseItemDTO purchaseItemDTO = purchaseItemService.findOne(approvalDTO.getId());
+            purchaseItemDTO.setApprovalStatus(approvalDTO.getApprovalStatus());
+            purchaseItemService.save(purchaseItemDTO);
+            ctr++;
+        }
+        return ctr;
     }
 }
