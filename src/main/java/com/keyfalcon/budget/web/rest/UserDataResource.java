@@ -146,7 +146,7 @@ public class UserDataResource {
         char loggedInUserRole = userRoleStr.charAt(1);
         List<UserDataDTO> userDataDTOList = null;
         if(Role.getValue(Long.valueOf(String.valueOf(loggedInUserRole))) == Role.SUPERADMIN) {
-            userDataDTOList = userDataService.findAllByCriteria(String.valueOf(criteria));
+            userDataDTOList = userDataService.findAll();
         } else {
             userDataDTOList = userDataService.findAllByCreatedByAndCriteria(userId,String.valueOf(criteria));
         }

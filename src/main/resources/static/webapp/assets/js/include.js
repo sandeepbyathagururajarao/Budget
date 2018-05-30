@@ -133,18 +133,18 @@ function getAndUpdatePurchaseItemData(id, path) {
 }
 
 function populateRecordCount() {
-    var dashPI =document.getElementById("dash_pi");
-    var dashMaster = document.getElementById("dash_master");
-    var dashApproval = document.getElementById("dash_approval");
+    //var userCount =document.getElementById("userCount");
+    /*var dashMaster = document.getElementById("dash_master");
+    var dashApproval = document.getElementById("dash_approval");*/
     var dashUser = document.getElementById("dash_user");
-    var menuPI = document.getElementById("menu_pi");
-    var menuApproval = document.getElementById("menu_approval");
+    //var menuPI = document.getElementById("menu_pi");
+    //var menuApproval = document.getElementById("menu_approval");
     $.ajax({
         method: "GET",
-        url: path,
+        url: dashboard +sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
         cache: false,
         success: function(data){
-
+            document.getElementById("dash_user").innerText = data;
         },
         error:function(xhr,status,err){
             alert("Error:"+err);

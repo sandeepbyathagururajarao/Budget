@@ -60,4 +60,8 @@ public interface UserDataService {
      * @param userId the userId of the entity
      */
     List<UserDataDTO> findAllByCreatedByAndCriteria(String userId, String criteria);
+
+    Long countAll();
+
+    Long countByCreatedByAndUserType(String userId, String criteria);
 }

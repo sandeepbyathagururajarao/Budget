@@ -106,4 +106,14 @@ public class UserDataServiceImpl implements UserDataService {
             .map(userDataMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
+
+    @Override
+    public Long countAll() {
+        return userDataRepository.countAllBy();
+    }
+
+    @Override
+    public Long countByCreatedByAndUserType(String userId, String criteria) {
+        return userDataRepository.countByCreatedByAndUserType(userId,criteria);
+    }
 }
