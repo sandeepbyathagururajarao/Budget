@@ -38,9 +38,15 @@ public interface PurchaseItemService {
      */
     void delete(Long id);
 
-    List<PurchaseItemDTO> findAllFilteredRecurringItems(Long id);
+    List<PurchaseItemDTO> findAllFilteredRecurringItems(Long userId);
 
-    List<PurchaseItemDTO> findAllFilteredNonRecurringItems(Long id);
+    List<PurchaseItemDTO> findAllFilteredNonRecurringItems(Long userId);
 
     List<PurchaseItemDTO> findAllFilteredByPurchaseType(String purchaseType);
+
+    List<PurchaseItemDTO> findAllFilteredByApprovalAndPurchaseType(String approvalStatus, String purchaseType);
+
+    List<PurchaseItemDTO> findAllFilteredApprovalAndRecurringItems(String approvalStatus, Long userId);
+
+    List<PurchaseItemDTO> findAllFilteredApprovalAndNonRecurringItems(String approvalStatus, Long userId);
 }

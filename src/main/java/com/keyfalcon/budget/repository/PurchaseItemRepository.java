@@ -14,6 +14,8 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface PurchaseItemRepository extends JpaRepository<PurchaseItem, Long> {
-    public List<PurchaseItem> findAllByUserIdAndPurchaseType(Long id, String purchaseType);
+    public List<PurchaseItem> findAllByUserIdAndPurchaseType(Long userId, String purchaseType);
     public List<PurchaseItem> findAllByPurchaseType(String purchaseType);
+    public List<PurchaseItem> findAllByApprovalStatusAndPurchaseType(String approvalStatus, String purchaseType);
+    public List<PurchaseItem> findAllByApprovalStatusAndUserIdAndPurchaseType(String approvalStatus, Long userId, String purchaseType);
 }

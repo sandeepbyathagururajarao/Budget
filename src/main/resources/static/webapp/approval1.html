@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Budget | Data Tables</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="assets/css/adminlte.css">
+  <!-- Fontawesome -->
+  <link rel="stylesheet" href="assets/css/fontawesome-all.css">
+  <!-- Custom -->
+  <link rel="stylesheet" href="assets/css/custom.css">
+
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="" class="brand-link">
+      <img src="assets/images/AdminLTELogo.png"
+           alt="AdminLTE Logo"
+           class="brand-image img-circle elevation-3"
+           style="opacity: 1">
+      <span class="brand-text font-weight-light">Budget</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="assets/images/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="index.html" class="d-block">Dashboard</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="purchase_item.html" class="nav-link">
+              <i class="nav-icon fa fa-th"></i>
+              <p>Purchase Items<span class="right badge badge-danger">23</span></p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="master.html" class="nav-link">
+              <i class="nav-icon fa fa-tree"></i>
+              <p>
+                Master
+                <i class="fa fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="master_item.html" class="nav-link">
+                  <i class="fas fa-caret-right nav-icon"></i>
+                  <p>Item</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="master_para.html" class="nav-link">
+                  <i class="fas fa-caret-right nav-icon"></i>
+                  <p>Guidelines  as per the para rule book</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="master_type.html" class="nav-link">
+                  <i class="fas fa-caret-right nav-icon"></i>
+                  <p>Sub Type Number</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="master_tcp.html" class="nav-link">
+                  <i class="fas fa-caret-right nav-icon"></i>
+                  <p>Para No TCP</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="master_district.html" class="nav-link">
+                  <i class="fas fa-caret-right nav-icon"></i>
+                  <p>District master</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="master_ward.html" class="nav-link">
+                  <i class="fas fa-caret-right nav-icon"></i>
+                  <p>Ward master</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="approval.html" class="nav-link">
+              <i class="nav-icon fa fa-thumbs-up"></i>
+              <p>Approval<span class="right badge badge-danger">3</span></p>
+            </a>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Users
+                <i class="fa fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="user_super_admin.html" class="nav-link">
+                  <i class="fas fa-caret-right nav-icon"></i>
+                  <p>Super Admin</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="user_admin.html" class="nav-link">
+                  <i class="fas fa-caret-right nav-icon"></i>
+                  <p>Admin</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="master_user.html" class="nav-link">
+                  <i class="fas fa-caret-right nav-icon"></i>
+                  <p>User</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Approval</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active">Approval</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row ">
+        <div class="col-12">
+
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#recurring" role="tab" aria-controls="pills-home" aria-selected="true">Recurring</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#non-recurring" role="tab" aria-controls="pills-profile" aria-selected="false">Non-recurring</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#abstract" role="tab" aria-controls="pills-contact" aria-selected="false">Abstract</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+
+              <div class="tab-pane fade show active" id="recurring" role="tabpanel" aria-labelledby="pills-home-tab">
+                  <div class="card">
+                    <!-- /.card-header -->
+                      <div class="d-block card-body" style="padding-bottom: 0px;">
+                          <input type="checkbox" class="" id="select_all"/> <span style="margin-left: 5px; font-weight: bold; font-size: 18px;">Select All</span>
+                          <button type="submit" style="margin: 0px 5px 5px;" class="remove float-sm-right btn btn-danger">Decline</button>
+                          <button type="submit" style="margin: 0px 5px 5px;" class="approve float-sm-right btn btn-primary">Approve</button>
+                        </div>
+                    <div class="card-body">
+                      <table id="example1" class="table-responsive table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <td></td>
+                            <th>Operation</th>
+                            <th>S.no</th>
+                            <th>Item</th>
+                            <th>Rule book</th>
+                            <th>Sub Type number</th>
+                            <th>Para No Tcp</th>
+                            <th>Unit</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                            <th>Coordinates</th>
+                            <th>Permission</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                          <td><input class="checkbox" type="checkbox" name="check[]"></td>
+                          <td><a href="approval_view.html"><i class="fas fa-eye icon-table"></i></a><a href="recurring_edit.html"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a></td>
+                          <td>1</td>
+                          <td>Creation of Roads</td>
+                          <td>15.2.15</td>
+                          <td>Other</td>
+                          <td>11.5.6</td>
+                          <td>Kms</td>
+                          <td>11,353</td>
+                          <td>1094462.94</td>
+                          <td>41°24'12.2"N 2°10'26.5"E</td>
+                          <td><button type="submit" style="margin:0px 0px 5px 0px;" class="approve btn btn-primary">Accept</button>
+                          <button type="submit" class="remove btn btn-danger">Decline</button></td>
+                        </tr>
+                        <tr>
+                          <td><input class="checkbox" type="checkbox" name="check[]"></td>
+                          <td><a href="approval_view.html"><i class="fas fa-eye icon-table"></i></a><a href="recurring_edit.html"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a></td>
+                          <td>2</td>
+                          <td>Creation of Roads and Jobs</td>
+                          <td>15.2.15</td>
+                          <td>Other</td>
+                          <td>11.5.6</td>
+                          <td>Kms</td>
+                          <td>11,353</td>
+                          <td>1094462.94</td>
+                          <td>41°24'12.2"N 2°10'26.5"E</td>
+                          <td><button type="submit" style="margin:0px 0px 5px 0px;" class="approve btn btn-primary">Accept</button>
+                          <button type="submit" class="remove btn btn-danger">Decline</button></td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+
+              </div>
+
+
+              <div class="tab-pane fade" id="non-recurring" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <div class="card">
+                    <!-- /.card-header -->
+                    <div class="d-block card-body" style="padding-bottom: 0px;">
+                          <input type="checkbox" class="" id="select"/> <span style="margin-left: 5px; font-weight: bold; font-size: 18px;">Select All</span>
+                          <button type="submit" style="margin: 0px 5px 5px;" class="remove float-sm-right btn btn-danger">Decline</button>
+                          <button type="submit" style="margin: 0px 5px 5px;" class="approve float-sm-right btn btn-primary">Approve</button>
+                        </div>
+                    <div class="card-body">
+
+                      <table id="example2" class="table-responsive table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <td></td>
+                            <th>Operation</th>
+                            <th>S.no</th>
+                            <th>Item</th>
+                            <th>Rule book</th>
+                            <th>Sub Type number</th>
+                            <th>Para No Tcp</th>
+                            <th>Unit</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                            <th>Coordinates</th>
+                            <th>Permission</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                          <td><input class="checkbox" type="checkbox" name="check[]"></td>
+                          <td><a href="approval_view.html"><i class="fas fa-eye icon-table"></i></a></i><a href="non_recurring_edit.html"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a></td>
+                          <td>1</td>
+                          <td>Creation of Roads</td>
+                          <td>15.2.15</td>
+                          <td>Other</td>
+                          <td>11.5.6</td>
+                          <td>Kms</td>
+                          <td>11,353</td>
+                          <td>1094462.94</td>
+                          <td>41°24'12.2"N 2°10'26.5"E</td>
+                          <td><button type="submit" style="margin:0px 0px 5px 0px;" class="approve btn btn-primary">Accept</button>
+                          <button type="submit" class="remove btn btn-danger">Decline</button></td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+              </div>
+
+              <div class="tab-pane fade" id="abstract" role="tabpanel" aria-labelledby="pills-contact-tab">..dsd.</div>
+
+            </div>
+          <!-- /.card -->
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.0.0-alpha
+    </div>
+    <strong>Copyright &copy; 2018 <a href="#">Budget</a>.</strong> All rights
+    reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="assets/js/jquery.min.js"></script>
+<!-- DataTables -->
+<script src="assets/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/dataTables.bootstrap4.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="assets/js/adminlte.min.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable();
+  });
+</script>
+
+  <script type="text/javascript">
+      $( document ).ready(function() {
+      // var counter = 1;
+      $('.remove').on('click', function(){
+        // $(this).closest('tr').remove();
+        var r = confirm("You want to decline this approval");
+
+      })
+
+      $('.approve').on('click', function(){
+        // $(this).closest('tr').remove();
+        var r = confirm("You want to accept this approval");
+
+      })
+    });
+
+//select all checkboxes
+$("#select_all").change(function(){  //"select all" change
+    var status = this.checked; // "select all" checked status
+    $('.checkbox').each(function(){ //iterate all listed checkbox items
+        this.checked = status; //change ".checkbox" checked status
+    });
+});
+
+$('.checkbox').change(function(){ //".checkbox" change
+    //uncheck "select all", if one of the listed checkbox item is unchecked
+    if(this.checked == false){ //if this item is unchecked
+        $("#select_all")[0].checked = false; //change "select all" checked status to false
+    }
+
+    //check "select all" if all checkbox items are checked
+    if ($('.checkbox:checked').length == $('.checkbox').length ){
+        $("#select_all")[0].checked = true; //change "select all" checked status to true
+    }
+});
+
+$("#select").change(function(){  //"select all" change
+    var status = this.checked; // "select all" checked status
+    $('.checkbox').each(function(){ //iterate all listed checkbox items
+        this.checked = status; //change ".checkbox" checked status
+    });
+});
+
+$('.checkbox').change(function(){ //".checkbox" change
+    //uncheck "select all", if one of the listed checkbox item is unchecked
+    if(this.checked == false){ //if this item is unchecked
+        $("#select")[0].checked = false; //change "select all" checked status to false
+    }
+
+    //check "select all" if all checkbox items are checked
+    if ($('.checkbox:checked').length == $('.checkbox').length ){
+        $("#select")[0].checked = true; //change "select all" checked status to true
+    }
+});
+  </script>
+  <script type="text/javascript">
+      $( document ).ready(function() {
+      // var counter = 1;
+      $('.approve').on('click', function(){
+        // $(this).closest('tr').remove();
+       /* var r = confirm("Press ok button to delete!");
+        if (r == true) {
+          $(this).closest('tr').remove();
+        } else {
+
+        }*/
+      });
+      $('.remove').on('click', function(){
+
+      });
+    });
+</script>
+</body>
+</html>

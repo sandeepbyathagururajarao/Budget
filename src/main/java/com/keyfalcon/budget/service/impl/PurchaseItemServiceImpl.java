@@ -87,18 +87,18 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<PurchaseItemDTO> findAllFilteredRecurringItems(Long id) {
+    public List<PurchaseItemDTO> findAllFilteredRecurringItems(Long userId) {
         log.debug("Request to get all filtered States");
-        return purchaseItemRepository.findAllByUserIdAndPurchaseType(id,"1").stream()
+        return purchaseItemRepository.findAllByUserIdAndPurchaseType(userId,"1").stream()
             .map(purchaseItemMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<PurchaseItemDTO> findAllFilteredNonRecurringItems(Long id) {
+    public List<PurchaseItemDTO> findAllFilteredNonRecurringItems(Long userId) {
         log.debug("Request to get all filtered States");
-        return purchaseItemRepository.findAllByUserIdAndPurchaseType(id,"2").stream()
+        return purchaseItemRepository.findAllByUserIdAndPurchaseType(userId,"2").stream()
             .map(purchaseItemMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
@@ -108,6 +108,27 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
     public List<PurchaseItemDTO> findAllFilteredByPurchaseType(String purchaseType) {
         log.debug("Request to get all filtered States");
         return purchaseItemRepository.findAllByPurchaseType(purchaseType).stream()
+            .map(purchaseItemMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public List<PurchaseItemDTO> findAllFilteredByApprovalAndPurchaseType(String approvalStatus, String purchaseType) {
+        log.debug("Request to get all filtered States");
+        return purchaseItemRepository.findAllByApprovalStatusAndPurchaseType(approvalStatus, purchaseType).stream()
+            .map(purchaseItemMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public List<PurchaseItemDTO> findAllFilteredApprovalAndRecurringItems(String approvalStatus, Long userId) {
+        log.debug("Request to get all filtered States");
+        return purchaseItemRepository.findAllByApprovalStatusAndUserIdAndPurchaseType(approvalStatus, userId,"1").stream()
+            .map(purchaseItemMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public List<PurchaseItemDTO> findAllFilteredApprovalAndNonRecurringItems(String approvalStatus, Long userId) {
+        log.debug("Request to get all filtered States");
+        return purchaseItemRepository.findAllByApprovalStatusAndUserIdAndPurchaseType(approvalStatus, userId,"2").stream()
             .map(purchaseItemMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }

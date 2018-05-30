@@ -150,15 +150,15 @@ public class PurchaseItemResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of states in body
      */
-    @GetMapping("/purchase-items/filter/recurring/{userRole}/{id}")
+    @GetMapping("/purchase-items/filter/recurring/{userRole}/{userId}")
     @Timed
-    public List<PurchaseItemDTO> getFilteredRecurringItems(@PathVariable Long userRole, @PathVariable Long id) {
+    public List<PurchaseItemDTO> getFilteredRecurringItems(@PathVariable Long userRole, @PathVariable Long userId) {
         log.debug("REST request to get all filtered items");
         List<PurchaseItemDTO> purchaseItemDTOList = null;
         if(Role.getValue(userRole) == Role.SUPERADMIN) {
             purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseType("1");
         } else {
-            purchaseItemDTOList = purchaseItemService.findAllFilteredRecurringItems(id);
+            purchaseItemDTOList = purchaseItemService.findAllFilteredRecurringItems(userId);
         }
         return purchaseItemDTOList;
     }
@@ -168,15 +168,51 @@ public class PurchaseItemResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of states in body
      */
-    @GetMapping("/purchase-items/filter/nonrecurring/{userRole}/{id}")
+    @GetMapping("/purchase-items/filter/nonrecurring/{userRole}/{userId}")
     @Timed
-    public List<PurchaseItemDTO> getFilteredNonRecurringItems(@PathVariable Long userRole, @PathVariable Long id) {
+    public List<PurchaseItemDTO> getFilteredNonRecurringItems(@PathVariable Long userRole, @PathVariable Long userId) {
         log.debug("REST request to get all filtered items");
         List<PurchaseItemDTO> purchaseItemDTOList = null;
         if(Role.getValue(userRole) == Role.SUPERADMIN) {
             purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseType("2");
         } else {
-            purchaseItemDTOList = purchaseItemService.findAllFilteredNonRecurringItems(id);
+            purchaseItemDTOList = purchaseItemService.findAllFilteredNonRecurringItems(userId);
+        }
+        return purchaseItemDTOList;
+    }
+
+    /**
+     * GET  /states/filter/recurring/{userRole}/{id} : get all filtered the states.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of states in body
+     */
+    @GetMapping("/purchase-items/filter/recurring/{approvalStatus}/{userRole}/{userId}")
+    @Timed
+    public List<PurchaseItemDTO> getFilteredRecurringItemsByApprovalStatus(@PathVariable String approvalStatus, @PathVariable Long userRole, @PathVariable Long userId) {
+        log.debug("REST request to get all filtered items");
+        List<PurchaseItemDTO> purchaseItemDTOList = null;
+        if(Role.getValue(userRole) == Role.SUPERADMIN) {
+            purchaseItemDTOList = purchaseItemService.findAllFilteredByApprovalAndPurchaseType(approvalStatus, "1");
+        } else {
+            purchaseItemDTOList = purchaseItemService.findAllFilteredApprovalAndRecurringItems(approvalStatus, userId);
+        }
+        return purchaseItemDTOList;
+    }
+
+    /**
+     * GET  /states/filter/nonrecurring/{userRole}/{id} : get all filtered the states.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of states in body
+     */
+    @GetMapping("/purchase-items/filter/nonrecurring/{approvalStatus}/{userRole}/{userId}")
+    @Timed
+    public List<PurchaseItemDTO> getFilteredNonRecurringItemsByApprovalStatus(@PathVariable String approvalStatus, @PathVariable Long userRole, @PathVariable Long userId) {
+        log.debug("REST request to get all filtered items");
+        List<PurchaseItemDTO> purchaseItemDTOList = null;
+        if(Role.getValue(userRole) == Role.SUPERADMIN) {
+            purchaseItemDTOList = purchaseItemService.findAllFilteredByApprovalAndPurchaseType(approvalStatus, "2");
+        } else {
+            purchaseItemDTOList = purchaseItemService.findAllFilteredApprovalAndNonRecurringItems(approvalStatus, userId);
         }
         return purchaseItemDTOList;
     }
