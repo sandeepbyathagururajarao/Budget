@@ -189,8 +189,8 @@
                   <div class="card">
                       <div class="d-block card-body" style="padding-bottom: 0px;">
                           <input type="checkbox" class="" id="select_all"/> <span style="margin-left: 5px; font-weight: bold; font-size: 18px;">Select All</span>
-                          <button type="submit" style="margin: 0px 5px 5px;" class="remove float-sm-right btn btn-danger">Decline</button>
-                          <button type="submit" style="margin: 0px 5px 5px;" class="approve float-sm-right btn btn-primary">Approve</button>
+                          <button type="button" style="margin: 0px 5px 5px;" class="remove float-sm-right btn btn-danger">Decline</button>
+                          <button type="button" style="margin: 0px 5px 5px;" class="approve float-sm-right btn btn-primary">Approve</button>
                       </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -345,11 +345,11 @@
                             '              <td>'+unitPrice+'</td>\n' +
                             '              <td>'+total+'</td>\n' +
                             '              <td>'+gpsCoordinate+'</td>\n' +
-                            '              <td><button type="submit" style="margin:0px 0px 5px 0px;" class="approve btn btn-primary">Accept</button>\n' +
-                            '              <button type="submit" class="remove btn btn-danger">Decline</button></td>\n'+
+                            '              <td><button type="button" style="margin:0px 0px 5px 0px;" class="approve btn btn-primary">Accept</button>\n' +
+                            '              <button type="button" class="remove btn btn-danger">Decline</button></td>\n'+
                             '              </tr>';
 
-                        $('#recurring_grid tr:last').after(displayData);
+                        $('#recurring_display_grid tbody').append(displayData);
                     }
                     $("#recurring_display_grid").DataTable({
                         "paging":   false,
@@ -411,7 +411,7 @@
                             '              <button type="submit" class="remove btn btn-danger">Decline</button></td>\n'+
                             '              </tr>';
 
-                        $('#non_recurring_grid tr:last').after(displayData);
+                        $('#non_recurring_display_grid tbody').append(displayData);
                     }
                     $("#non_recurring_display_grid").DataTable({
                         "paging":   false,
@@ -432,16 +432,18 @@
 
         // var counter = 1;
         $('.remove').on('click', function(){
-            // $(this).closest('tr').remove();
-            var r = confirm("You want to decline this approval");
+            var response = confirm("You want to decline this approval");
+            $('.checkbox').each(function(){
 
-        })
+            });
+        });
 
         $('.approve').on('click', function(){
-            // $(this).closest('tr').remove();
-            var r = confirm("You want to accept this approval");
-
-        })
+            var response = confirm("You want to accept this approval");
+            $('.checkbox').each(function(){
+                //this.checked = status;
+            });
+        });
     });
 
     //select all checkboxes

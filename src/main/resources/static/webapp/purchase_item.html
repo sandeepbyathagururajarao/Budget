@@ -423,7 +423,7 @@
                             '              <td>'+gpsCoordinate+'</td>\n' +
                             '              </tr>';
 
-                        $('#non_recurring_grid tr:last').after(displayData);
+                        $('#non_recurring_display_grid tbody').append(displayData);
                     }
                     $("#non_recurring_display_grid").DataTable({
                         "paging":   false,
