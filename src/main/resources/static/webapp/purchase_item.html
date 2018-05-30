@@ -298,20 +298,6 @@
 <!-- page script -->
 <script src="assets/js/variables.js"></script>
 <script src="assets/js/include.js"></script>
-<script>
-  $(function () {
-    $("#recurring_display_grid").DataTable( {
-        "paging":   false,
-        "searching": false,
-        "info":     false
-    });
-    $('#non_recurring_display_grid').DataTable( {
-        "paging":   false,
-        "searching": false,
-        "info":     false
-    });
-  });
-</script>
 
 <script type="text/javascript">
     function getRecurringRecords(path) {
@@ -370,7 +356,11 @@
 
                         $('#recurring_display_grid tbody').append(displayData);
                     }
-                    $("#recurring_display_grid").DataTable();
+                    $("#recurring_display_grid").DataTable({
+                        "paging":   false,
+                        "searching": false,
+                        "info":     false
+                    });
                 }
             },
             error:function(xhr,status,err){
@@ -435,7 +425,11 @@
 
                         $('#non_recurring_grid tr:last').after(displayData);
                     }
-                    $("#non_recurring_display_grid").DataTable();
+                    $("#non_recurring_display_grid").DataTable({
+                        "paging":   false,
+                        "searching": false,
+                        "info":     false
+                    });
                 }
             },
             error:function(xhr,status,err){
