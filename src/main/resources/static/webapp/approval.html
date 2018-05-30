@@ -432,7 +432,7 @@
 
         $( document ).ajaxStop(function() {
             $('.remove').on('click', function(){
-                var response = confirm("You want to decline selected approval/s");
+                var response = confirm("You want to decline selected record/s");
                 if(response) {
                     var indexedApprovedData = [];
                     if(!$("#select_all")[0].checked) {
@@ -450,7 +450,7 @@
             });
 
             $('.approve').on('click', function(){
-                var response = confirm("You want to accept selected approval/s");
+                var response = confirm("You want to accept selected record/s");
                 if(response) {
                     var indexedApprovedData = [];
                     if(!$("#select_all")[0].checked) {
@@ -468,7 +468,7 @@
             });
 
             $('.removenr').on('click', function(){
-                var response = confirm("You want to decline selected approval/s");
+                var response = confirm("You want to decline selected record/s");
                 if(response) {
                     var indexedApprovedData = [];
                     if(!$("#select_all_nr")[0].checked) {
@@ -486,7 +486,7 @@
             });
 
             $('.approvenr').on('click', function(){
-                var response = confirm("You want to accept selected approval/s");
+                var response = confirm("You want to accept selected record/s");
                 if(response) {
                     var indexedApprovedData = [];
                     if(!$("#select_all_nr")[0].checked) {
