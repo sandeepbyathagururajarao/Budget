@@ -191,8 +191,8 @@
                     <div class="card-body">
                       <div class="">
                         <a href="purchase_item_create.html?type=1" class="text-left" href=""><i class="fa fa-plus icon-create"></i></a> <span class="label-create">Create</span>
-                        <a class="float-right"  href=""><i style="margin-left: 10px;" class="fa fa-file-pdf icon-create"></i></a>
-                        <a class="float-right" href=""><i class="fa fa-file-excel icon-create"></i></a>
+                          <a class="float-right"  href="#" onclick="nonRecurringPdf()"><i style="margin-left: 10px;" class="fa fa-file-pdf icon-create"></i></a>
+                          <a class="float-right" href="#" onclick="nonRecurringExcel()"><i class="fa fa-file-excel icon-create"></i></a><span style="color: green; font-weight: bold;"></span>
                       </div>
 
                       <table id="recurring_display_grid" class="table-responsive table table-bordered table-striped">
@@ -226,8 +226,8 @@
                     <div class="card-body">
                       <div class="">
                         <a href="purchase_item_create.html?type=2" class="text-left" href=""><i class="fa fa-plus icon-create"></i></a> <span class="label-create">Create</span>
-                        <a class="float-right"  href=""><i style="margin-left: 10px;" class="fa fa-file-pdf icon-create"></i></a>
-                        <a class="float-right" href=""><i class="fa fa-file-excel icon-create"></i></a><span style="color: green; font-weight: bold;"></span>
+                        <a class="float-right"  href="#" onclick="nonNonRecurringPdf()"><i style="margin-left: 10px;" class="fa fa-file-pdf icon-create"></i></a>
+                        <a class="float-right" href="#" onclick="nonNonRecurringExcel()"><i class="fa fa-file-excel icon-create"></i></a><span style="color: green; font-weight: bold;"></span>
                       </div>
 
                       <table id="non_recurring_display_grid" class="table-responsive table table-bordered table-striped">
@@ -293,6 +293,13 @@
 <script src="assets/js/jquery.dataTables.min.js"></script>
 <script src="assets/js/dataTables.bootstrap4.min.js"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets/js/dataTables.buttons.min.js"></script>
+<script src="assets/js/jszip.min.js"></script>
+<script src="assets/js/pdfmake.min.js"></script>
+<script src="assets/js/vfs_fonts.js"></script>
+<script src="assets/js/buttons.html5.min.js"></script>
+
 <!-- AdminLTE App -->
 <script src="assets/js/adminlte.min.js"></script>
 <!-- page script -->
@@ -300,6 +307,23 @@
 <script src="assets/js/include.js"></script>
 
 <script type="text/javascript">
+
+    function nonRecurringPdf() {
+        $('#recurring_display_grid_wrapper .buttons-pdf').click();
+    }
+
+    function nonNonRecurringPdf() {
+        $('#non_recurring_display_grid_wrapper .buttons-pdf').click();
+    }
+
+    function nonRecurringExcel() {
+        $('#recurring_display_grid_wrapper .buttons-excel').click();
+    }
+
+    function nonNonRecurringExcel() {
+        $('#non_recurring_display_grid_wrapper .buttons-excel').click();
+    }
+
     function getRecurringRecords(path) {
         $.ajax({
             method: "GET",
@@ -356,11 +380,37 @@
 
                         $('#recurring_display_grid tbody').append(displayData);
                     }
+                    var buttonCommon = {
+                        exportOptions: {
+                            format: {
+                                body: function ( data, row, column, node ) {
+                                    if(column === 0 || column === 6 || column === 7 || column === 8 || column === 9) {
+                                        var div = document.createElement("div");
+                                        div.innerHTML = data;
+                                        data = div.innerText;
+                                        div = null;
+                                        data  = data.replace(/<br\s*\/?>/ig, "\n");
+                                    }
+                                    return data;
+                                }
+                            }
+                        }
+                    };
                     $("#recurring_display_grid").DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [
+                            $.extend( true, {}, buttonCommon, {
+                                extend: 'excelHtml5'
+                            } ),
+                            $.extend( true, {}, buttonCommon, {
+                                extend: 'pdfHtml5'
+                            } )
+                        ],
                         "paging":   false,
                         "searching": false,
                         "info":     false
                     });
+                    $(".dt-buttons").hide();
                 }
             },
             error:function(xhr,status,err){
@@ -425,11 +475,37 @@
 
                         $('#non_recurring_display_grid tbody').append(displayData);
                     }
+                    var buttonCommon = {
+                        exportOptions: {
+                            format: {
+                                body: function ( data, row, column, node ) {
+                                    if(column === 0 || column === 6 || column === 7 || column === 8 || column === 9) {
+                                        var div = document.createElement("div");
+                                        div.innerHTML = data;
+                                        data = div.innerText;
+                                        div = null;
+                                        data  = data.replace(/<br\s*\/?>/ig, "\n");
+                                    }
+                                    return data;
+                                }
+                            }
+                        }
+                    };
                     $("#non_recurring_display_grid").DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [
+                            $.extend( true, {}, buttonCommon, {
+                                extend: 'excelHtml5'
+                            } ),
+                            $.extend( true, {}, buttonCommon, {
+                                extend: 'pdfHtml5'
+                            } )
+                        ],
                         "paging":   false,
                         "searching": false,
                         "info":     false
                     });
+                    $(".dt-buttons").hide();
                 }
             },
             error:function(xhr,status,err){
