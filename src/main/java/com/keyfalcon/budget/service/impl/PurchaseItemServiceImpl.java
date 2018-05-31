@@ -143,6 +143,20 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    public List<PurchaseItemDTO> findAllFilteredApprovalAndRecurringItemsAndStateId(String approvalStatus, Long id) {
+        log.debug("Request to get all filtered States");
+        return purchaseItemRepository.findAllByApprovalStatusAndStateIdAndPurchaseType(approvalStatus, id,"1").stream()
+            .map(purchaseItemMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public List<PurchaseItemDTO> findAllFilteredApprovalAndNonRecurringItemsAndStateId(String approvalStatus, Long id) {
+        log.debug("Request to get all filtered States");
+        return purchaseItemRepository.findAllByApprovalStatusAndStateIdAndPurchaseType(approvalStatus, id,"2").stream()
+            .map(purchaseItemMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
     @Override
     public Long countAll() {
         return purchaseItemRepository.countAllBy();

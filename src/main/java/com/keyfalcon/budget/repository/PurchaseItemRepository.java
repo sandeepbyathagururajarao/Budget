@@ -19,6 +19,7 @@ public interface PurchaseItemRepository extends JpaRepository<PurchaseItem, Long
     public List<PurchaseItem> findAllByPurchaseTypeAndStateId(String purchaseType, Long stateId);
     public List<PurchaseItem> findAllByApprovalStatusAndPurchaseType(String approvalStatus, String purchaseType);
     public List<PurchaseItem> findAllByApprovalStatusAndUserIdAndPurchaseType(String approvalStatus, Long userId, String purchaseType);
+    public List<PurchaseItem> findAllByApprovalStatusAndStateIdAndPurchaseType(String approvalStatus, Long userId, String purchaseType);
     Long countByUserId(Long userId);
     Long countAllBy();
     Long countAllByApprovalStatus(String approvalStatus);

@@ -191,15 +191,17 @@ public class PurchaseItemResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of states in body
      */
-    @GetMapping("/purchase-items/filter/recurring/{approvalStatus}/{userRole}/{userId}")
+    @GetMapping("/purchase-items/filter/recurring/{approvalStatus}/{userRole}/{id}")
     @Timed
-    public List<PurchaseItemDTO> getFilteredRecurringItemsByApprovalStatus(@PathVariable String approvalStatus, @PathVariable Long userRole, @PathVariable Long userId) {
+    public List<PurchaseItemDTO> getFilteredRecurringItemsByApprovalStatus(@PathVariable String approvalStatus, @PathVariable Long userRole, @PathVariable Long id) {
         log.debug("REST request to get all filtered items Recurring Items By ApprovalStatus");
         List<PurchaseItemDTO> purchaseItemDTOList = null;
         if(Role.getValue(userRole) == Role.SUPERADMIN) {
             purchaseItemDTOList = purchaseItemService.findAllFilteredByApprovalAndPurchaseType(approvalStatus, "1");
+        } else if(Role.getValue(userRole) == Role.ADMIN) {
+            purchaseItemDTOList = purchaseItemService.findAllFilteredApprovalAndRecurringItemsAndStateId(approvalStatus, id);
         } else {
-            purchaseItemDTOList = purchaseItemService.findAllFilteredApprovalAndRecurringItems(approvalStatus, userId);
+            purchaseItemDTOList = purchaseItemService.findAllFilteredApprovalAndRecurringItems(approvalStatus, id);
         }
         return purchaseItemDTOList;
     }
@@ -209,15 +211,17 @@ public class PurchaseItemResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of states in body
      */
-    @GetMapping("/purchase-items/filter/nonrecurring/{approvalStatus}/{userRole}/{userId}")
+    @GetMapping("/purchase-items/filter/nonrecurring/{approvalStatus}/{userRole}/{id}")
     @Timed
-    public List<PurchaseItemDTO> getFilteredNonRecurringItemsByApprovalStatus(@PathVariable String approvalStatus, @PathVariable Long userRole, @PathVariable Long userId) {
+    public List<PurchaseItemDTO> getFilteredNonRecurringItemsByApprovalStatus(@PathVariable String approvalStatus, @PathVariable Long userRole, @PathVariable Long id) {
         log.debug("REST request to get all filtered NonRecurring Items By ApprovalStatus");
         List<PurchaseItemDTO> purchaseItemDTOList = null;
         if(Role.getValue(userRole) == Role.SUPERADMIN) {
             purchaseItemDTOList = purchaseItemService.findAllFilteredByApprovalAndPurchaseType(approvalStatus, "2");
+        } else if(Role.getValue(userRole) == Role.ADMIN) {
+            purchaseItemDTOList = purchaseItemService.findAllFilteredApprovalAndNonRecurringItemsAndStateId(approvalStatus, id);
         } else {
-            purchaseItemDTOList = purchaseItemService.findAllFilteredApprovalAndNonRecurringItems(approvalStatus, userId);
+            purchaseItemDTOList = purchaseItemService.findAllFilteredApprovalAndNonRecurringItems(approvalStatus, id);
         }
         return purchaseItemDTOList;
     }
