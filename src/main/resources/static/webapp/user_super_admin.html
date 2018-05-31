@@ -200,6 +200,7 @@
               <div class="card-body table-responsive p-0">
                 <table id="display_grid" class="table table-hover">
                   <tr>
+                    <th>User Id</th>
                     <th>User Name</th>
                     <th>State</th>
                     <th class="text-right">Action</th>
@@ -255,9 +256,10 @@
                 if(data != null && data.length > 0) {
                     for(ctr = 0; ctr < data.length; ctr++) {
                         var userId = data[ctr].id;
+                        var userLoginId = data[ctr].userId;
                         var name = data[ctr].userName;
                         var state = data[ctr].stateName;
-                        $('#display_grid tr:last').after('<tr><td>'+name+'</td><td>'+state+'</td><td class="text-right"><a href="user_super_admin_view.html?id='+userId+'"><i class="fas fa-eye icon-table"></i></a><a href="user_super_admin_edit.html?id='+userId+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i onclick=removeRecord('+userId+',\''+users+'\') class="remove fas fa-trash-alt icon-table" style="background: red"></i></td></tr>');
+                        $('#display_grid tr:last').after('<tr><td>'+userLoginId+'</td><td>'+name+'</td><td>'+state+'</td><td class="text-right"><a href="user_super_admin_view.html?id='+userId+'"><i class="fas fa-eye icon-table"></i></a><a href="user_super_admin_edit.html?id='+userId+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a><i onclick=removeRecord('+userId+',\''+users+'\') class="remove fas fa-trash-alt icon-table" style="background: red"></i></td></tr>');
                     }
                 }
             },

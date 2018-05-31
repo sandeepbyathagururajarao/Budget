@@ -44,6 +44,8 @@ public interface PurchaseItemService {
 
     List<PurchaseItemDTO> findAllFilteredByPurchaseType(String purchaseType);
 
+    List<PurchaseItemDTO> findAllFilteredByPurchaseTypeAndStateId(String purchaseType, Long stateId);
+
     List<PurchaseItemDTO> findAllFilteredByApprovalAndPurchaseType(String approvalStatus, String purchaseType);
 
     List<PurchaseItemDTO> findAllFilteredApprovalAndRecurringItems(String approvalStatus, Long userId);

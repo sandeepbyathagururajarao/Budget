@@ -151,15 +151,17 @@ public class PurchaseItemResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of states in body
      */
-    @GetMapping("/purchase-items/filter/recurring/{userRole}/{userId}")
+    @GetMapping("/purchase-items/filter/recurring/{userRole}/{id}")
     @Timed
-    public List<PurchaseItemDTO> getFilteredRecurringItems(@PathVariable Long userRole, @PathVariable Long userId) {
+    public List<PurchaseItemDTO> getFilteredRecurringItems(@PathVariable Long userRole, @PathVariable Long id) {
         log.debug("REST request to get all filtered Recurring items");
         List<PurchaseItemDTO> purchaseItemDTOList = null;
         if(Role.getValue(userRole) == Role.SUPERADMIN) {
             purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseType("1");
+        } else if(Role.getValue(userRole) == Role.ADMIN) {
+            purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseTypeAndStateId("1", id);
         } else {
-            purchaseItemDTOList = purchaseItemService.findAllFilteredRecurringItems(userId);
+            purchaseItemDTOList = purchaseItemService.findAllFilteredRecurringItems(id);
         }
         return purchaseItemDTOList;
     }
@@ -169,15 +171,17 @@ public class PurchaseItemResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of states in body
      */
-    @GetMapping("/purchase-items/filter/nonrecurring/{userRole}/{userId}")
+    @GetMapping("/purchase-items/filter/nonrecurring/{userRole}/{id}")
     @Timed
-    public List<PurchaseItemDTO> getFilteredNonRecurringItems(@PathVariable Long userRole, @PathVariable Long userId) {
+    public List<PurchaseItemDTO> getFilteredNonRecurringItems(@PathVariable Long userRole, @PathVariable Long id) {
         log.debug("REST request to get all filtered NonRecurring Items");
         List<PurchaseItemDTO> purchaseItemDTOList = null;
         if(Role.getValue(userRole) == Role.SUPERADMIN) {
             purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseType("2");
+        } else if(Role.getValue(userRole) == Role.ADMIN) {
+            purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseTypeAndStateId("2", id);
         } else {
-            purchaseItemDTOList = purchaseItemService.findAllFilteredNonRecurringItems(userId);
+            purchaseItemDTOList = purchaseItemService.findAllFilteredNonRecurringItems(id);
         }
         return purchaseItemDTOList;
     }

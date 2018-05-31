@@ -261,6 +261,7 @@
                   </div>
                 </div>
                 <!-- /.card-body -->
+                  <input type="hidden" class="form-control" id="stateId" name="stateId">
                   <input type="hidden" class="form-control" id="approvalStatus" name="approvalStatus" value="1">
                   <input type="hidden" class="form-control" id="purchaseType" name="purchaseType">
               </form>
@@ -403,6 +404,7 @@
             $("#headerTitle").text("Abstract Items");
         }
         document.getElementById("purchaseType").value = purchaseType;
+        document.getElementById("stateId").value = sessionStorage.getItem("ST");
         $('#subItemString').html(subItemString);
         $('.hide_on_click').on('click', function () {
             var add = $("#subItemString").last('.add_item');

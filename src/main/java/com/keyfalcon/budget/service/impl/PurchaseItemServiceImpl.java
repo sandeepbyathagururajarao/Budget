@@ -112,6 +112,16 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<PurchaseItemDTO> findAllFilteredByPurchaseTypeAndStateId(String purchaseType, Long stateId) {
+        log.debug("Request to get all filtered purchase type and States");
+        return purchaseItemRepository.findAllByPurchaseTypeAndStateId(purchaseType, stateId).stream()
+            .map(purchaseItemMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+
     public List<PurchaseItemDTO> findAllFilteredByApprovalAndPurchaseType(String approvalStatus, String purchaseType) {
         log.debug("Request to get all filtered States");
         return purchaseItemRepository.findAllByApprovalStatusAndPurchaseType(approvalStatus, purchaseType).stream()

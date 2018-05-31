@@ -304,10 +304,15 @@
 
 <script type="text/javascript">
     function getRecurringRecords(path) {
+        var UTPE = sessionStorage.getItem("UTPE");
+        var UID = sessionStorage.getItem("UID");
+        if(UTPE === "2") {
+            UID = sessionStorage.getItem("ST");
+        }
         $.ajax({
             method: "GET",
             cache: false,
-            url: path+"filter/recurring/1/"+sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
+            url: path+"filter/recurring/1/"+UTPE+"/"+UID,
             success: function(data){
                 if(data != null && data.length > 0) {
                     for(ctr = 0; ctr < data.length; ctr++) {
@@ -365,10 +370,15 @@
     }
 
     function getNonRecurringRecords(path) {
+        var UTPE = sessionStorage.getItem("UTPE");
+        var UID = sessionStorage.getItem("UID");
+        if(UTPE === "2") {
+            UID = sessionStorage.getItem("ST");
+        }
         $.ajax({
             method: "GET",
             cache: false,
-            url: path+"filter/nonrecurring/1/"+sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
+            url: path+"filter/nonrecurring/1/"+UTPE+"/"+UID,
             success: function(data){
                 if(data != null && data.length > 0) {
                     for(ctr = 0; ctr < data.length; ctr++) {
