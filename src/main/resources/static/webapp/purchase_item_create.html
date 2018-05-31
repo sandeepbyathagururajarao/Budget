@@ -235,8 +235,9 @@
                 <h3 class="card-title">Others</h3>
               </div>
               <!-- form start -->
-              <form role="form">
+
                 <div class="card-body">
+                  <form role="form">
                   <div class="form-group">
                     <label for="gpsCoordinate">GPS Coordinates</label>
                     <input type="text" class="form-control" id="gpsCoordinate" name="gpsCoordinate" placeholder="Enter GPS Coordinates">
@@ -246,25 +247,27 @@
                     <label for="justification">Justification</label>
                     <input type="text" class="form-control" id="justification" name="justification" placeholder="Enter Justification">
                   </div>
-
-                  <div class="form-group">
-                    <label for="image">File input</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image" name="image">
-                        <label class="custom-file-label" for="image">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text" id="upload">Upload</span>
-                      </div>
-                    </div>
-                  </div>
+                      <input type="hidden" class="form-control" id="stateId" name="stateId">
+                      <input type="hidden" class="form-control" id="approvalStatus" name="approvalStatus" value="1">
+                      <input type="hidden" class="form-control" id="purchaseType" name="purchaseType">
+                      <input type="hidden" class="form-control" id="image" name="image">
+                  </form>
+                    <form role="form" id="fileUploadForm" name="fileUploadForm">
+                        <div class="form-group">
+                            <label for="imageFile">File input</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="imageFile" name="imageFile">
+                                    <label class="custom-file-label" for="imageFile">Choose file</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="btnSubmit" name="btnSubmit">Upload</span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <!-- /.card-body -->
-                  <input type="hidden" class="form-control" id="stateId" name="stateId">
-                  <input type="hidden" class="form-control" id="approvalStatus" name="approvalStatus" value="1">
-                  <input type="hidden" class="form-control" id="purchaseType" name="purchaseType">
-              </form>
               <div class="card-footer">
                   <button type="button" onclick="submitPurchaseData(purchases)" class="btn btn-primary">Submit</button>
               </div>
@@ -413,6 +416,7 @@
         });
         fillDropDownDetails();
         $('.select2').select2();
+        uploadFileEvent();
     });
 
     function fillDropDownDetails() {

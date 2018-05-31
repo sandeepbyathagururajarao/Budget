@@ -103,7 +103,7 @@ function loopChildItemForm(elem, subItem) {
 function updateChildFormFields($forms) {
     var subItems = purchaseEditData["subItems"];
     if(subItems != null && subItems.length > 0) {
-        for(var formCnt = 1; formCnt<$forms.length-1; formCnt++) {
+        for(var formCnt = 1; formCnt<$forms.length-2; formCnt++) {
             updateChildPurchaseFormFields($forms[formCnt], subItems[formCnt - 1]);
         }
     }
@@ -241,12 +241,12 @@ function approveData(path, indexed_array) {
 function submitPurchaseData(path) {
     var forms = $('form');
     var firstForm = getFormData($(forms[0]), false);
-    var lastForm = getFormData($(forms[forms.length-1]), false);
+    var lastForm = getFormData($(forms[forms.length-2]), false);
     var mergedJSON = mergeJSON(firstForm, lastForm);
 
     var subItems = new Array();
     var indexed_array = mergedJSON;
-    for(var formCnt = 1; formCnt<forms.length-1; formCnt++) {
+    for(var formCnt = 1; formCnt<forms.length-2; formCnt++) {
         var subItemForm = getFormData($(forms[formCnt]), false);
         subItems.push(subItemForm);
     }
@@ -308,3 +308,33 @@ var randomString = function(length) {
     return text;
 };
 
+function uploadFileEvent() {
+    $("#btnSubmit").click(function (event) {
+        event.preventDefault();
+        var form = $('#fileUploadForm')[0];
+        var data = new FormData(form);
+        data.append('imageFile',form.imageFile.files[0]);
+        $("#btnSubmit").prop("disabled", true);
+        $.ajax({
+            type: 'POST',
+            url: upload,
+            data: data,
+            async: false,
+            processData: false,
+            contentType:false,
+            cache: false,
+            timeout: 600000,
+            success: function (responseText) {
+                var newFileName = responseText.substring(0,responseText.indexOf("_"));
+                $('#image').val(newFileName);
+                responseText = responseText.substring(responseText.indexOf("_")+1);
+                alert(responseText);
+                $("#btnSubmit").prop("disabled", false);
+            },
+            error: function (e) {
+                alert("ERROR while uploading: "+e);
+                $("#btnSubmit").prop("disabled", false);
+            }
+        });
+    });
+}

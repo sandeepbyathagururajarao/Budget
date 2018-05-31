@@ -11,4 +11,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
 
+    private String fileUploadPath;
+
+    public String getFileUploadPath() {
+        return fileUploadPath;
+    }
+
+    public void setFileUploadPath(String fileUploadPath) {
+        this.fileUploadPath = fileUploadPath;
+    }
 }

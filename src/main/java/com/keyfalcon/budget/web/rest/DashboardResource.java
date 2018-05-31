@@ -28,7 +28,7 @@ public class DashboardResource {
 
     private final Logger log = LoggerFactory.getLogger(DashboardResource.class);
 
-    private static final String ENTITY_NAME = "userData";
+    private static final String ENTITY_NAME = "dashboard";
 
     private final DashboardService dashboardService;
 

@@ -15,7 +15,12 @@
   <link rel="stylesheet" href="assets/css/fontawesome-all.css">
   <!-- Custom -->
   <link rel="stylesheet" href="assets/css/custom.css">
-
+<script>
+    if(sessionStorage.getItem("UTPE") === "3") {
+        alert("You are not authorized to view approval records");
+        history.back();
+    }
+</script>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -437,6 +442,9 @@
     }
 
     $( document ).ready(function() {
+        if(sessionStorage.getItem("UTPE") === "3") {
+            return;
+        }
         getRecurringRecords(purchases);
         getNonRecurringRecords(purchases);
 
