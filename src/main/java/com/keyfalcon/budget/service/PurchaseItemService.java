@@ -50,4 +50,12 @@ public interface PurchaseItemService {
 
     List<PurchaseItemDTO> findAllFilteredApprovalAndNonRecurringItems(String approvalStatus, Long userId);
 
+    Long countAll();
+
+    Long countByUserId(Long userId);
+
+    Long countApprovalByUserId(Long userId);
+
+    Long countAllByApprovalStatus();
+
 }

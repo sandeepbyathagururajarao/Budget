@@ -41,13 +41,25 @@ public class DashboardServiceImpl implements DashboardService {
     @Override
     public String getDataCount(Long userId, Long userRole) {
         Long userCount;
+        Long purchaseItemCount;
+        Long approvalCount;
         if(Role.getValue(userRole) == Role.SUPERADMIN) {
             userCount = userDataService.countAll();
+            purchaseItemCount = purchaseItemService.countAll();
+            approvalCount = purchaseItemService.countAllByApprovalStatus();
+
+        }
+        else if (Role.getValue(userRole) == Role.ADMIN) {
+            userCount = 0L;
+            purchaseItemCount = 0L;
+            approvalCount = 0L;
         }
         else {
-            userCount = userDataService.countByCreatedByAndUserType(String.valueOf(userId),String.valueOf(userRole));
+            userCount = userDataService.countByCreatedBy(String.valueOf(userId));
+            purchaseItemCount = purchaseItemService.countByUserId(userId);
+            approvalCount = purchaseItemService.countApprovalByUserId(userId);
         }
-        return String.valueOf(userCount);
+        return String.valueOf(userCount) + "||" + String.valueOf(purchaseItemCount) + "||" + String.valueOf(approvalCount);
     }
 
 

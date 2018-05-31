@@ -136,7 +136,7 @@ function populateRecordCount() {
     //var userCount =document.getElementById("userCount");
     /*var dashMaster = document.getElementById("dash_master");
     var dashApproval = document.getElementById("dash_approval");*/
-    var dashUser = document.getElementById("dash_user");
+    //var dashUser = document.getElementById("dash_user");
     //var menuPI = document.getElementById("menu_pi");
     //var menuApproval = document.getElementById("menu_approval");
     $.ajax({
@@ -144,7 +144,10 @@ function populateRecordCount() {
         url: dashboard +sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
         cache: false,
         success: function(data){
-            document.getElementById("dash_user").innerText = data;
+            var countValues = data.split("||");
+            document.getElementById("dash_pi").innerText = countValues[1];
+            document.getElementById("dash_user").innerText = countValues[0];
+            document.getElementById("dash_approval").innerText = countValues[2];
         },
         error:function(xhr,status,err){
             alert("Error:"+err);

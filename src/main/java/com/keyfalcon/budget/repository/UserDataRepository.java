@@ -18,5 +18,6 @@ public interface UserDataRepository extends JpaRepository<UserData, Long> {
     List<UserData> findAllByCreatedByAndUserType(String userId, String criteria);
     List<UserData> findAllByUserType(String criteria);
     Long countByCreatedByAndUserType(String userId, String criteria);
-    Long countAllBy();
+    Long countAllByUserType(String userType);
+    Long countByCreatedBy(String userId);
 }

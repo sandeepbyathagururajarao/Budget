@@ -133,4 +133,25 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    @Override
+    public Long countAll() {
+        return purchaseItemRepository.countAllBy();
+    }
+
+    @Override
+    public Long countByUserId(Long userId) {
+        return purchaseItemRepository.countByUserId(userId);
+    }
+
+    @Override
+    public Long countApprovalByUserId(Long userId) {
+        return purchaseItemRepository.countAllByApprovalStatusAndUserId("1", userId);
+    }
+
+    @Override
+    public Long countAllByApprovalStatus() {
+        return purchaseItemRepository.countAllByApprovalStatus("1");
+    }
+
+
 }

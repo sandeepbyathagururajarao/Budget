@@ -109,11 +109,16 @@ public class UserDataServiceImpl implements UserDataService {
 
     @Override
     public Long countAll() {
-        return userDataRepository.countAllBy();
+        return userDataRepository.countAllByUserType("3");
     }
 
     @Override
     public Long countByCreatedByAndUserType(String userId, String criteria) {
         return userDataRepository.countByCreatedByAndUserType(userId,criteria);
+    }
+
+    @Override
+    public Long countByCreatedBy(String userId) {
+        return userDataRepository.countByCreatedBy(userId);
     }
 }
