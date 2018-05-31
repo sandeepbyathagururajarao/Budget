@@ -24,4 +24,6 @@ public interface PurchaseItemRepository extends JpaRepository<PurchaseItem, Long
     Long countAllBy();
     Long countAllByApprovalStatus(String approvalStatus);
     Long countAllByApprovalStatusAndUserId(String approvalStatus, Long userId);
+    Long countAllByStateId(Long stateId);
+    Long countAllByStateIdAndApprovalStatus(Long stateId, String approvalStatus);
 }

@@ -64,4 +64,8 @@ public interface PurchaseItemService {
 
     Long countAllByApprovalStatus();
 
+    Long countAllByStateId(Long stateId);
+
+    Long countByStateIdAndApprovalStatus(Long stateId);
+
 }

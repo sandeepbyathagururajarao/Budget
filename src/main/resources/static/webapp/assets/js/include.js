@@ -141,7 +141,7 @@ function populateRecordCount() {
     //var menuApproval = document.getElementById("menu_approval");
     $.ajax({
         method: "GET",
-        url: dashboard +sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
+        url: dashboard +sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID")+"/"+sessionStorage.getItem("ST"),
         cache: false,
         success: function(data){
             var countValues = data.split("||");
