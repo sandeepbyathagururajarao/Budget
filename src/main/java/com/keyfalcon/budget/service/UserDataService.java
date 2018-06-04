@@ -66,4 +66,5 @@ public interface UserDataService {
     Long countByCreatedByAndUserType(String userId, String criteria);
 
     Long countByCreatedBy(String userId);
+
 }

@@ -37,9 +37,9 @@ public class DashboardResource {
     }
 
 
-    @GetMapping("/dashboard/{userRole}/{id}")
+    @GetMapping("/dashboard/{userRole}/{id}/{stateId}")
     @Timed
-    public String getDashboardCount(@PathVariable Long userRole, @PathVariable Long id)  {
-        return dashboardService.getDataCount(id,userRole);
+    public String getDashboardCount(@PathVariable Long userRole, @PathVariable Long id, @PathVariable Long stateId)  {
+        return dashboardService.getDataCount(id,userRole,stateId);
     }
 }

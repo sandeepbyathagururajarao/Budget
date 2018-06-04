@@ -177,5 +177,16 @@ public class PurchaseItemServiceImpl implements PurchaseItemService {
         return purchaseItemRepository.countAllByApprovalStatus("1");
     }
 
+    @Override
+    public Long countAllByStateId(Long stateId) {
+        return purchaseItemRepository.countAllByStateId(stateId);
+    }
+
+    @Override
+    public Long countByStateIdAndApprovalStatus(Long stateId) {
+        return purchaseItemRepository.countAllByStateIdAndApprovalStatus(stateId,"1");
+    }
+
+
 
 }

@@ -39,7 +39,7 @@ public class DashboardServiceImpl implements DashboardService {
 
 
     @Override
-    public String getDataCount(Long userId, Long userRole) {
+    public String getDataCount(Long userId, Long userRole, Long stateId) {
         Long userCount;
         Long purchaseItemCount;
         Long approvalCount;
@@ -50,9 +50,9 @@ public class DashboardServiceImpl implements DashboardService {
 
         }
         else if (Role.getValue(userRole) == Role.ADMIN) {
-            userCount = 0L;
-            purchaseItemCount = 0L;
-            approvalCount = 0L;
+            userCount = userDataService.countByCreatedBy(String.valueOf(userId));
+            purchaseItemCount = purchaseItemService.countAllByStateId(stateId);
+            approvalCount = purchaseItemService.countByStateIdAndApprovalStatus(stateId);
         }
         else {
             userCount = userDataService.countByCreatedBy(String.valueOf(userId));
