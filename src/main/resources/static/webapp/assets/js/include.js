@@ -139,9 +139,14 @@ function populateRecordCount() {
     //var dashUser = document.getElementById("dash_user");
     //var menuPI = document.getElementById("menu_pi");
     //var menuApproval = document.getElementById("menu_approval");
+    var stateId = sessionStorage.getItem("ST");
+    // For SuperAdmin
+    if(stateId == null || stateId == "null") {
+        stateId = "000";
+    }
     $.ajax({
         method: "GET",
-        url: dashboard +sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID")+"/"+sessionStorage.getItem("ST"),
+        url: dashboard +sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID")+"/"+stateId,
         cache: false,
         success: function(data){
             var countValues = data.split("||");
