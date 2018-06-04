@@ -67,7 +67,7 @@ function updatePurchaseItemFieldsWithData() {
     if(purchaseEditData != null) {
         var forms = $('form');
         updatePurchaseParentFormFields(forms[0]);
-        updatePurchaseParentFormFields(forms[forms.length - 1]);
+        updatePurchaseParentFormFields(forms[forms.length - 2]);
         updateChildFormFields(forms);
     }
 }
@@ -141,7 +141,7 @@ function populateRecordCount() {
     //var menuApproval = document.getElementById("menu_approval");
     $.ajax({
         method: "GET",
-        url: dashboard +sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
+        url: dashboard +sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID")+"/"+sessionStorage.getItem("ST"),
         cache: false,
         success: function(data){
             var countValues = data.split("||");
