@@ -162,6 +162,10 @@ function populateRecordCount() {
 
 function getFormData($form, toStringify){
     var unindexed_array = $form.serializeArray();
+    var validationArr = validateFormData(unindexed_array);
+    if(!validationArr) {
+        return validationArr;
+    }
     var indexed_array = {};
     $.map(unindexed_array, function(n, i){
         indexed_array[n['name']] = n['value'];
@@ -182,6 +186,18 @@ function getFormData($form, toStringify){
         output = JSON.stringify(indexed_array);
     }
     return output;
+}
+
+function validateFormData(unindexed_array) {
+    //var isValid = "true";
+    for(i=0;i<unindexed_array.length;i++) {
+        var field = unindexed_array[i];
+        if(field.value == "Select") {
+            alert("Please select a value for " + $("#" + field.name).prev("label").text());
+            return false;
+        }
+    }
+    return true;
 }
 
 function extend(src, dest) {
@@ -246,13 +262,22 @@ function approveData(path, indexed_array) {
 function submitPurchaseData(path) {
     var forms = $('form');
     var firstForm = getFormData($(forms[0]), false);
+    if(firstForm == false) {
+        return;
+    }
     var lastForm = getFormData($(forms[forms.length-2]), false);
+    if(lastForm == false) {
+        return;
+    }
     var mergedJSON = mergeJSON(firstForm, lastForm);
 
     var subItems = new Array();
     var indexed_array = mergedJSON;
     for(var formCnt = 1; formCnt<forms.length-2; formCnt++) {
         var subItemForm = getFormData($(forms[formCnt]), false);
+        if(subItemForm == false) {
+            return;
+        }
         subItems.push(subItemForm);
     }
 

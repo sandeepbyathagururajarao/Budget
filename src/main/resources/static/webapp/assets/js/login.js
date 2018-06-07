@@ -24,6 +24,8 @@ function login() {
                 } else {
                     alert("Authetication failed, UserId or password is invalid");
                 }
+            } else {
+                alert("Authetication failed, UserId or password is invalid");
             }
         },
         error:function(xhr,status,err){
@@ -31,3 +33,10 @@ function login() {
         }
     });
 }
+
+document.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        login();
+    }
+});
