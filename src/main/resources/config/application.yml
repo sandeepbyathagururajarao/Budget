@@ -122,4 +122,4 @@ jhipster:
 # ===================================================================
 
 application:
-        fileUploadPath: D:/Sandeep/upload
+        fileUploadPath: /opt/upload
