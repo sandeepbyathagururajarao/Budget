@@ -369,6 +369,11 @@
                                 unit = unit +(counter) + ". "+subItems[subctr].unit+"<br>";
                                 unitPrice = unitPrice +(counter) + ". "+subItems[subctr].price+"<br>";
                                 total = total +(counter) + ". "+subItems[subctr].total+"<br>";
+                                if(subItems[subctr].total == "" || subItems[subctr].total == null) {
+                                    subItems[subctr].total = 0;
+                                } else {
+                                    subItems[subctr].total = subItems[subctr].total.replace(/,/g,"");
+                                }
                                 grandTotal = grandTotal+parseFloat(subItems[subctr].total);
                                 counter++;
                             }
@@ -475,6 +480,11 @@
                                 unit = unit +(counter) + ". "+subItems[subctr].unit+"<br>";
                                 unitPrice = unitPrice +(counter) + ". "+subItems[subctr].price+"<br>";
                                 total = total +(counter) + ". "+subItems[subctr].total+"<br>";
+                                if(subItems[subctr].total == "" || subItems[subctr].total == null) {
+                                    subItems[subctr].total = 0;
+                                } else {
+                                    subItems[subctr].total = subItems[subctr].total.replace(/,/g,"");
+                                }
                                 grandTotal = grandTotal+parseFloat(subItems[subctr].total);
                                 counter++;
                             }
