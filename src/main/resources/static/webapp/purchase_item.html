@@ -209,6 +209,13 @@
                         <tbody id="recurring_grid" >
 
                         </tbody>
+                          <tfoot>
+                          <tr>
+                              <th id="id1" class="" colspan="7"></th>
+                              <th id="id2" colspan="2">Grand Total :</th>
+                              <th id="total_r" colspan="2"></th>
+                          </tr>
+                          </tfoot>
                       </table>
                     </div>
                     <!-- /.card-body -->
@@ -244,6 +251,13 @@
                         <tbody id="non_recurring_grid">
 
                         </tbody>
+                          <tfoot>
+                          <tr>
+                              <th id="id3" class="" colspan="7"></th>
+                              <th id="id4" colspan="2">Grand Total :</th>
+                              <th id="total_non_r" colspan="2"></th>
+                          </tr>
+                          </tfoot>
                       </table>
                     </div>
                     <!-- /.card-body -->
@@ -319,11 +333,14 @@
         $('#non_recurring_display_grid_wrapper .buttons-excel').click();
     }
 
-    function getRecurringRecords(path) {
+    function getRecurringRecords(filterUserId, path) {
         var UTPE = sessionStorage.getItem("UTPE");
         var UID = sessionStorage.getItem("UID");
         if(UTPE === "2") {
             UID = sessionStorage.getItem("ST");
+        }
+        if(filterUserId != null) {
+            UID = UID + "_"+filterUserId;
         }
         $.ajax({
             method: "GET",
@@ -331,6 +348,7 @@
             url: path+"filter/recurring/"+UTPE+"/"+UID,
             success: function(data){
                 if(data != null && data.length > 0) {
+                    var grandTotal = 0;
                     for(ctr = 0; ctr < data.length; ctr++) {
                         var id = data[ctr].id;
                         var approvalStatus = data[ctr].approvalStatus;
@@ -351,6 +369,7 @@
                                 unit = unit +(counter) + ". "+subItems[subctr].unit+"<br>";
                                 unitPrice = unitPrice +(counter) + ". "+subItems[subctr].price+"<br>";
                                 total = total +(counter) + ". "+subItems[subctr].total+"<br>";
+                                grandTotal = grandTotal+parseFloat(subItems[subctr].total);
                                 counter++;
                             }
                         }
@@ -380,6 +399,7 @@
 
                         $('#recurring_display_grid tbody').append(displayData);
                     }
+                    $('#total_r').text(grandTotal);
                     var buttonCommon = {
                         exportOptions: {
                             format: {
@@ -419,11 +439,14 @@
         });
     }
 
-    function getNonRecurringRecords(path) {
+    function getNonRecurringRecords(filterUserId, path) {
         var UTPE = sessionStorage.getItem("UTPE");
         var UID = sessionStorage.getItem("UID");
         if(UTPE === "2") {
             UID = sessionStorage.getItem("ST");
+        }
+        if(filterUserId != null) {
+            UID = UID + "_"+filterUserId;
         }
         $.ajax({
             method: "GET",
@@ -431,6 +454,7 @@
             url: path+"filter/nonrecurring/"+UTPE+"/"+UID,
             success: function(data){
                 if(data != null && data.length > 0) {
+                    var grandTotal = 0;
                     for(ctr = 0; ctr < data.length; ctr++) {
                         var id = data[ctr].id;
                         var approvalStatus = data[ctr].approvalStatus;
@@ -451,6 +475,7 @@
                                 unit = unit +(counter) + ". "+subItems[subctr].unit+"<br>";
                                 unitPrice = unitPrice +(counter) + ". "+subItems[subctr].price+"<br>";
                                 total = total +(counter) + ". "+subItems[subctr].total+"<br>";
+                                grandTotal = grandTotal+parseFloat(subItems[subctr].total);
                                 counter++;
                             }
                         }
@@ -480,6 +505,7 @@
 
                         $('#non_recurring_display_grid tbody').append(displayData);
                     }
+                    $('#total_non_r').text(grandTotal);
                     var buttonCommon = {
                         exportOptions: {
                             format: {
@@ -520,8 +546,9 @@
     }
 
     $( document ).ready(function() {
-        getRecurringRecords(purchases);
-        getNonRecurringRecords(purchases);
+        var userId = getParameterByName("id");
+        getRecurringRecords(userId, purchases);
+        getNonRecurringRecords(userId, purchases);
     });
 </script>
 </body>
