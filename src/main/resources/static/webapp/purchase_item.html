@@ -406,7 +406,7 @@
 
                         $('#recurring_display_grid tbody').append(displayData);
                     }
-                    $('#total_r').text(grandTotal);
+                    $('#total_r').text(Math.round(grandTotal));
                     var buttonCommon = {
                         exportOptions: {
                             format: {
@@ -519,7 +519,7 @@
 
                         $('#non_recurring_display_grid tbody').append(displayData);
                     }
-                    $('#total_non_r').text(grandTotal);
+                    $('#total_non_r').text(Math.round(grandTotal));
                     var buttonCommon = {
                         exportOptions: {
                             format: {
