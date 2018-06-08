@@ -159,7 +159,7 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
+          <div class="col-sm-6" id="editRec">
             <h1 class="d-inline" id="createItemsTitle"></h1>
             <a href="#" onclick="editRecord()" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-alt icon-create"></i></a>
           </div>
@@ -393,6 +393,9 @@
         $(document).ajaxStop(function() {
             updatePurchaseItemFieldsWithData();
             if(purchaseEditData != null) {
+                if(purchaseEditData["approvalStatus"] == "2") {
+                    $("#editRec").remove();
+                }
                 var image = document.getElementById("image").value;
                 if(image != null && image != "") {
                     $("#imageLink").attr("href", download + "/" + document.getElementById("image").value);

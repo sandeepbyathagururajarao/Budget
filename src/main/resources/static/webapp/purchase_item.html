@@ -378,8 +378,10 @@
                                 counter++;
                             }
                         }
+                        var purchaseEditLink = '               <a href="purchase_item_edit.html?type=1&id='+id+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a>';
                         if(approvalStatus == 2) {
                             approvalStatus = '<span style="color: green; font-weight: bold;">Approved</span>';
+                            purchaseEditLink = "";
                         } else if(approvalStatus == 3) {
                             approvalStatus = '<span style="color: blue; font-weight: bold;">Rejected</span>';
                         } else {
@@ -387,7 +389,7 @@
                         }
                         var displayData = '<tr>\n' +
                             '              <td><a href="purchase_item_view.html?type=1&id='+id+'"><i class="fas fa-eye icon-table"></i></a>' +
-                            '               <a href="purchase_item_edit.html?type=1&id='+id+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a>' +
+                                            purchaseEditLink +
                             '               <i class="remove fas fa-trash-alt icon-table" onclick=removeRecord('+id+',"'+purchases+'") style="background: red"></i>' +
                             '               '+approvalStatus+
                             '              \n</td><td>'+(ctr+1)+'</td>\n' +
@@ -489,8 +491,10 @@
                                 counter++;
                             }
                         }
+                        var purchaseEditLink = '               <a href="purchase_item_edit.html?type=2&id='+id+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a>';
                         if(approvalStatus == 2) {
                             approvalStatus = '<span style="color: green; font-weight: bold;">Approved</span>';
+                            purchaseEditLink = "";
                         } else if(approvalStatus == 3) {
                             approvalStatus = '<span style="color: blue; font-weight: bold;">Rejected</span>';
                         } else {
@@ -498,7 +502,7 @@
                         }
                         var displayData = '<tr>\n' +
                             '              <td><a href="purchase_item_view.html?type=2&id='+id+'"><i class="fas fa-eye icon-table"></i></a>' +
-                            '               <a href="purchase_item_edit.html?type=2&id='+id+'"><i class="fas fa-pencil-alt icon-table" style="background: green"></i></a>' +
+                                            purchaseEditLink+
                             '               <i class="remove fas fa-trash-alt icon-table" onclick=removeRecord('+id+',"'+purchases+'") style="background: red"></i>' +
                             '               '+approvalStatus+
                             '              \n</td><td>'+(ctr+1)+'</td>\n' +
