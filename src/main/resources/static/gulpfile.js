@@ -5,7 +5,7 @@ gulp.task('browser-sync', function() {
     browserSync({
         files: "webapp/*.html",
         server: {
-            baseDir: "." // Change this to your web root dir
+            baseDir: "D:\\Sandeep\\Projects\\MIS\\src\\main\\resources\\static" // Change this to your web root dir
         }
     });
 });
