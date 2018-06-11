@@ -157,7 +157,11 @@ public class PurchaseItemResource {
         log.debug("REST request to get all filtered Recurring items");
         List<PurchaseItemDTO> purchaseItemDTOList = null;
         if(Role.getValue(userRole) == Role.SUPERADMIN) {
-            purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseType("1");
+            if(userDet.contains("_")) {
+                purchaseItemDTOList = purchaseItemService.findAllFilteredRecurringItems(Long.parseLong(userDet.substring(userDet.indexOf("_") + 1)));
+            } else {
+                purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseType("1");
+            }
         } else if(Role.getValue(userRole) == Role.ADMIN) {
             if(userDet.contains("_")) {
                 purchaseItemDTOList = purchaseItemService.findAllFilteredRecurringItems(Long.parseLong(userDet.substring(userDet.indexOf("_") + 1)));
@@ -165,7 +169,12 @@ public class PurchaseItemResource {
                 purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseTypeAndStateId("1", Long.parseLong(userDet));
             }
         } else {
-            purchaseItemDTOList = purchaseItemService.findAllFilteredRecurringItems(Long.parseLong(userDet));
+            if(userDet.contains("_")) {
+                purchaseItemDTOList = purchaseItemService.findAllFilteredRecurringItems(Long.parseLong(userDet.substring(userDet.indexOf("_") + 1)));
+            } else {
+                purchaseItemDTOList = purchaseItemService.findAllFilteredRecurringItems(Long.parseLong(userDet));
+            }
+
         }
         return purchaseItemDTOList;
     }
@@ -181,7 +190,11 @@ public class PurchaseItemResource {
         log.debug("REST request to get all filtered NonRecurring Items");
         List<PurchaseItemDTO> purchaseItemDTOList = null;
         if(Role.getValue(userRole) == Role.SUPERADMIN) {
-            purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseType("2");
+            if(userDet.contains("_")) {
+                purchaseItemDTOList = purchaseItemService.findAllFilteredNonRecurringItems(Long.parseLong(userDet.substring(userDet.indexOf("_") + 1)));
+            } else {
+                purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseType("2");
+            }
         } else if(Role.getValue(userRole) == Role.ADMIN) {
             if(userDet.contains("_")) {
                 purchaseItemDTOList = purchaseItemService.findAllFilteredNonRecurringItems(Long.parseLong(userDet.substring(userDet.indexOf("_") + 1)));
@@ -189,7 +202,11 @@ public class PurchaseItemResource {
                 purchaseItemDTOList = purchaseItemService.findAllFilteredByPurchaseTypeAndStateId("2", Long.parseLong(userDet));
             }
         } else {
-            purchaseItemDTOList = purchaseItemService.findAllFilteredNonRecurringItems(Long.parseLong(userDet));
+            if(userDet.contains("_")) {
+                purchaseItemDTOList = purchaseItemService.findAllFilteredNonRecurringItems(Long.parseLong(userDet.substring(userDet.indexOf("_") + 1)));
+            } else {
+                purchaseItemDTOList = purchaseItemService.findAllFilteredNonRecurringItems(Long.parseLong(userDet));
+            }
         }
         return purchaseItemDTOList;
     }

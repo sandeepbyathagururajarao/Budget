@@ -25,6 +25,12 @@
         text-overflow: ellipsis;
     }
     </style>
+	<script>
+    if(sessionStorage.getItem("UTPE") === "3") {
+        alert("You are not authorized to add admin");
+        history.back();
+    }
+</script>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
