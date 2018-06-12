@@ -7,6 +7,15 @@ function validateLogin() {
         return;
     }
 }
+var roleName = "";
+if(sessionStorage.getItem("UTPE") == "1" ) {
+	roleName = "Super Admin";
+} else if(sessionStorage.getItem("UTPE") == "2" ) {
+	roleName = "Admin";
+} else {
+	roleName = "User";
+}
+$(".brand-link").append("<br><span>" + roleName + "</span>");
 validateLogin();
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
