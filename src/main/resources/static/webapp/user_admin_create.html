@@ -255,7 +255,7 @@
         $.ajax({
             method: "GET",
             cache: false,
-            url: states+"filter/"+sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID"),
+            url: states+"filter/"+sessionStorage.getItem("UTPE")+"/"+sessionStorage.getItem("UID")+"_"+sessionStorage.getItem("ST"),
             success: function(data){
                 if(data != null && data.length > 0) {
                     for(ctr = 0; ctr < data.length; ctr++) {

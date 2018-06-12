@@ -125,13 +125,22 @@ public class StateResource {
      */
     @GetMapping("/states/filter/{userRole}/{id}")
     @Timed
-    public List<StateDTO> getFilteredStates(@PathVariable Long userRole, @PathVariable Long id) {
+    public List<StateDTO> getFilteredStates(@PathVariable Long userRole, @PathVariable String id) {
         log.debug("REST request to get all filtered States");
         List<StateDTO> stateDTOList = null;
+        String userId = id;
+        String stateId = null;
+        if(id.contains("_")) {
+            userId = id.substring(0,id.indexOf("_"));
+            stateId = id.substring(id.indexOf("_") + 1, id.length());
+        }
         if(Role.getValue(userRole) == Role.SUPERADMIN) {
             stateDTOList = stateService.findAll();
         } else {
-            stateDTOList = stateService.findAllFilteredStates(id);
+            stateDTOList = stateService.findAllFilteredStates(Long.parseLong(userId));
+        }
+        if(stateId != null) {
+            stateDTOList.add(stateService.findOne(Long.parseLong(stateId)));
         }
         return stateDTOList;
     }
@@ -142,7 +151,7 @@ public class StateResource {
         log.debug("REST request to get all searched guidelines");
         if(name != null) {
             if("@~all~@".equals(name.trim())) {
-                return getFilteredStates(userRole, id);
+                return getFilteredStates(userRole, id+"");
             }
         }
         List<StateDTO> stateDTOList = null;
