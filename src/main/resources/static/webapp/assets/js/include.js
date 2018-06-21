@@ -201,9 +201,15 @@ function validateFormData(unindexed_array) {
     //var isValid = "true";
     for(i=0;i<unindexed_array.length;i++) {
         var field = unindexed_array[i];
-        if(field.value == "Select") {
-            alert("Please select a value for " + $("#" + field.name).prev("label").text());
-            return false;
+        if(field.name != "unit") {
+            if(field.value == "Select") {
+                alert("Please select a value for " + $("#" + field.name).prev("label").text());
+                return false;
+            }
+        } else {
+            if(field.value == "Select") {
+                field.value = "";
+            }
         }
     }
     return true;

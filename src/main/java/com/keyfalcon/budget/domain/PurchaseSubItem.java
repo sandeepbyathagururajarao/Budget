@@ -37,6 +37,9 @@ public class PurchaseSubItem implements Serializable {
     @Column(name = "total", nullable = false)
     private String total;
 
+    @Column(name = "sub_gps_coordinate")
+    private String subGpsCoordinate;
+
     @NotNull
     @Column(name = "created_date", nullable = false)
     private ZonedDateTime createdDate;
@@ -101,6 +104,19 @@ public class PurchaseSubItem implements Serializable {
 
     public PurchaseSubItem price(String price) {
         this.price = price;
+        return this;
+    }
+
+    public void setSubGpsCoordinate(String subGpsCoordinate) {
+        this.subGpsCoordinate = subGpsCoordinate;
+    }
+
+    public String getSubGpsCoordinate() {
+        return subGpsCoordinate;
+    }
+
+    public PurchaseSubItem subGpsCoordinate(String subGpsCoordinate) {
+        this.subGpsCoordinate = subGpsCoordinate;
         return this;
     }
 
@@ -190,6 +206,7 @@ public class PurchaseSubItem implements Serializable {
             ", unit='" + getUnit() + "'" +
             ", price='" + getPrice() + "'" +
             ", total='" + getTotal() + "'" +
+            ", subGpsCoordinate='" + getSubGpsCoordinate() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", modifiedDate='" + getModifiedDate() + "'" +
             "}";

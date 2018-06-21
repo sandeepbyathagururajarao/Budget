@@ -1,4 +1,4 @@
-entity UserData {	
+entity UserData {
     userId String required,
     userName String required,
     password String required,
@@ -49,7 +49,7 @@ entity PurchaseItem {
 	gpsCoordinate String,
 	justification String,
 	image String,
-    approvalStatus String required,    
+    approvalStatus String required,
     createdDate ZonedDateTime required,
     modifiedDate ZonedDateTime
 }
@@ -59,7 +59,8 @@ entity PurchaseSubItem {
 	noOfItem String,
 	unit String,
 	price String,
-	total String required,	
+	total String required,
+    subGpsCoordinate String,
     createdDate ZonedDateTime required,
     modifiedDate ZonedDateTime
 }
@@ -78,7 +79,7 @@ relationship ManyToOne {
 }
 
 relationship ManyToOne {
-	UserData{state} to State 
+	UserData{state} to State
 }
 
 relationship ManyToOne {

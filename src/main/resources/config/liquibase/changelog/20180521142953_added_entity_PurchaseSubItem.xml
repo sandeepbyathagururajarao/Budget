@@ -42,6 +42,10 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="sub_gps_coordinate" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="created_date" type="timestamp">
                 <constraints nullable="false" />
             </column>
@@ -58,7 +62,7 @@
         </createTable>
         <dropDefaultValue tableName="purchase_sub_item" columnName="created_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="purchase_sub_item" columnName="modified_date" columnDataType="datetime"/>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

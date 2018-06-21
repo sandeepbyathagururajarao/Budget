@@ -26,6 +26,8 @@ public class PurchaseSubItemDTO implements Serializable {
     @NotNull
     private String total;
 
+    private String subGpsCoordinate;
+
     @NotNull
     private ZonedDateTime createdDate;
 
@@ -81,6 +83,15 @@ public class PurchaseSubItemDTO implements Serializable {
         this.total = total;
     }
 
+    public String getSubGpsCoordinate() {
+        return subGpsCoordinate;
+    }
+
+    public void setSubGpsCoordinate(String subGpsCoordinate) {
+        this.subGpsCoordinate = subGpsCoordinate;
+    }
+
+
     public ZonedDateTime getCreatedDate() {
         return createdDate;
     }
@@ -135,6 +146,7 @@ public class PurchaseSubItemDTO implements Serializable {
             ", unit='" + getUnit() + "'" +
             ", price='" + getPrice() + "'" +
             ", total='" + getTotal() + "'" +
+            ", subGpsCoordinate='" + getSubGpsCoordinate() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", modifiedDate='" + getModifiedDate() + "'" +
             "}";

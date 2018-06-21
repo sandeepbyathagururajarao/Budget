@@ -133,6 +133,9 @@ public class StateResource {
         if(id.contains("_")) {
             userId = id.substring(0,id.indexOf("_"));
             stateId = id.substring(id.indexOf("_") + 1, id.length());
+            if("null".equals(stateId)) {
+                stateId = null;
+            }
         }
         if(Role.getValue(userRole) == Role.SUPERADMIN) {
             stateDTOList = stateService.findAll();
