@@ -12,8 +12,11 @@ if(sessionStorage.getItem("UTPE") == "1" ) {
 	roleName = "Super Admin";
 } else if(sessionStorage.getItem("UTPE") == "2" ) {
 	roleName = "Admin";
+    $("a[href$='user_super_admin.html']").remove();
 } else {
 	roleName = "User";
+    $("a[href$='user_super_admin.html']").remove();
+    $("a[href$='user_admin.html']").remove();
 }
 $(".brand-link").append("<br><span>" + roleName + "</span>");
 validateLogin();

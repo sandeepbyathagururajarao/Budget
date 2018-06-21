@@ -366,7 +366,7 @@
                             var counter = 1;
                             for (subctr = 0; subctr < subItems.length; subctr++) {
                                 subItemName = subItemName +(counter) + ". "+subItems[subctr].name+"<br>";
-                                unit = unit +(counter) + ". "+subItems[subctr].unit+"<br>";
+                                unit = unit +(counter) + ". "+subItems[subctr].noOfItem+" "+subItems[subctr].unit+"<br>";
                                 unitPrice = unitPrice +(counter) + ". "+subItems[subctr].price+"<br>";
                                 total = total +(counter) + ". "+subItems[subctr].total+"<br>";
                                 if(subItems[subctr].total == "" || subItems[subctr].total == null) {
@@ -479,7 +479,7 @@
                             var counter = 1;
                             for (subctr = 0; subctr < subItems.length; subctr++) {
                                 subItemName = subItemName +(counter) + ". "+subItems[subctr].name+"<br>";
-                                unit = unit +(counter) + ". "+subItems[subctr].unit+"<br>";
+                                unit = unit +(counter) + ". "+subItems[subctr].noOfItem+" "+subItems[subctr].unit+"<br>";
                                 unitPrice = unitPrice +(counter) + ". "+subItems[subctr].price+"<br>";
                                 total = total +(counter) + ". "+subItems[subctr].total+"<br>";
                                 if(subItems[subctr].total == "" || subItems[subctr].total == null) {
