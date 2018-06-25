@@ -2,6 +2,7 @@ package com.keyfalcon.budget.service.dto;
 
 
 import java.time.ZonedDateTime;
+import javax.persistence.Lob;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -20,6 +21,7 @@ public class PurchaseItemDTO implements Serializable {
 
     private String gpsCoordinate;
 
+    @Lob
     private String justification;
 
     private String image;

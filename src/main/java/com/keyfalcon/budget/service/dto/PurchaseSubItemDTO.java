@@ -4,8 +4,7 @@ package com.keyfalcon.budget.service.dto;
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Lob;
 import java.util.Objects;
 
 /**
@@ -15,6 +14,7 @@ public class PurchaseSubItemDTO implements Serializable {
 
     private Long id;
 
+    @Lob
     private String name;
 
     private String noOfItem;

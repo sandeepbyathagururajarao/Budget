@@ -21,6 +21,7 @@ public class PurchaseSubItem implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Lob
     @Column(name = "name")
     private String name;
 

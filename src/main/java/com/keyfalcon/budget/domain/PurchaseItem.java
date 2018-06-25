@@ -31,6 +31,7 @@ public class PurchaseItem implements Serializable {
     @Column(name = "gps_coordinate")
     private String gpsCoordinate;
 
+    @Lob
     @Column(name = "justification")
     private String justification;
 

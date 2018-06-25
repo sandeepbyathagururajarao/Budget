@@ -47,7 +47,7 @@ entity State {
 entity PurchaseItem {
 	purchaseType String required,
 	gpsCoordinate String,
-	justification String,
+	justification TextBlob,
 	image String,
     approvalStatus String required,
     createdDate ZonedDateTime required,
@@ -55,7 +55,7 @@ entity PurchaseItem {
 }
 
 entity PurchaseSubItem {
-	name String,
+	name TextBlob,
 	noOfItem String,
 	unit String,
 	price String,

@@ -203,7 +203,7 @@
                             <th>Unit</th>
                             <th>Price</th>
                             <th>Total</th>
-                            <th>Coordinates</th>
+                            <th>GPS Coordinates</th>
                           </tr>
                         </thead>
                         <tbody id="recurring_grid" >
@@ -245,7 +245,7 @@
                             <th>Unit</th>
                             <th>Price</th>
                             <th>Total</th>
-                            <th>Coordinates</th>
+                            <th>GPS Coordinates</th>
                           </tr>
                         </thead>
                         <tbody id="non_recurring_grid">
@@ -352,29 +352,55 @@
                     for(ctr = 0; ctr < data.length; ctr++) {
                         var id = data[ctr].id;
                         var approvalStatus = data[ctr].approvalStatus;
+                        approvalStatus = (approvalStatus == null)?"":approvalStatus;
                         var itemName = data[ctr].itemName;
+                        itemName = (itemName == null)?"":itemName;
                         var guidelineName = data[ctr].guidelineName;
+                        guidelineName = (guidelineName == null)?"":guidelineName;
                         var subTypeName = data[ctr].subTypeName;
+                        subTypeName = (subTypeName == null)?"":subTypeName;
                         var tcpName = data[ctr].tcpName;
+                        tcpName = (tcpName == null)?"":tcpName;
                         var gpsCoordinate = data[ctr].gpsCoordinate;
+                        gpsCoordinate = (gpsCoordinate == null)?"":gpsCoordinate;
                         var subItems = data[ctr].subItems;
                         var subItemName = "";
                         var unit = "";
+                        var subGpsCoordinate = "";
                         var unitPrice = 0;
                         var total = 0;
                         if(subItems != null && subItems.length > 0) {
                             var counter = 1;
                             for (subctr = 0; subctr < subItems.length; subctr++) {
-                                subItemName = subItemName +(counter) + ". "+subItems[subctr].name+"<br>";
-                                unit = unit +(counter) + ". "+subItems[subctr].noOfItem+" "+subItems[subctr].unit+"<br>";
-                                unitPrice = unitPrice +(counter) + ". "+subItems[subctr].price+"<br>";
-                                total = total +(counter) + ". "+subItems[subctr].total+"<br>";
-                                if(subItems[subctr].total == "" || subItems[subctr].total == null) {
-                                    subItems[subctr].total = 0;
+                                var subItemNameData = subItems[subctr].name;
+                                subItemNameData = (subItemNameData == null)?"":subItemNameData;
+
+                                var noOfItem = subItems[subctr].noOfItem;
+                                noOfItem = (noOfItem == null)?"":noOfItem;
+
+                                var unitData = subItems[subctr].unit;
+                                unitData = (unitData == null)?"":unitData;
+
+                                var price = subItems[subctr].price;
+                                price = (price == null)?"":price;
+
+                                var totalData = subItems[subctr].total;
+                                totalData = (totalData == null)?"":totalData;
+
+                                var subGpsCoordinateData = subItems[subctr].subGpsCoordinate;
+                                subGpsCoordinateData = (subGpsCoordinateData == null)?"":subGpsCoordinateData;
+
+                                subItemName = subItemName + subItemNameData+"<br>";
+                                unit = unit +noOfItem+" "+unitData+"<br>";
+                                unitPrice = unitPrice + price+"<br>";
+                                subGpsCoordinate = subGpsCoordinate + subGpsCoordinateData+"<br>";
+                                total = total + totalData+"<br>";
+                                if(totalData == "" || totalData == null) {
+                                    totalData = 0;
                                 } else {
-                                    subItems[subctr].total = subItems[subctr].total.replace(/,/g,"");
+                                    totalData = totalData.replace(/,/g,"");
                                 }
-                                grandTotal = grandTotal+parseFloat(subItems[subctr].total);
+                                grandTotal = grandTotal+parseFloat(totalData);
                                 counter++;
                             }
                         }
@@ -401,7 +427,7 @@
                             '              <td>'+unit+'</td>\n' +
                             '              <td>'+unitPrice+'</td>\n' +
                             '              <td>'+total+'</td>\n' +
-                            '              <td>'+gpsCoordinate+'</td>\n' +
+                            '              <td>'+subGpsCoordinate+'</td>\n' +
                             '              </tr>';
 
                         $('#recurring_display_grid tbody').append(displayData);
@@ -465,29 +491,55 @@
                     for(ctr = 0; ctr < data.length; ctr++) {
                         var id = data[ctr].id;
                         var approvalStatus = data[ctr].approvalStatus;
+                        approvalStatus = (approvalStatus == null)?"":approvalStatus;
                         var itemName = data[ctr].itemName;
+                        itemName = (itemName == null)?"":itemName;
                         var guidelineName = data[ctr].guidelineName;
+                        guidelineName = (guidelineName == null)?"":guidelineName;
                         var subTypeName = data[ctr].subTypeName;
+                        subTypeName = (subTypeName == null)?"":subTypeName;
                         var tcpName = data[ctr].tcpName;
+                        tcpName = (tcpName == null)?"":tcpName;
                         var gpsCoordinate = data[ctr].gpsCoordinate;
+                        gpsCoordinate = (gpsCoordinate == null)?"":gpsCoordinate;
                         var subItems = data[ctr].subItems;
                         var subItemName = "";
                         var unit = "";
+                        var subGpsCoordinate = "";
                         var unitPrice = 0;
                         var total = 0;
                         if(subItems != null && subItems.length > 0) {
                             var counter = 1;
                             for (subctr = 0; subctr < subItems.length; subctr++) {
-                                subItemName = subItemName +(counter) + ". "+subItems[subctr].name+"<br>";
-                                unit = unit +(counter) + ". "+subItems[subctr].noOfItem+" "+subItems[subctr].unit+"<br>";
-                                unitPrice = unitPrice +(counter) + ". "+subItems[subctr].price+"<br>";
-                                total = total +(counter) + ". "+subItems[subctr].total+"<br>";
-                                if(subItems[subctr].total == "" || subItems[subctr].total == null) {
-                                    subItems[subctr].total = 0;
+                                var subItemNameData = subItems[subctr].name;
+                                subItemNameData = (subItemNameData == null)?"":subItemNameData;
+
+                                var noOfItem = subItems[subctr].noOfItem;
+                                noOfItem = (noOfItem == null)?"":noOfItem;
+
+                                var unitData = subItems[subctr].unit;
+                                unitData = (unitData == null)?"":unitData;
+
+                                var price = subItems[subctr].price;
+                                price = (price == null)?"":price;
+
+                                var totalData = subItems[subctr].total;
+                                totalData = (totalData == null)?"":totalData;
+
+                                var subGpsCoordinateData = subItems[subctr].subGpsCoordinate;
+                                subGpsCoordinateData = (subGpsCoordinateData == null)?"":subGpsCoordinateData;
+
+                                subItemName = subItemName + subItemNameData+"<br>";
+                                unit = unit +noOfItem+" "+unitData+"<br>";
+                                unitPrice = unitPrice + price+"<br>";
+                                subGpsCoordinate = subGpsCoordinate + subGpsCoordinateData+"<br>";
+                                total = total + totalData+"<br>";
+                                if(totalData == "" || totalData == null) {
+                                    totalData = 0;
                                 } else {
-                                    subItems[subctr].total = subItems[subctr].total.replace(/,/g,"");
+                                    totalData = totalData.replace(/,/g,"");
                                 }
-                                grandTotal = grandTotal+parseFloat(subItems[subctr].total);
+                                grandTotal = grandTotal+parseFloat(totalData);
                                 counter++;
                             }
                         }
@@ -514,7 +566,7 @@
                             '              <td>'+unit+'</td>\n' +
                             '              <td>'+unitPrice+'</td>\n' +
                             '              <td>'+total+'</td>\n' +
-                            '              <td>'+gpsCoordinate+'</td>\n' +
+                            '              <td>'+subGpsCoordinate+'</td>\n' +
                             '              </tr>';
 
                         $('#non_recurring_display_grid tbody').append(displayData);

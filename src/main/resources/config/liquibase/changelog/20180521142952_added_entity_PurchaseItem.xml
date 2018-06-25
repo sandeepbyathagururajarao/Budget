@@ -30,7 +30,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="justification" type="varchar(255)">
+            <column name="justification" type="clob">
                 <constraints nullable="true" />
             </column>
 
@@ -78,7 +78,7 @@
         </createTable>
         <dropDefaultValue tableName="purchase_item" columnName="created_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="purchase_item" columnName="modified_date" columnDataType="datetime"/>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

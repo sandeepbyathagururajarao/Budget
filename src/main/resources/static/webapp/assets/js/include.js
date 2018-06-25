@@ -172,12 +172,12 @@ function populateRecordCount() {
     });
 }
 
-function getFormData($form, toStringify){
-    var unindexed_array = $form.serializeArray();
-    var validationArr = validateFormData(unindexed_array);
+function getFormData($form, toStringify) {
+    var validationArr = validateFormData($form);
     if(!validationArr) {
         return validationArr;
     }
+    var unindexed_array = $form.serializeArray();
     var indexed_array = {};
     $.map(unindexed_array, function(n, i){
         indexed_array[n['name']] = n['value'];
@@ -200,22 +200,24 @@ function getFormData($form, toStringify){
     return output;
 }
 
-function validateFormData(unindexed_array) {
-    //var isValid = "true";
-    for(i=0;i<unindexed_array.length;i++) {
-        var field = unindexed_array[i];
-        if(field.name != "unit") {
-            if(field.value == "Select") {
-                alert("Please select a value for " + $("#" + field.name).prev("label").text());
-                return false;
-            }
-        } else {
-            if(field.value == "Select") {
-                field.value = "";
+function validateFormData($form) {
+    var result = true;
+    $form.find("select").each(
+        function(index){
+            var input = $(this);
+            var name = input.attr('name');
+            var value = input.val();
+            if(name != "unit") {
+                if(value == "Select" || value == "" || value == null) {
+                    alert("Please select a value for " + $("#" + name).prev("label").text());
+                    result = false;
+                }
+            } else {
+                input.val("");
             }
         }
-    }
-    return true;
+    );
+    return result;
 }
 
 function extend(src, dest) {
